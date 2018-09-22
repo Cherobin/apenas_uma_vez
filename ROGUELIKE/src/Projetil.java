@@ -36,14 +36,14 @@ BufferedImage charset = null;
 		X+=velX*diftime/1000.0f;
 		Y+=velY*diftime/1000.0f;
 		
-		if(X<=0){
-			X = xold;
-			vivo = false;
-		}
-		if(Y<=0){
-			Y = yold;
-			vivo = false;
-		}
+//		if(X<=0){
+//			X = xold;
+//			vivo = false;
+//		}
+//		if(Y<=0){
+//			Y = yold;
+//			vivo = false;
+//		}
 //		if(X>=CanvasMain.tilemap.Largura*16){
 //			X = xold;
 //			vivo = false;
