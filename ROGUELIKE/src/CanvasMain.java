@@ -38,7 +38,7 @@ public class CanvasMain extends MyCanvas {
 
 	double rotx = 0;
 
-	public static Personagem heroi;
+
 
 	public static ArrayList<Sprite> listaDePersonagens = new ArrayList<Sprite>();
 
@@ -72,10 +72,10 @@ public class CanvasMain extends MyCanvas {
 		x2 = 0;
 		y2 = 200;
 
-		heroi = new Personagem(100, 100);
-		heroi.vel = 100;
+		Constantes.heroi = new Personagem(100, 100);
+		Constantes.heroi.vel = 100;
 
-		listaDePersonagens.add(heroi);
+		listaDePersonagens.add(Constantes.heroi);
 		
 		for(int i = 0; i < 10;i++){
 			int posx = 0;
@@ -129,32 +129,32 @@ public class CanvasMain extends MyCanvas {
 		
 
 		if(LEFT){
-			heroi.angulo-=Math.PI*diftime/1000.0f;
+			Constantes.heroi.angulo-=Math.PI*diftime/1000.0f;
 
 		}else if(RIGHT){
-			heroi.angulo+=Math.PI*diftime/1000.0f;
+			Constantes.heroi.angulo+=Math.PI*diftime/1000.0f;
 
 		}
 		if(UP){
-			heroi.vel+=50*diftime/1000.0f;
-			if(heroi.vel>=400) {
-				heroi.vel=400;
+			Constantes.heroi.vel+=50*diftime/1000.0f;
+			if(Constantes.heroi.vel>=400) {
+				Constantes.heroi.vel=400;
 			}
 		}else if(DOWN){
-			heroi.vel-=50*diftime/1000.0f;
-			if(heroi.vel<=0) {
-				heroi.vel=0;
+			Constantes.heroi.vel-=50*diftime/1000.0f;
+			if(Constantes.heroi.vel<=0) {
+				Constantes.heroi.vel=0;
 			}
 		}
 		
 
-		heroi.FIRE = FIRE;
+		Constantes.heroi.FIRE = FIRE;
 
-		MapX = (int)(heroi.X-(Constantes.telaW/zoom)/2);
-		MapY = (int)(heroi.Y-(Constantes.telaH/zoom)/2);
+		MapX = (int)(Constantes.heroi.X-(Constantes.telaW/zoom)/2);
+		MapY = (int)(Constantes.heroi.Y-(Constantes.telaH/zoom)/2);
 		
-		heroi.xAlvo = (float)(MouseX/zoom+MapX);
-		heroi.yAlvo = (float)(MouseY/zoom+MapY);
+		Constantes.heroi.xAlvo = (float)(MouseX/zoom+MapX);
+		Constantes.heroi.yAlvo = (float)(MouseY/zoom+MapY);
 
 
 //		heroi.SimulaSe((int)diftime);
