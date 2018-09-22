@@ -6,6 +6,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
 import java.awt.image.BufferedImage;
+import java.io.FileWriter;
 
 public class CanvasCostrucao extends MyCanvas {
 
@@ -43,23 +44,17 @@ public class CanvasCostrucao extends MyCanvas {
 
 		this.canvasOrigem = canvasOrigem;
 		this.cor = cor;
-		NTileX = NTileY = 32;
-		System.out.print("#Layer1");
+		NTileX = NTileY = 32; 
 		for (int j = 0; j < base.length; j++) {
 			for (int i = 0; i < base[j].length; i++) {
-				base[j][i] = Constantes.heroi.layer0[j][i];
-				System.out.print(base[j][i]+";");
-			}
-			System.out.println();
+				base[j][i] = Constantes.heroi.layer0[j][i]; 
+			} 
 		}
-
-		System.out.print("#Layer2");
+ 
 		for (int j = 0; j < armas.length; j++) {
 			for (int i = 0; i < armas[j].length; i++) {
-				armas[j][i] = Constantes.heroi.layer1[j][i];
-				System.out.print(armas[j][i]+";");
-			}
-			System.out.println();
+				armas[j][i] = Constantes.heroi.layer1[j][i]; 
+			} 
 		}
 		
 		
@@ -285,7 +280,31 @@ public class CanvasCostrucao extends MyCanvas {
 	@Override
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
+		int keyCode = e.getKeyCode();
+		 
+        
+		if (keyCode == KeyEvent.VK_S) {
+			System.out.println("#Layer1");
+			for (int j = 0; j < base.length; j++) {
+				for (int i = 0; i < base[j].length; i++) {
+					base[j][i] = Constantes.heroi.layer0[j][i];
+					System.out.print(base[j][i]+";");
+				}
+				System.out.println();
+			}
 
+			System.out.println("#Layer2");
+			for (int j = 0; j < armas.length; j++) {
+				for (int i = 0; i < armas[j].length; i++) {
+					armas[j][i] = Constantes.heroi.layer1[j][i];
+					System.out.print(armas[j][i]+";");
+				}
+				System.out.println();
+			}
+			
+		}
+		
+		 
 	}
 
 	@Override
