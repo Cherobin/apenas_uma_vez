@@ -61,7 +61,7 @@ public class CanvasMain extends MyCanvas {
 	
 	
 	public CanvasMain() {
-		imgFundo = GamePanel.instance.carregaImagem("Imagem 675.jpg");
+		imgFundo = GamePanel.instance.carregaImagem("nebulosa.jpg");
 		imgCharset = GamePanel.instance.carregaImagem("rmxp004tw4.png");
 		tileset = GamePanel.instance.carregaImagem("Bridge.png");
 		fumaca = GamePanel.instance.carregaImagem("fumaca.png");
@@ -99,17 +99,17 @@ public class CanvasMain extends MyCanvas {
 				for(int j = 0; j < listaDePersonagens.size();j++){
 					Personagem pers = (Personagem)listaDePersonagens.get(j);
 
-					if(pers.ColisaoRetangular(new Personagem(posx, posy))){
-						colidiu = true;
-						continue;
-					}
+//					if(pers.ColisaoRetangular(new Personagem(posx, posy))){
+//						colidiu = true;
+//						continue;
+//					}
 				}
 				
 			}while(colidiu);
 
 			
 			Personagem pers = new Personagem(posx, posy);
-			pers.vel = -50+GamePanel.rnd.nextInt(100);
+			pers.vel = 50+GamePanel.rnd.nextInt(50);
 			pers.angulo = (Math.PI*2)*GamePanel.rnd.nextDouble();
 			
 			//pers.vel = (int)Math.sqrt(pers.velX*pers.velX + pers.velY*pers.velY);
@@ -127,7 +127,7 @@ public class CanvasMain extends MyCanvas {
 	public void SimulaSe(int diftime) {
 		timertiro+=diftime;
 		
-		int vel = 200;
+
 		if(LEFT){
 			heroi.angulo-=Math.PI*diftime/1000.0f;
 
@@ -136,16 +136,22 @@ public class CanvasMain extends MyCanvas {
 
 		}
 		if(UP){
-			//heroi.velY = -vel;
-
+			heroi.vel+=50*diftime/1000.0f;
+			if(heroi.vel>=400) {
+				heroi.vel=400;
+			}
 		}else if(DOWN){
-			//heroi.velY = vel;
-
+			heroi.vel-=50*diftime/1000.0f;
+			if(heroi.vel<=0) {
+				heroi.vel=0;
+			}
 		}
 		
 
 		heroi.FIRE = FIRE;
 
+		MapX = (int)(heroi.X-(Constantes.telaW/zoom)/2);
+		MapY = (int)(heroi.Y-(Constantes.telaH/zoom)/2);
 		
 		heroi.xAlvo = (float)(MouseX/zoom+MapX);
 		heroi.yAlvo = (float)(MouseY/zoom+MapY);
@@ -183,9 +189,7 @@ public class CanvasMain extends MyCanvas {
 //		gerenciadorEventos.testaEventos(heroi);
 		
 		
-		
-		MapX = (int)(heroi.X-(Constantes.telaW/zoom)/2);
-		MapY = (int)(heroi.Y-(Constantes.telaH/zoom)/2);
+		Constantes.telaRect.setBounds(MapX, MapY, (int)(Constantes.telaW/zoom), (int)(Constantes.telaH/zoom));
 	}
 
 	@Override
@@ -193,6 +197,8 @@ public class CanvasMain extends MyCanvas {
 		// clear the background
 		dbg.setColor(Color.BLACK);
 		dbg.fillRect (0, 0, Constantes.telaW, Constantes.telaH);
+		
+		//dbg.drawImage(imgFundo,(int)(-500+(heroi.X/100)),(int)(-500+(heroi.Y/100)),null);
 		
 		AffineTransform trans = dbg.getTransform();
 		
@@ -228,16 +234,16 @@ public class CanvasMain extends MyCanvas {
 	public void keyPressed(KeyEvent e) {
 		int keyCode = e.getKeyCode();
 		
-		if(keyCode == KeyEvent.VK_LEFT){
+		if(keyCode == KeyEvent.VK_LEFT || keyCode == KeyEvent.VK_A){
 			LEFT = true;
 		}
-		if(keyCode == KeyEvent.VK_RIGHT){
+		if(keyCode == KeyEvent.VK_RIGHT || keyCode == KeyEvent.VK_D){
 			RIGHT = true;
 		}
-		if(keyCode == KeyEvent.VK_UP){
+		if(keyCode == KeyEvent.VK_UP || keyCode == KeyEvent.VK_W){
 			UP = true;
 		}
-		if(keyCode == KeyEvent.VK_DOWN){
+		if(keyCode == KeyEvent.VK_DOWN || keyCode == KeyEvent.VK_S){
 			DOWN = true;
 		}	
 		if(keyCode == KeyEvent.VK_SPACE){
@@ -252,16 +258,16 @@ public class CanvasMain extends MyCanvas {
 	public void keyReleased(KeyEvent e) {
 		int keyCode = e.getKeyCode();
 		
-		if(keyCode == KeyEvent.VK_LEFT){
+		if(keyCode == KeyEvent.VK_LEFT || keyCode == KeyEvent.VK_A){
 			LEFT = false;
 		}
-		if(keyCode == KeyEvent.VK_RIGHT){
+		if(keyCode == KeyEvent.VK_RIGHT || keyCode == KeyEvent.VK_D){
 			RIGHT = false;
 		}
-		if(keyCode == KeyEvent.VK_UP){
+		if(keyCode == KeyEvent.VK_UP || keyCode == KeyEvent.VK_W){
 			UP = false;
 		}
-		if(keyCode == KeyEvent.VK_DOWN){
+		if(keyCode == KeyEvent.VK_DOWN || keyCode == KeyEvent.VK_S){
 			DOWN = false;
 		}
 	}

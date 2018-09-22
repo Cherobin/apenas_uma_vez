@@ -17,6 +17,8 @@ BufferedImage charset = null;
 	
 	int tempoDeVida = 10000;
 	
+	float dano = 25;
+	
 	public Projetil(float x,float y,float velX,float velY,Object pai){
 		this.X = x;
 		this.Y = y;
@@ -60,8 +62,6 @@ BufferedImage charset = null;
 //			vivo = false;
 //		}
 		
-		int bx = (int)(X/16);
-		int by = (int)(Y/16);
 		
 //		if(CanvasMain.tilemap.mapa2[by][bx]!=0){
 //			X = xold;
@@ -85,12 +85,10 @@ BufferedImage charset = null;
 			Personagem pers = (Personagem)CanvasMain.listaDePersonagens.get(i);
 			
 			if(pers!=pai){
-				if(testaColisao(pers)){
+				if(pers.testaColisao(X,Y,raio,this)){
 					X = xold;
 					Y = yold;
 					vivo = false;
-					
-					pers.levaDano(25);
 					break;
 				}
 			}
@@ -117,15 +115,17 @@ BufferedImage charset = null;
 	public void DesenhaSe(Graphics2D dbg,int xMundo,int yMundo) {
 		// TODO Auto-generated method stub
 		
-		dbg.setColor(Color.white);
-		dbg.fillOval((int)(X-raio-xMundo), (int)(Y-raio-yMundo), (int)(raio*2), (int)(raio*2));
-//		dbg.setColor(Color.red);
-//		dbg.drawRect((int)X-xMundo+2, (int)Y-yMundo+2, 28, 44);
+		if(Constantes.telaRect.contains((int)X, (int)Y)) {
+			dbg.setColor(Color.white);
+			dbg.fillOval((int)(X-raio-xMundo), (int)(Y-raio-yMundo), (int)(raio*2), (int)(raio*2));
+	//		dbg.setColor(Color.red);
+	//		dbg.drawRect((int)X-xMundo+2, (int)Y-yMundo+2, 28, 44);
+		}
 	}
 	
 	public boolean testaColisao(Personagem pers){
-		float dx = (pers.X+16)-(X);
-		float dy = (pers.Y+24)-(Y);
+		float dx = (pers.X+pers.raio)-(X);
+		float dy = (pers.Y+pers.raio)-(Y);
 		
 		float sr = pers.raio+raio;
 		
@@ -136,22 +136,22 @@ BufferedImage charset = null;
 		return false;
 	}
 	
-    public boolean ColisaoRetangular(Personagem pers){
-    	float p1x1 = X-1;
-    	float p1x2 = X+1;
-    	float p2x1 = pers.X+2;
-    	float p2x2 = pers.X+30;
-    	
-    	float p1y1 = Y-1;
-    	float p1y2 = Y+1;
-    	float p2y1 = pers.Y+2;
-    	float p2y2 = pers.Y+46;
-    	
-        if((p1x1 < p2x2) && (p1x2>p2x1) && (p1y1 < p2y2) && (p1y2>p2y1)){
-            return true;
-        }
-        return false;
-    }
+//    public boolean ColisaoRetangular(Personagem pers){
+//    	float p1x1 = X-1;
+//    	float p1x2 = X+1;
+//    	float p2x1 = pers.X+2;
+//    	float p2x2 = pers.X+30;
+//    	
+//    	float p1y1 = Y-1;
+//    	float p1y2 = Y+1;
+//    	float p2y1 = pers.Y+2;
+//    	float p2y2 = pers.Y+46;
+//    	
+//        if((p1x1 < p2x2) && (p1x2>p2x1) && (p1y1 < p2y2) && (p1y2>p2y1)){
+//            return true;
+//        }
+//        return false;
+//    }
 
 
 }

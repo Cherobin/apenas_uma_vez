@@ -20,7 +20,7 @@ public class Personagem extends Sprite {
 
 	int raio = 496;
 
-	int life = 100;
+	int life = 1000;
 
 	Rectangle boundingbox;
 
@@ -31,6 +31,8 @@ public class Personagem extends Sprite {
 	float xAlvo = 0;
 	float yAlvo = 0;
 	int timertiro = 0;
+	
+	double xy[] = new double[2];
 
 	public Personagem(float x, float y) {
 		this.X = x;
@@ -72,7 +74,7 @@ public class Personagem extends Sprite {
 		X += velX * diftime / 1000.0f;
 		Y += velY * diftime / 1000.0f;
 
-		angulo = Math.atan2(velY, velX);
+
 
 		// if(Math.abs(velX)>Math.abs(velY)){
 		// if(velX>0){
@@ -130,25 +132,27 @@ public class Personagem extends Sprite {
 		}
 
 		if (FIRE && timertiro > 100) {
-			float xy[] = new float[2];
+			
 			for (int i = 0; i < 31; i++) {
 				for (int j = 0; j < 31; j++) {
 
-					basetToXY(j, i, xy);
-					
-					double dx = xAlvo - (xy[0]+X);
-					double dy = yAlvo - (xy[1]+Y);
-
-					double ang = Math.atan2(dy, dx);
-
-					float velo = 1200;
-
-					Projetil proj = new Projetil(xy[0]+X, xy[1]+Y, (float) (velo * Math.cos(ang)), (float) (velo * Math.sin(ang)),
-							this);
-
-					CanvasMain.listaDeProjeteis.add(proj);
-
-					timertiro = 0;
+					if (layer0[i][j] != 0) {
+						basetToXY(j, i, xy);
+						
+						double dx = xAlvo - (xy[0]+X);
+						double dy = yAlvo - (xy[1]+Y);
+	
+						double ang = Math.atan2(dy, dx);
+	
+						float velo = 1200;
+	
+						Projetil proj = new Projetil((float)(xy[0]+X), (float)(xy[1]+Y), (float) (velo * Math.cos(ang)), (float) (velo * Math.sin(ang)),
+								this);
+	
+						CanvasMain.listaDeProjeteis.add(proj);
+	
+						timertiro = 0;
+					}
 				}
 			}
 		}
@@ -162,7 +166,7 @@ public class Personagem extends Sprite {
 
 		AffineTransform trans = dbg.getTransform();
 
-		dbg.translate(X - xMundo, Y - yMundo);
+		dbg.translate((int)(X - xMundo),(int)(Y - yMundo));
 
 		dbg.rotate(angulo);
 
@@ -175,8 +179,8 @@ public class Personagem extends Sprite {
 
 		for (int i = 0; i < 31; i++) {
 			for (int j = 0; j < 31; j++) {
-				dbg.setColor(Color.red);
-				dbg.drawRect((int) -basex + j * 32, (int) -basey + i * 32, 32, 32);
+				//dbg.setColor(Color.red);
+				//dbg.drawRect((int) -basex + j * 32, (int) -basey + i * 32, 32, 32);
 				if (layer0[i][j] == 1) {
 					dbg.setColor(Color.red);
 					dbg.fillRect((int) -basex + j * 32, (int) -basey + i * 32, 32, 32);
@@ -208,14 +212,31 @@ public class Personagem extends Sprite {
 		return false;
 	}
 
-	public boolean testaColisao(float x, float y, float r) {
-		float dx = (x + 16) - (X + 16);
-		float dy = (y + 24) - (Y + 24);
-
+	public boolean testaColisao(float x, float y, float r, Projetil proj) {
+		float dx = x - X;
+		float dy = y - Y;
 		float sr = r + raio;
 
 		if (sr * sr > (dx * dx + dy * dy)) {
-			return true;
+			
+			for (int i = 0; i < 31; i++) {
+				for (int j = 0; j < 31; j++) {
+					if (layer0[i][j] != 0) {
+						
+						basetToXY(j, i, xy);
+						double dx2 = x - (X+xy[0]);
+						double dy2 = y - (Y+xy[1]);
+						double sr2 = r + 16;
+						
+						if (sr2 * sr2 > (dx2 * dx2 + dy2* dy2)) {
+							levaDano((int)proj.dano);
+							return true;
+						}
+					}
+				}
+			}
+			
+			
 		}
 
 		return false;
@@ -237,6 +258,8 @@ public class Personagem extends Sprite {
 		}
 		return false;
 	}
+	
+	
 
 	public void levaDano(int dano) {
 		life -= dano;
@@ -245,7 +268,7 @@ public class Personagem extends Sprite {
 		}
 	}
 
-	public void basetToXY(int j, int i, float ret[]) {
+	public void basetToXY(int j, int i, double ret[]) {
 		int pi = i - 15;
 		int pj = j - 15;
 
@@ -254,8 +277,8 @@ public class Personagem extends Sprite {
 
 		double x = jx * Math.cos(angulo) - ix * Math.sin(angulo);
 		double y = jx * Math.sin(angulo) + ix * Math.cos(angulo);
-		ret[0] = (float)x;
-		ret[1] = (float)y;
+		ret[0] = x;
+		ret[1] = y;
 	}
 
 }
