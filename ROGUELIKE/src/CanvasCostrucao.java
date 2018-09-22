@@ -3,27 +3,47 @@ import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
+import java.awt.image.BufferedImage;
 
 
-public class CanvasMenu extends MyCanvas {
+public class CanvasCostrucao extends MyCanvas {
 	
 	public MyCanvas canvasOrigem = null;
 	
 	public Color cor = null;
 	
+	private BufferedImage fundo;
 	
 	
-	
-	public CanvasMenu(MyCanvas canvasOrigem,Color cor) {
+    int NTileX,NTileY;
+    int base[][] = new int[31][31];
+    int armas[][] = new int[31][31];
+    
+    
+
+	public CanvasCostrucao(MyCanvas canvasOrigem,Color cor) {
+		fundo = GamePanel.instance.carregaImagem("fundo.png");
+		
 		this.canvasOrigem = canvasOrigem;
 		this.cor = cor;
+		NTileX = NTileY = 32;
+		for (int j = 0; j < base.length; j++) {
+			for (int i = 0; i < base[j].length; i++) {
+				base[j][i] = 0;
+			}
+		}
+		
+		for (int j = 0; j < armas.length; j++) {
+			for (int i = 0; i < armas[j].length; i++) {
+				armas[j][i] = 0;
+			}
+		}
 	}
-	
-	long somatime = 0;
+	 
 	@Override
 	public void SimulaSe(int diftime) {
 		// TODO Auto-generated method stub
-		somatime += diftime;
+	 
 	}
 
 	@Override
@@ -33,8 +53,27 @@ public class CanvasMenu extends MyCanvas {
 		dbg.fillRect(0, 0, Constantes.telaW, Constantes.telaH);
 		
 		dbg.setColor(Color.white);
-		dbg.drawString("MENU DO JOGO PRESSIONE ESC PARA SAIR", 10, 10);
-		dbg.drawString(""+somatime,300,250);
+		dbg.drawString("Clique nos icones para construção", 10, 10);
+	 
+		for (int j = 0; j < base.length; j++) {
+			for (int i = 0; i < base[j].length; i++) {
+				    int tilex = (base[j][i]%NTileX);
+	                int tiley = (base[j][i]/NTileY);
+	                if(base[j][i]==0) {
+	                	 dbg.drawImage(fundo,i*16+384,j*16+50,(i*16)+16+384,(j*16)+16+50,tilex*16,tiley*16,(tilex*16)+16,(tiley*16)+16,null); 	
+	                }
+	           	}
+		}
+		
+		for (int j = 0; j < Constantes.armas.size(); j++) {
+			dbg.drawImage(Constantes.armas.get(j).imagem, 10+16, 10+16*j, null);
+		}
+		
+		
+		for (int j = 0; j < Constantes.bases.size(); j++) {
+			dbg.drawImage(Constantes.bases.get(j).imagem, 10+34, 10+16*j, null);
+		}
+		
 	}
 
 	@Override
@@ -46,7 +85,7 @@ public class CanvasMenu extends MyCanvas {
 			GamePanel.telaAtiva = canvasOrigem;
 		}
 		if(keyCode == KeyEvent.VK_G){
-			GamePanel.telaAtiva = new CanvasMenu(this,Color.GREEN);
+			GamePanel.telaAtiva = new CanvasCostrucao(this,Color.GREEN);
 		}
 	}
 

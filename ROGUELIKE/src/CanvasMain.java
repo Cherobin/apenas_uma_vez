@@ -244,7 +244,7 @@ public class CanvasMain extends MyCanvas {
 
 		}
 		if(keyCode == KeyEvent.VK_M){
-			GamePanel.telaAtiva = new CanvasMenu(this,Color.blue);
+			GamePanel.telaAtiva = new CanvasCostrucao(this,Color.blue);
 		}
 	}
 
