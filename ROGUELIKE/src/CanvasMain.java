@@ -74,6 +74,7 @@ public class CanvasMain extends MyCanvas {
 
 		Constantes.heroi = new Personagem(100, 100);
 		Constantes.heroi.vel = 100;
+		Constantes.heroi.life = 5000;
 
 		listaDePersonagens.add(Constantes.heroi);
 		
@@ -90,15 +91,15 @@ public class CanvasMain extends MyCanvas {
 				
 					
 				colidiu = false;
-				posx = GamePanel.rnd.nextInt(6000);
-				posy = GamePanel.rnd.nextInt(4000);
+				posx = GamePanel.rnd.nextInt(16000)-8000;
+				posy = GamePanel.rnd.nextInt(16000)-8000;
 				
 				bx = (int)((posx+16)/16);
 				by = (int)((posy+40)/16);
 				
 				for(int j = 0; j < listaDePersonagens.size();j++){
 					Personagem pers = (Personagem)listaDePersonagens.get(j);
-
+					
 //					if(pers.ColisaoRetangular(new Personagem(posx, posy))){
 //						colidiu = true;
 //						continue;
@@ -111,7 +112,7 @@ public class CanvasMain extends MyCanvas {
 			Personagem pers = new Personagem(posx, posy);
 			pers.vel = 50+GamePanel.rnd.nextInt(50);
 			pers.angulo = (Math.PI*2)*GamePanel.rnd.nextDouble();
-			
+			pers.rodaia = true;
 			//pers.vel = (int)Math.sqrt(pers.velX*pers.velX + pers.velY*pers.velY);
 			
 			listaDePersonagens.add(pers);
