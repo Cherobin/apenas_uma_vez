@@ -147,10 +147,11 @@ public GamePanel()
 		}
 	});
 	
-	telaAtiva = new CanvasMain();
 	
 	carregaAssetsEntreOutrasCoisas();
-
+	
+	telaAtiva = new CanvasMain();
+  
 } // end of GamePanel()
 
 private void carregaAssetsEntreOutrasCoisas() {
@@ -229,6 +230,52 @@ private void carregaAssetsEntreOutrasCoisas() {
 	}
 	
 	
+	
+	carregaNave("nave_1.csv");
+	carregaNave("nave_2.csv");
+	carregaNave("nave_3.csv");
+	carregaNave("nave_4.csv");
+	
+}
+public void carregaNave(String file) {
+	try {
+		 
+		InputStream In = getClass().getResourceAsStream(file);
+	
+			String line = "";
+		
+			BufferedReader bfr = new BufferedReader(new InputStreamReader(In));
+			NaveBase nave = new NaveBase();
+			int isBase = -1;
+			int e =0;
+			while((line = bfr.readLine())!=null){
+				if(line.charAt(0)=='#'){
+					isBase++; 
+					e = 0; 
+				}
+				if(line.charAt(0)!='#'){
+					String strs[] = line.split(";");
+				 
+					for (int i = 0; i < strs.length; i++) {
+						 if(isBase == 0) {
+							 nave.layer0[e][i] = Integer.parseInt(strs[i]);
+						 }else {
+							 nave.layer1[e][i] = Integer.parseInt(strs[i]);
+						 }
+					}
+					e++;
+				} 
+				
+			}
+			 Constantes.navesBase.add(nave);
+			
+		 
+		
+	} catch (IOException e) {
+		// TODO Auto-generated catch block
+	    System.out.println(e.getMessage()+ "  abreaA!!!");
+		e.printStackTrace();
+	}
 }
 
 public void addNotify()

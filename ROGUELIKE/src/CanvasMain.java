@@ -8,6 +8,7 @@ import java.awt.event.MouseWheelEvent;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.Random;
 
 
 public class CanvasMain extends MyCanvas {
@@ -38,7 +39,7 @@ public class CanvasMain extends MyCanvas {
 	double posy = 0;
 
 	double rotx = 0;
-
+	public Random rnd;
 
 
 	public static ArrayList<Sprite> listaDePersonagens = new ArrayList<Sprite>();
@@ -59,6 +60,9 @@ public class CanvasMain extends MyCanvas {
 	double zoom;
 	double newzoom;
 	
+	
+	public Font fonteMini = new Font("", Font.BOLD,12);
+	
 	public Font fonte = new Font("", Font.BOLD,16);
 	
 	public Font fonteG1 = new Font("", Font.BOLD,22);
@@ -71,13 +75,14 @@ public class CanvasMain extends MyCanvas {
 		//tileset = GamePanel.instance.carregaImagem("Bridge.png");
 		//fumaca = GamePanel.instance.carregaImagem("fumaca.png");
 		
+		rnd = new Random();
 		x = 0;
 		y = 50; 
 		
 		x2 = 0;
 		y2 = 200;
 
-		Constantes.heroi = new Personagem(100, 100,5000);
+		Constantes.heroi = new Personagem(100, 100,5000, Constantes.navesBase.get(0));
 		Constantes.heroi.vel = 200;
 
 
@@ -113,8 +118,8 @@ public class CanvasMain extends MyCanvas {
 				
 			}while(colidiu);
 
-			
-			Personagem pers = new Personagem(posx, posy,500);
+			int x = rnd.nextInt(Constantes.navesBase.size()-1);
+			Personagem pers = new Personagem(posx, posy,500,Constantes.navesBase.get(x));
 			pers.vel = 50+GamePanel.rnd.nextInt(50);
 			pers.angulo = (Math.PI*2)*GamePanel.rnd.nextDouble();
 			pers.rodaia = true;
@@ -154,7 +159,7 @@ public class CanvasMain extends MyCanvas {
 		}else if(DOWN){
 			Constantes.heroi.vel-=50*diftime/1000.0f;
 			
-			System.out.println("DDD Constantes.heroi.vel "+Constantes.heroi.vel);
+			//System.out.println("DDD Constantes.heroi.vel "+Constantes.heroi.vel);
 			
 			if(Constantes.heroi.vel<=0) {
 				Constantes.heroi.vel=0;
@@ -260,15 +265,17 @@ public class CanvasMain extends MyCanvas {
 		dbg.setColor(Color.YELLOW);	
 		dbg.drawString("FPS: "+GamePanel.FPS, 10, 20);
 		
-		dbg.setFont(fonteG1);	
+		dbg.setFont(fonteMini);	
+		dbg.drawString("Velocidade", 10, Constantes.telaH-26);
 		dbg.drawString(""+(int)(Constantes.heroi.vel), 10, Constantes.telaH-15);
 		
 		dbg.setColor(lifebarcolor);
+	
 		dbg.fillRoundRect(100, Constantes.telaH-40, (int)(400*(Constantes.heroi.life/(float)Constantes.heroi.lifeMax)), 30, 10, 10);
-		
+
 		dbg.setColor(Color.lightGray);
 		dbg.drawRoundRect(100, Constantes.telaH-40, 400, 30, 10, 10);
-		
+		dbg.drawString("Life", 105, Constantes.telaH-28);
 		
 		dbg.setFont(f);
 	}

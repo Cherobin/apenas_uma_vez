@@ -37,7 +37,7 @@ public class Personagem extends Sprite {
 	
 	boolean rodaia = false;
 
-	public Personagem(float x, float y,int lifemax) {
+	public Personagem(float x, float y,int lifemax, NaveBase naveBase) {
 		this.X = x;
 		this.Y = y;
 		
@@ -46,6 +46,10 @@ public class Personagem extends Sprite {
 
 		boundingbox = new Rectangle(0, 0, 100, 100);
 
+		layer0 = naveBase.layer0;
+		layer1 = naveBase.layer1;
+		
+		/*
 		layer0[15][15] = 1;
 		layer0[15][16] = 2;
 		layer0[15][17] = 2;
@@ -54,6 +58,7 @@ public class Personagem extends Sprite {
 		
 		layer1[14][15] = 2;
 		layer1[16][15] = 2;
+		*/
 	}
 
 	@Override

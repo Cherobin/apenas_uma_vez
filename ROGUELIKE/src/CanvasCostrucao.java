@@ -44,17 +44,26 @@ public class CanvasCostrucao extends MyCanvas {
 		this.canvasOrigem = canvasOrigem;
 		this.cor = cor;
 		NTileX = NTileY = 32;
+		System.out.print("#Layer1");
 		for (int j = 0; j < base.length; j++) {
 			for (int i = 0; i < base[j].length; i++) {
 				base[j][i] = Constantes.heroi.layer0[j][i];
+				System.out.print(base[j][i]+";");
 			}
+			System.out.println();
 		}
 
+		System.out.print("#Layer2");
 		for (int j = 0; j < armas.length; j++) {
 			for (int i = 0; i < armas[j].length; i++) {
 				armas[j][i] = Constantes.heroi.layer1[j][i];
+				System.out.print(armas[j][i]+";");
 			}
+			System.out.println();
 		}
+		
+		
+		
 		
 		Constantes.bases.get(0).isSelected = true;
 		my_base = Constantes.bases.get(0);
