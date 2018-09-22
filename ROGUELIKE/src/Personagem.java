@@ -181,13 +181,20 @@ public class Personagem extends Sprite {
 			for (int j = 0; j < 31; j++) {
 				//dbg.setColor(Color.red);
 				//dbg.drawRect((int) -basex + j * 32, (int) -basey + i * 32, 32, 32);
-				if (layer0[i][j] == 1) {
-					dbg.setColor(Color.red);
-					dbg.fillRect((int) -basex + j * 32, (int) -basey + i * 32, 32, 32);
+//				if (layer0[i][j] == 1) {
+//					dbg.setColor(Color.red);
+//					dbg.fillRect((int) -basex + j * 32, (int) -basey + i * 32, 32, 32);
+//				}
+//				if (layer0[i][j] == 2) {
+//					dbg.setColor(Color.blue);
+//					dbg.fillRect((int) -basex + j * 32, (int) -basey + i * 32, 32, 32);
+//				}
+				
+				if (layer0[i][j] != 0) {
+					dbg.drawImage(Constantes.bases.get(layer0[i][j]-1).imagem,(int) -basex + j * 32, (int) -basey + i * 32,32,32,null);
 				}
-				if (layer0[i][j] == 2) {
-					dbg.setColor(Color.blue);
-					dbg.fillRect((int) -basex + j * 32, (int) -basey + i * 32, 32, 32);
+				if (layer1[i][j] != 0) {
+					dbg.drawImage(Constantes.armas.get(layer1[i][j]-1).imagem,(int) -basex + j * 32, (int) -basey + i * 32,32,32,null);
 				}
 			}
 		}
