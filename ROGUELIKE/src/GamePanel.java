@@ -148,8 +148,57 @@ public GamePanel()
 	});
 	
 	telaAtiva = new CanvasMain();
+	
+	carregaAssetsEntreOutrasCoisas();
 
 } // end of GamePanel()
+
+private void carregaAssetsEntreOutrasCoisas() {
+	//Constantes.armas
+	
+	try {
+	 
+		InputStream In = getClass().getResourceAsStream("armas.csv");
+	
+			System.out.println(" In "+In.available());
+			String line = "";
+		
+			BufferedReader bfr = new BufferedReader(new InputStreamReader(In));
+		
+	 
+			while((line = bfr.readLine())!=null){
+				if(line.charAt(0)!='#'){
+					String strs[] = line.split(";");
+					
+					int tipo = Integer.parseInt(strs[1]);
+					
+					//Evento ev = null;
+					
+					switch (tipo) {
+					case 0:
+					//	ev = new EventoPortal(strs);
+						break;
+					case 1:
+						//ev = new EventoDialogo(strs);
+						break;
+
+					default:
+						break;
+					}
+					
+					//if(ev!=null)
+					//listaDeEventos.add(ev);
+				}
+			}
+		 
+		
+	} catch (IOException e) {
+		// TODO Auto-generated catch block
+	    System.out.println(e.getMessage()+ "  abreaA!!!");
+		e.printStackTrace();
+	}
+	
+}
 
 public void addNotify()
 {
