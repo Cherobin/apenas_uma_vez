@@ -56,7 +56,7 @@ public class CanvasMain extends MyCanvas {
 	int MapY = 0;
 	
 	double zoom;
-	
+	double newzoom;
 	
 	
 	
@@ -118,6 +118,7 @@ public class CanvasMain extends MyCanvas {
 		}
 		
 		zoom = 0.5;
+		newzoom = 0.5;
 		
 //		gerenciadorEventos.carregaEventos(this.getClass().getResourceAsStream("ecentos.csv"));
 		
@@ -126,7 +127,7 @@ public class CanvasMain extends MyCanvas {
 	@Override
 	public void SimulaSe(int diftime) {
 		timertiro+=diftime;
-		
+		zoom = newzoom;
 
 		if(LEFT){
 			Constantes.heroi.angulo-=Math.PI*diftime/1000.0f;
@@ -135,13 +136,20 @@ public class CanvasMain extends MyCanvas {
 			Constantes.heroi.angulo+=Math.PI*diftime/1000.0f;
 
 		}
+		
 		if(UP){
-			Constantes.heroi.vel+=50*diftime/1000.0f;
+			Constantes.heroi.vel += 50*diftime/1000.0f;
+			
+			System.out.println("Constantes.heroi.vel "+Constantes.heroi.vel);
+			
 			if(Constantes.heroi.vel>=400) {
 				Constantes.heroi.vel=400;
 			}
 		}else if(DOWN){
 			Constantes.heroi.vel-=50*diftime/1000.0f;
+			
+			System.out.println("DDD Constantes.heroi.vel "+Constantes.heroi.vel);
+			
 			if(Constantes.heroi.vel<=0) {
 				Constantes.heroi.vel=0;
 			}
@@ -150,8 +158,7 @@ public class CanvasMain extends MyCanvas {
 
 		Constantes.heroi.FIRE = FIRE;
 
-		MapX = (int)(Constantes.heroi.X-(Constantes.telaW/zoom)/2);
-		MapY = (int)(Constantes.heroi.Y-(Constantes.telaH/zoom)/2);
+
 		
 		Constantes.heroi.xAlvo = (float)(MouseX/zoom+MapX);
 		Constantes.heroi.yAlvo = (float)(MouseY/zoom+MapY);
@@ -188,6 +195,8 @@ public class CanvasMain extends MyCanvas {
 		
 //		gerenciadorEventos.testaEventos(heroi);
 		
+		MapX = (int)(Constantes.heroi.X-(Constantes.telaW/zoom)/2);
+		MapY = (int)(Constantes.heroi.Y-(Constantes.telaH/zoom)/2);
 		
 		Constantes.telaRect.setBounds(MapX, MapY, (int)(Constantes.telaW/zoom), (int)(Constantes.telaH/zoom));
 	}
@@ -197,6 +206,22 @@ public class CanvasMain extends MyCanvas {
 		// clear the background
 		dbg.setColor(Color.BLACK);
 		dbg.fillRect (0, 0, Constantes.telaW, Constantes.telaH);
+		
+		for(int i = 0; i < 40; i++) {
+			for(int j = 0; j < 40; j++) {
+				Rectangle bquadrante = new Rectangle((j-20)*8000, (i-20)*8000, 8000, 8000);
+				
+				if(Constantes.telaRect.intersects(bquadrante)) {
+					if(Constantes.quadrantes[i][j]!=null) {
+						//System.out.println(Constantes.telaRect+" "+bquadrante);
+						Constantes.quadrantes[i][j].DesenhaSe(dbg, MapX, MapY);
+					}else {
+						Constantes.quadrantes[i][j] = new Quadrante(j-20, i-20);
+						Constantes.quadrantes[i][j].DesenhaSe(dbg, MapX, MapY);
+					}
+				}
+			}
+		}
 		
 		//dbg.drawImage(imgFundo,(int)(-500+(heroi.X/100)),(int)(-500+(heroi.Y/100)),null);
 		
@@ -323,9 +348,17 @@ public class CanvasMain extends MyCanvas {
 //		double oldpoy = MouseY/fatorDeEscala;
 		
 		if(arg0.getWheelRotation()>0){
-			zoom*=1.1;
+			newzoom = zoom*1.1;
 		}else{
-			zoom*=0.9;
+			newzoom = zoom*0.9;
+		}
+		
+		if(newzoom>2) {
+			newzoom = 2;
+		}
+		
+		if(newzoom<0.05) {
+			newzoom = 0.05;
 		}
 		
 //		double mouseposnewx = MouseX/fatorDeEscala;

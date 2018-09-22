@@ -11,5 +11,6 @@ public class Constantes {
 	public static Rectangle telaRect = new Rectangle();
 	
 	public static Personagem heroi;
+	public static Quadrante quadrantes[][] = new Quadrante[40][40];
 	
 }

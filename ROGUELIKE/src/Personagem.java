@@ -16,7 +16,7 @@ public class Personagem extends Sprite {
 	int anim = 0;
 
 	double angulo = 0;
-	int vel = 0;
+	double vel = 0;
 
 	int raio = 496;
 
@@ -144,7 +144,7 @@ public class Personagem extends Sprite {
 	
 						double ang = Math.atan2(dy, dx);
 	
-						float velo = 1200;
+						float velo = 2000;
 	
 						Projetil proj = new Projetil((float)(xy[0]+X), (float)(xy[1]+Y), (float) (velo * Math.cos(ang)), (float) (velo * Math.sin(ang)),
 								this);
