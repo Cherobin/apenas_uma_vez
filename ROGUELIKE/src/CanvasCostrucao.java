@@ -14,8 +14,6 @@ public class CanvasCostrucao extends MyCanvas {
 	
 	private BufferedImage fundo;
 	
-	private BufferedImage buff_armas[] = new BufferedImage[9];
-	private BufferedImage buff_bases[] = new BufferedImage[9];
 	
     int NTileX,NTileY;
     int base[][] = new int[31][31];
@@ -26,17 +24,6 @@ public class CanvasCostrucao extends MyCanvas {
 	public CanvasCostrucao(MyCanvas canvasOrigem,Color cor) {
 		fundo = GamePanel.instance.carregaImagem("fundo.png");
 		
-		
-		for (int i = 0; i < buff_armas.length; i++) {
-			buff_armas[i] = GamePanel.instance.carregaImagem("arma_"+(i+1)+".png");
-	 
-		}
-		
-		for (int i = 0; i < buff_bases.length; i++) {
-			buff_bases[i] = GamePanel.instance.carregaImagem("arma_"+(i+1)+".png");
-		}
-		
-	 
 		this.canvasOrigem = canvasOrigem;
 		this.cor = cor;
 		NTileX = NTileY = 32;
@@ -78,6 +65,9 @@ public class CanvasCostrucao extends MyCanvas {
 	           	}
 		}
 		
+		for (int j = 0; j < Constantes.armas.size(); j++) {
+			dbg.drawImage(Constantes.armas.get(j).imagem, 10+16, 10+16*j, null);
+		}
 	}
 
 	@Override

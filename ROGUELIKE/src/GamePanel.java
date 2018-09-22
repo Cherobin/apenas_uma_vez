@@ -159,7 +159,6 @@ private void carregaAssetsEntreOutrasCoisas() {
 	 
 		InputStream In = getClass().getResourceAsStream("armas.csv");
 	
-			System.out.println(" In "+In.available());
 			String line = "";
 		
 			BufferedReader bfr = new BufferedReader(new InputStreamReader(In));
@@ -169,24 +168,20 @@ private void carregaAssetsEntreOutrasCoisas() {
 				if(line.charAt(0)!='#'){
 					String strs[] = line.split(";");
 					
-					int tipo = Integer.parseInt(strs[1]);
+						Arma arma = new Arma();
 					
-					//Evento ev = null;
-					
-					switch (tipo) {
-					case 0:
-					//	ev = new EventoPortal(strs);
-						break;
-					case 1:
-						//ev = new EventoDialogo(strs);
-						break;
-
-					default:
-						break;
-					}
-					
-					//if(ev!=null)
-					//listaDeEventos.add(ev);
+						arma.id = Integer.parseInt(strs[0]);
+						arma.nome = strs[1];
+						arma.imagem = carregaImagem(strs[2]);
+						arma.dano = Float.parseFloat(strs[3]);
+						arma.candecia_tiro = Float.parseFloat(strs[4]);
+						arma.velocidade_tiro = Float.parseFloat(strs[5]);
+						arma.tiro_automatico = Boolean.parseBoolean(strs[6]);
+						arma.tipo_tiro = Integer.parseInt(strs[7]);
+						arma.custo = Float.parseFloat(strs[8]);
+					 
+						Constantes.armas.add(arma);
+				  
 				}
 			}
 		 
