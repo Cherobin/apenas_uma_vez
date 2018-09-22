@@ -179,7 +179,7 @@ private void carregaAssetsEntreOutrasCoisas() {
 						arma.tiro_automatico = Boolean.parseBoolean(strs[6]);
 						arma.tipo_tiro = Integer.parseInt(strs[7]);
 						arma.custo = Float.parseFloat(strs[8]);
-					 
+						arma.energia = Float.parseFloat(strs[9]);
 						Constantes.armas.add(arma);
 				  
 				}
@@ -191,6 +191,42 @@ private void carregaAssetsEntreOutrasCoisas() {
 	    System.out.println(e.getMessage()+ "  abreaA!!!");
 		e.printStackTrace();
 	}
+	
+	
+	try {
+		 
+		InputStream In = getClass().getResourceAsStream("bases.csv");
+	
+			String line = "";
+		
+			BufferedReader bfr = new BufferedReader(new InputStreamReader(In));
+		
+	 
+			while((line = bfr.readLine())!=null){
+				if(line.charAt(0)!='#'){
+					String strs[] = line.split(";");
+					
+						Base base = new Base();
+					
+						base.id = Integer.parseInt(strs[0]);
+						base.nome = strs[1];
+						base.imagem = carregaImagem(strs[2]);
+						base.tipo_base = Integer.parseInt(strs[3]);
+						base.custo = Float.parseFloat(strs[4]);
+						base.poder = Integer.parseInt(strs[5]);
+						 
+						Constantes.bases.add(base);
+				  
+				}
+			}
+		 
+		
+	} catch (IOException e) {
+		// TODO Auto-generated catch block
+	    System.out.println(e.getMessage()+ "  abreaA!!!");
+		e.printStackTrace();
+	}
+	
 	
 }
 

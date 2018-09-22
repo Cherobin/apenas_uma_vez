@@ -68,6 +68,12 @@ public class CanvasCostrucao extends MyCanvas {
 		for (int j = 0; j < Constantes.armas.size(); j++) {
 			dbg.drawImage(Constantes.armas.get(j).imagem, 10+16, 10+16*j, null);
 		}
+		
+		
+		for (int j = 0; j < Constantes.bases.size(); j++) {
+			dbg.drawImage(Constantes.bases.get(j).imagem, 10+34, 10+16*j, null);
+		}
+		
 	}
 
 	@Override
