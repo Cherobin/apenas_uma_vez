@@ -246,11 +246,13 @@ public class CanvasCostrucao extends MyCanvas {
 	}
 	
 	boolean podeCriar(int x, int y) {
-		
+		 
 		 for (int j = x-1; j <= x+1; j++) {
 			for (int i = y-1; i <= y+1; i++) {
-				if(base[j][i]!=0){
-					return true;
+				if(j<31 && i < 31 && i >0 && j >0) { // não pegar null
+					if(base[j][i]!=0){
+						return true;
+					}
 				}
 			}
 		}
@@ -335,7 +337,7 @@ public class CanvasCostrucao extends MyCanvas {
 						Rectangle rect = new Rectangle(i * 16 + 384, j * 16 + 50, 16, 16);
 						if (rect.contains(arg0.getX(), arg0.getY())) {
 							if (Constantes.gold >= my_base.custo) {
-								if(podeCriar(j,i) && base[j][i] ==0) {
+								if(podeCriar(j,i) && base[j][i] == 0) {
 									Constantes.gold -= my_base.custo;
 									base[j][i] = my_base.id;
 								}else {
