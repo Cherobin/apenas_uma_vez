@@ -1,0 +1,4 @@
+#Cod;Tipo( 0 - Portal);Xe;Ye;Pvar;Pop (0 ==  1 >  2 <);Pval;Avar;Aop ( 0 = 1++ 2--);Sval;dX;dY;Map
+0;0;10;10;0;0;0;0;0;1;20;20;-1
+1;0;25;20;0;0;1;0;0;2;5;5;-1
+2;1;25;5;0;0;2;0;0;0;Oi turma de engines 2d;;
