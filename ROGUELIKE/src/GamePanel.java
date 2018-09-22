@@ -22,8 +22,11 @@ private Thread animator;
 private boolean running = false;
 private boolean gameOver = false; 
 
-private BufferedImage dbImage;
 private Graphics2D dbg;
+
+Canvas gui = null;
+public BufferStrategy strategy = null;
+
 
 public static int FPS,SFPS;
 int fpscount;
@@ -31,6 +34,8 @@ int fpscount;
 public static MyCanvas telaAtiva = null;
 
 public static Random rnd = new Random();
+
+
 
 
 public GamePanel()
@@ -45,19 +50,13 @@ public GamePanel()
 
 	requestFocus(); // JPanel now receives key events
 	
-	if (dbImage == null){
-		dbImage = new BufferedImage(Constantes.telaW, Constantes.telaH,BufferedImage.TYPE_INT_ARGB);
-		if (dbImage == null) {
-			System.out.println("dbImage is null");
-			return;
-		}else{
-			dbg = (Graphics2D)dbImage.getGraphics();
-		}
-	}	
-	
+	gui = new Canvas();
+	gui.setSize(Constantes.telaW, Constantes.telaH);
+	setLayout(new BorderLayout());
+	add(gui, BorderLayout.CENTER);
 	
 	// Adiciona um Key Listner
-	addKeyListener( new KeyAdapter() {
+	gui.addKeyListener( new KeyAdapter() {
 		public void keyPressed(KeyEvent e)
 			{ 
 				if(telaAtiva!=null){
@@ -72,7 +71,7 @@ public GamePanel()
 			}
 	});
 	
-	addMouseMotionListener(new MouseMotionListener() {
+	gui.addMouseMotionListener(new MouseMotionListener() {
 		
 		@Override
 		public void mouseMoved(MouseEvent e) {
@@ -93,7 +92,7 @@ public GamePanel()
 	
 	
 	
-	addMouseListener(new MouseListener() {
+	gui.addMouseListener(new MouseListener() {
 		
 		@Override
 		public void mouseReleased(MouseEvent e) {
@@ -136,7 +135,7 @@ public GamePanel()
 		}
 	});
 	
-	addMouseWheelListener(new MouseWheelListener() {
+	gui.addMouseWheelListener(new MouseWheelListener() {
 		
 		@Override
 		public void mouseWheelMoved(MouseWheelEvent e) {
@@ -231,11 +230,20 @@ public void run()
 	DifTime = 0;
 	TempoAnterior = System.currentTimeMillis();
 	
-	while(running) {
+	gui.createBufferStrategy(2);
+	strategy = gui.getBufferStrategy();
 	
-		gameUpdate(DifTime); // game state is updated
-		gameRender(); // render to a buffer
-		paintImmediately(0, 0, Constantes.telaW, Constantes.telaH); // paint with the buffer
+	while(running) {
+		
+		dbg = (Graphics2D) strategy.getDrawGraphics();
+		dbg.setClip(0, 0, Constantes.telaW, Constantes.telaH);
+		dbg.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+		
+		gameUpdate(DifTime);
+		gameRender();
+		
+		dbg.dispose();
+		strategy.show();
 	
 		try {
 			Thread.sleep(0); // sleep a bit
@@ -270,14 +278,6 @@ private void gameRender()
 	if(telaAtiva!=null){
 		telaAtiva.DesenhaSe(dbg);
 	}
-}
-
-
-public void paintComponent(Graphics g)
-{
-	super.paintComponent(g);
-	if (dbImage != null)
-		g.drawImage(dbImage, 0, 0, null);
 }
 
 

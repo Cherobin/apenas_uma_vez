@@ -22,8 +22,8 @@ public class EventoPortal extends Evento {
 	@Override
 	public void executaEvento(Personagem pers) {
 		// TODO Auto-generated method stub
-		pers.X = dx*16-pers.charw/2;
-		pers.Y = dy*16-pers.charh-8;
+		pers.X = dx*16-pers.boundingbox.width/2;
+		pers.Y = dy*16-pers.boundingbox.height-8;
 		executaAcao();
 	}
 }

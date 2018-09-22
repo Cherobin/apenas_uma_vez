@@ -69,8 +69,8 @@ public class GerenciadorDeEventos {
 	}
 	
 	public void testaEventos(Personagem pers){
-		int bx = (int)((pers.X+pers.charw/2)/16);
-		int by = (int)((pers.Y+pers.charh-8)/16);
+		int bx = (int)((pers.X+pers.boundingbox.width/2)/16);
+		int by = (int)((pers.Y+pers.boundingbox.height-8)/16);
 		
 		for (Evento ev : listaDeEventos) {
 			ev.testaPrerequisitos();

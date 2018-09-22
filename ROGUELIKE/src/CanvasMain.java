@@ -3,6 +3,7 @@ import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
+import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
@@ -29,9 +30,7 @@ public class CanvasMain extends MyCanvas {
 	int tempomovimento = 0;
 	int tempomovimento2 = 0;
 
-	boolean scale = false;
 
-	double fatorDeEscala = 0.5;
 
 	double posx = 0;
 	double posy = 0;
@@ -55,6 +54,8 @@ public class CanvasMain extends MyCanvas {
 	int MapX = 0;
 	int MapY = 0;
 	
+	double zoom;
+	
 	
 	
 	public CanvasMain() {
@@ -69,9 +70,11 @@ public class CanvasMain extends MyCanvas {
 		x2 = 0;
 		y2 = 200;
 
-		heroi = new Personagem(100, 100, imgCharset,0);
+		heroi = new Personagem(100, 100);
+		heroi.vel = 100;
 
 		listaDePersonagens.add(heroi);
+		
 		for(int i = 0; i < 10;i++){
 			int posx = 0;
 			int posy = 0;
@@ -85,8 +88,8 @@ public class CanvasMain extends MyCanvas {
 				
 					
 				colidiu = false;
-				posx = GamePanel.rnd.nextInt(600);
-				posy = GamePanel.rnd.nextInt(400);
+				posx = GamePanel.rnd.nextInt(6000);
+				posy = GamePanel.rnd.nextInt(4000);
 				
 				bx = (int)((posx+16)/16);
 				by = (int)((posy+40)/16);
@@ -94,7 +97,7 @@ public class CanvasMain extends MyCanvas {
 				for(int j = 0; j < listaDePersonagens.size();j++){
 					Personagem pers = (Personagem)listaDePersonagens.get(j);
 
-					if(pers.ColisaoRetangular(new Personagem(posx, posy, null, 0))){
+					if(pers.ColisaoRetangular(new Personagem(posx, posy))){
 						colidiu = true;
 						continue;
 					}
@@ -103,18 +106,18 @@ public class CanvasMain extends MyCanvas {
 			}while(colidiu);
 
 			
-			Personagem pers = new Personagem(posx, posy, imgCharset, GamePanel.rnd.nextInt(7)+1);
-			pers.velX = -50+GamePanel.rnd.nextInt(100);
-			pers.velY = -50+GamePanel.rnd.nextInt(100);
+			Personagem pers = new Personagem(posx, posy);
+			pers.vel = -50+GamePanel.rnd.nextInt(100);
+			pers.angulo = (Math.PI*2)*GamePanel.rnd.nextDouble();
 			
-			pers.vel = (int)Math.sqrt(pers.velX*pers.velX + pers.velY*pers.velY);
+			//pers.vel = (int)Math.sqrt(pers.velX*pers.velX + pers.velY*pers.velY);
 			
 			listaDePersonagens.add(pers);
 		}
 		
+		zoom = 0.5;
 		
-		
-		gerenciadorEventos.carregaEventos(this.getClass().getResourceAsStream("ecentos.csv"));
+//		gerenciadorEventos.carregaEventos(this.getClass().getResourceAsStream("ecentos.csv"));
 		
 		
 	}
@@ -124,33 +127,30 @@ public class CanvasMain extends MyCanvas {
 		
 		int vel = 200;
 		if(LEFT){
-			heroi.velX = -vel;
-			heroi.anim = 1;
+			heroi.angulo-=Math.PI*diftime/1000.0f;
+
 		}else if(RIGHT){
-			heroi.velX = vel;
-			heroi.anim = 2;
-		}else{
-			heroi.velX = 0;
+			heroi.angulo+=Math.PI*diftime/1000.0f;
+
 		}
 		if(UP){
-			heroi.velY = -vel;
-			heroi.anim = 3;
+			//heroi.velY = -vel;
+
 		}else if(DOWN){
-			heroi.velY = vel;
-			heroi.anim = 0;
-		}else{
-			heroi.velY = 0;
+			//heroi.velY = vel;
+
 		}
 		
+		
 		if(FIRE&&timertiro>400){
-			float dx = (MouseX+MapX)-(heroi.X+16);
-			float dy = (MouseY+MapY)-(heroi.Y+24);
+			double dx = (MouseX/zoom+MapX)-(heroi.X);
+			double dy = (MouseY/zoom+MapY)-(heroi.Y);
 			
 			double ang = Math.atan2(dy, dx);
 			
 			float velo = 400;
 			
-			Projetil proj = new Projetil(heroi.X+16, heroi.Y+24, (float)(velo*Math.cos(ang)), (float)(velo*Math.sin(ang)),heroi);
+			Projetil proj = new Projetil(heroi.X, heroi.Y, (float)(velo*Math.cos(ang)), (float)(velo*Math.sin(ang)),heroi);
 			
 			listaDeProjeteis.add(proj);
 			
@@ -186,14 +186,23 @@ public class CanvasMain extends MyCanvas {
 			}
 		}	
 		
-		gerenciadorEventos.testaEventos(heroi);
+//		gerenciadorEventos.testaEventos(heroi);
+		
+		
+		
+		MapX = (int)(heroi.X-(Constantes.telaW/zoom)/2);
+		MapY = (int)(heroi.Y-(Constantes.telaH/zoom)/2);
 	}
 
 	@Override
 	public void DesenhaSe(Graphics2D dbg) {
 		// clear the background
-		dbg.setColor(Color.white);
+		dbg.setColor(Color.BLACK);
 		dbg.fillRect (0, 0, Constantes.telaW, Constantes.telaH);
+		
+		AffineTransform trans = dbg.getTransform();
+		
+		dbg.scale(zoom, zoom);
 
 //		dbg.drawImage(imgFundo, null,0,0);
 		
@@ -210,7 +219,9 @@ public class CanvasMain extends MyCanvas {
 		}	
 //		heroi.DesenhaSe(dbg);
 		
-		gerenciadorEventos.desenhase(dbg, MapX,MapY);
+		//gerenciadorEventos.desenhase(dbg, MapX,MapY);
+		
+		dbg.setTransform(trans);
 		
 		dbg.setColor(Color.BLUE);	
 //		dbg.drawString("FPS: "+FPS+" MouseX: "+MouseX+" MouseY: "+MouseY+" LEFT "+LEFT+" RIGHT "+RIGHT+" UP "+UP+" DOWN "+DOWN, 10, 10);	
@@ -236,7 +247,7 @@ public class CanvasMain extends MyCanvas {
 			DOWN = true;
 		}	
 		if(keyCode == KeyEvent.VK_SPACE){
-			scale=!scale;
+
 		}
 		if(keyCode == KeyEvent.VK_M){
 			GamePanel.telaAtiva = new CanvasCostrucao(this,Color.blue);
@@ -312,9 +323,9 @@ public class CanvasMain extends MyCanvas {
 //		double oldpoy = MouseY/fatorDeEscala;
 		
 		if(arg0.getWheelRotation()>0){
-			rotx+=0.1;
+			zoom*=1.1;
 		}else{
-			rotx-=0.1;
+			zoom*=0.9;
 		}
 		
 //		double mouseposnewx = MouseX/fatorDeEscala;

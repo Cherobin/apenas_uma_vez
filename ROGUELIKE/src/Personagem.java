@@ -1,44 +1,46 @@
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
+import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 
 
 public class Personagem extends Sprite {
 	BufferedImage charset = null;
-	
-	int charw = 32;
-	int charh = 48;
+
+	static int basex = 496;
+	static int basey = 496;
 	
 	int animTimer = 0;
 	int animSpeed = 200;
 	int frame = 0;
 	int anim = 0;
 	
+	double angulo = 0;
 	int vel = 0;
-	int velX = 0;
-	int velY = 0;
 	
-	int skin = 0;
-	
-	int charposx = 0;
-	int charposy = 0;
-	
-	int raio = 10;
+	int raio = 496;
 	
 	int life = 100;
 	
-	public Personagem(float x,float y,BufferedImage charset,int skin){
+	Rectangle boundingbox;
+	
+	int layer0[][] = new int[31][31];
+	int layer1[][] = new int[31][31];
+	
+
+	
+	public Personagem(float x,float y){
 		this.X = x;
 		this.Y = y;
-		this.charset = charset;
+
+		boundingbox = new Rectangle(0, 0, 100, 100);
 		
-		this.skin = skin;
-		
-		int skincol = skin%4;
-		int skinline = skin/4;
-		
-		charposx = skincol*(charw*3);
-		charposy = skinline*(charh*4);
+		layer0[15][15] = 1;
+		layer0[15][16] = 2;
+		layer0[15][17] = 2;
+		layer0[14][15] = 2;
+		layer0[16][15] = 2;
 	}
 	
 	@Override
@@ -57,6 +59,9 @@ public class Personagem extends Sprite {
 //			velY = (int)(vel*Math.sin(ang));
 //		}
 		
+		double velX = vel*Math.cos(angulo);
+		double velY = vel*Math.sin(angulo);
+		
 		float xold = X;
 		float yold = Y;
 		
@@ -64,31 +69,33 @@ public class Personagem extends Sprite {
 		Y+=velY*diftime/1000.0f;
 		
 		
+		angulo = Math.atan2(velY, velX);
 		
-		if(Math.abs(velX)>Math.abs(velY)){
-			if(velX>0){
-				anim = 2;
-			}else{
-				anim = 1;
-			}
-		}else{
-			if(velY>0){
-				anim = 0;
-			}else if(velY<0){
-				anim = 3;
-			}else{
-				anim = 0;
-			}
-		}
 		
-		if(X<0){
-			X = 0;
-			velX = -velX;
-		}
-		if(Y<0){
-			Y = 0;
-			velY = -velY;
-		}
+//		if(Math.abs(velX)>Math.abs(velY)){
+//			if(velX>0){
+//				anim = 2;
+//			}else{
+//				anim = 1;
+//			}
+//		}else{
+//			if(velY>0){
+//				anim = 0;
+//			}else if(velY<0){
+//				anim = 3;
+//			}else{
+//				anim = 0;
+//			}
+//		}
+		
+//		if(X<0){
+//			X = 0;
+//			velX = -velX;
+//		}
+//		if(Y<0){
+//			Y = 0;
+//			velY = -velY;
+//		}
 		
 //		if(X>CanvasMain.tilemap.Largura*16-charw){
 //			X = CanvasMain.tilemap.Largura*16-charw;
@@ -99,8 +106,7 @@ public class Personagem extends Sprite {
 //			velY = -velY;
 //		}
 		
-		int bx = (int)((X+charw/2)/16);
-		int by = (int)((Y+charh-8)/16);
+
 		
 //		if(CanvasMain.tilemap.mapa2[by][bx]!=0){
 //			X = xold;
@@ -127,11 +133,43 @@ public class Personagem extends Sprite {
 	@Override
 	public void DesenhaSe(Graphics2D dbg,int xMundo,int yMundo) {
 		// TODO Auto-generated method stub
-		dbg.drawImage(charset,(int)X-xMundo, (int)Y-yMundo,(int)X+charw-xMundo, (int)Y+charh-yMundo,charposx+charw*frame,charposy+charh*anim,charposx+charw*frame+charw,charposy+charh*anim+charh,null);
+		//dbg.drawImage(charset,(int)X-xMundo, (int)Y-yMundo,(int)X+charw-xMundo, (int)Y+charh-yMundo,charposx+charw*frame,charposy+charh*anim,charposx+charw*frame+charw,charposy+charh*anim+charh,null);
+			
+		AffineTransform trans = dbg.getTransform();
+		
+		dbg.translate(X-xMundo, Y-yMundo);
+		
+		dbg.rotate(angulo);
+		
+
+		
 		dbg.setColor(Color.white);
-		dbg.drawOval((int)X-raio-xMundo+16, (int)Y-raio-yMundo+24, raio*2, raio*2);
-		dbg.setColor(Color.red);
-		dbg.drawRect((int)X-xMundo+2, (int)Y-yMundo+2, 28, 44);
+		dbg.drawOval((int)-raio, (int)-raio, raio*2, raio*2);
+		
+		//dbg.setColor(Color.red);
+		//dbg.drawRect((int)X-xMundo-boundingbox.width/2, (int)Y-yMundo-boundingbox.height/2,boundingbox.width,boundingbox.height);
+		
+		
+		for(int i = 0; i < 31;i++) {
+			for(int j = 0; j < 31;j++) {
+				dbg.setColor(Color.red);
+				dbg.drawRect((int)-basex+j*32, (int)-basey+i*32,32,32);
+				if(layer0[i][j]==1) {
+					dbg.setColor(Color.red);
+					dbg.fillRect((int)-basex+j*32, (int)-basey+i*32,32,32);
+				}
+				if(layer0[i][j]==2) {
+					dbg.setColor(Color.blue);
+					dbg.fillRect((int)-basex+j*32, (int)-basey+i*32,32,32);
+				}
+			}
+		}
+		
+		dbg.setColor(Color.green);
+		dbg.drawLine(0,-basey, basex, 0);
+		dbg.drawLine(0,basey, basex, 0);
+		
+		dbg.setTransform(trans);
 	}
 	
 	public boolean testaColisao(Personagem pers){
