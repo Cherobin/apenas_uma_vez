@@ -15,9 +15,10 @@ BufferedImage charset = null;
 	
 	Object pai = null;
 	
-	int tempoDeVida = 10000;
+	int tempoDeVida = 2000;
 	
 	float dano = 25;
+	double angulo = 0; 
 	
 	public Projetil(float x,float y,float velX,float velY,Object pai){
 		this.X = x;
@@ -27,6 +28,8 @@ BufferedImage charset = null;
 		this.velY = velY;
 		
 		this.pai = pai;
+		
+		angulo = Math.atan2(velY, velX);
 
 	}
 	

@@ -33,6 +33,8 @@ public class Personagem extends Sprite {
 	int timertiro = 0;
 	
 	double xy[] = new double[2];
+	
+	boolean rodaia = false;
 
 	public Personagem(float x, float y) {
 		this.X = x;
@@ -45,10 +47,18 @@ public class Personagem extends Sprite {
 		layer0[15][17] = 2;
 		layer0[14][15] = 2;
 		layer0[16][15] = 2;
+		
+		layer1[14][15] = 2;
+		layer1[16][15] = 2;
 	}
 
 	@Override
 	public void SimulaSe(int diftime) {
+		
+		if(rodaia) {
+			rodaia(diftime);
+		}
+		
 		// TODO Auto-generated method stub
 		animTimer += diftime;
 		timertiro += diftime;
@@ -73,6 +83,8 @@ public class Personagem extends Sprite {
 
 		X += velX * diftime / 1000.0f;
 		Y += velY * diftime / 1000.0f;
+		
+		
 
 
 
@@ -136,22 +148,58 @@ public class Personagem extends Sprite {
 			for (int i = 0; i < 31; i++) {
 				for (int j = 0; j < 31; j++) {
 
-					if (layer0[i][j] != 0) {
-						basetToXY(j, i, xy);
-						
-						double dx = xAlvo - (xy[0]+X);
-						double dy = yAlvo - (xy[1]+Y);
-	
-						double ang = Math.atan2(dy, dx);
-	
-						float velo = 2000;
-	
-						Projetil proj = new Projetil((float)(xy[0]+X), (float)(xy[1]+Y), (float) (velo * Math.cos(ang)), (float) (velo * Math.sin(ang)),
-								this);
-	
-						CanvasMain.listaDeProjeteis.add(proj);
-	
-						timertiro = 0;
+					if (layer1[i][j] != 0) {
+						if(layer1[i][j]==1) {
+							basetToXY(j, i, xy);
+							
+							double dx = xAlvo - (xy[0]+X);
+							double dy = yAlvo - (xy[1]+Y);
+		
+							double ang = Math.atan2(dy, dx);
+		
+							float velo = 2000;
+		
+							Projetil proj = new Projetil((float)(xy[0]+X), (float)(xy[1]+Y), (float) (velo * Math.cos(ang)), (float) (velo * Math.sin(ang)),
+									this);
+		
+							CanvasMain.listaDeProjeteis.add(proj);
+		
+							timertiro = 0;
+						}
+						if(layer1[i][j]==2) {
+							basetToXY(j, i, xy);
+							
+							double dx = xAlvo - (xy[0]+X);
+							double dy = yAlvo - (xy[1]+Y);
+		
+							double ang = Math.atan2(dy, dx);
+		
+							float velo = 2000;
+		
+							Projetil proj = new Tiro01((float)(xy[0]+X), (float)(xy[1]+Y), (float) (velo * Math.cos(ang)), (float) (velo * Math.sin(ang)),
+									this);
+		
+							CanvasMain.listaDeProjeteis.add(proj);
+		
+							timertiro = 0;
+						}	
+						if(layer1[i][j]==3) {
+							basetToXY(j, i, xy);
+							
+							double dx = xAlvo - (xy[0]+X);
+							double dy = yAlvo - (xy[1]+Y);
+		
+							double ang = Math.atan2(dy, dx);
+		
+							float velo = 10000;
+		
+							Projetil proj = new Tiro02((float)(xy[0]+X), (float)(xy[1]+Y), (float) (velo * Math.cos(ang)), (float) (velo * Math.sin(ang)),
+									this);
+		
+							CanvasMain.listaDeProjeteis.add(proj);
+		
+							timertiro = 0;
+						}							
 					}
 				}
 			}
@@ -286,6 +334,47 @@ public class Personagem extends Sprite {
 		double y = jx * Math.sin(angulo) + ix * Math.cos(angulo);
 		ret[0] = x;
 		ret[1] = y;
+	}
+	
+	public void rodaia(int diftime) {
+		if(angulo>Math.PI*2) {
+			angulo-=(Math.PI*2);
+		}
+		if(angulo < 0 ) {
+			angulo+=(Math.PI*2);
+		}
+		//System.out.println("angulo "+angulo);
+		
+		float dx = Constantes.heroi.X - X;
+		float dy = Constantes.heroi.Y - Y;
+		
+		
+		
+		if((dx*dx+dy*dy) < 10000000 && Constantes.heroi.vivo) {
+			double ang = Math.atan2(dy, dx);
+			if(ang<0) {
+				ang = (Math.PI*2)+ang;
+			}
+			
+			System.out.println("angulo "+angulo+" "+ang);
+			//System.out.println(" RODA IA "+dx+" "+dy+" "+ang);
+			
+			if(Math.abs(angulo-ang)>0.2) {
+				if(angulo-ang < 0) {
+					angulo += (Math.PI*0.5)*diftime/1000.0f;
+				}else {
+					angulo -= (Math.PI*0.5)*diftime/1000.0f;
+				}
+			}else {
+				if((dx*dx+dy*dy) < 8000000) {
+					FIRE = true;
+					xAlvo = Constantes.heroi.X - 500 + GamePanel.rnd.nextInt(1000);
+					yAlvo = Constantes.heroi.Y - 500 + GamePanel.rnd.nextInt(1000);
+				}
+			}
+		}else {
+			FIRE = false;
+		}
 	}
 
 }
