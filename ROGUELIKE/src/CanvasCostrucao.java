@@ -15,6 +15,7 @@ public class CanvasCostrucao extends MyCanvas {
 
 	private BufferedImage fundo;
 
+	float mouseX,mouseY;
 	int NTileX, NTileY;
 	int base[][] = new int[31][31];
 	int armas[][] = new int[31][31];
@@ -30,7 +31,11 @@ public class CanvasCostrucao extends MyCanvas {
 
 	boolean isSelectedSalvar = false;
 	boolean isSelectedCancelar = false;
-
+	boolean semBase = false;
+	boolean semGrana = false;
+	
+	float counterTooltipGrana = 0;
+	float counterTooltipBase = 0;
 	public CanvasCostrucao(MyCanvas canvasOrigem, Color cor) {
 		fundo = GamePanel.instance.carregaImagem("fundo.png");
 
@@ -57,7 +62,15 @@ public class CanvasCostrucao extends MyCanvas {
 	@Override
 	public void SimulaSe(int diftime) {
 		// TODO Auto-generated method stub
-
+		
+ 
+		if(semBase) {
+			counterTooltipBase += diftime/1000f;
+		}
+		
+		if(semGrana) {
+			counterTooltipGrana += diftime/1000f;
+		}
 	}
 
 	@Override
@@ -71,6 +84,7 @@ public class CanvasCostrucao extends MyCanvas {
 
 		
 		dbg.drawString("Planta de Construção", 384, 48);
+		 
 		
 		// DESENHA GRID
 		for (int j = 0; j < base.length; j++) {
@@ -162,6 +176,32 @@ public class CanvasCostrucao extends MyCanvas {
 			dbg.setColor(Color.YELLOW);
 			dbg.drawString("Cancelar", 50, Constantes.telaH - 50);
 		}
+		
+		
+		//toooltip kkkk
+		if(semBase && counterTooltipBase < 3) {
+			dbg.setFont(new Font("TimesRoman", Font.PLAIN, 12));
+			dbg.setColor(Color.white);
+			dbg.fillRect((int)mouseX, (int)mouseY-12, 270, 20);
+			dbg.setColor(Color.RED);
+			dbg.drawString("  Para Construir uma arma, é necessário ter uma base", mouseX, mouseY);
+		}else {
+			semBase = false;
+			counterTooltipBase = 0;
+		}
+		
+		
+		if(semGrana&& counterTooltipGrana < 3) {
+			dbg.setFont(new Font("TimesRoman", Font.PLAIN, 12));
+			dbg.setColor(Color.white);
+			dbg.fillRect((int)mouseX, (int)mouseY-12, 160, 20);
+			dbg.setColor(Color.RED);
+			dbg.drawString("  Você não possuí R$ suficiente", mouseX, mouseY);
+		}else {
+			semGrana = false;
+			counterTooltipGrana = 0;
+		}
+		
 	}
 
 	BufferedImage getImageBase(int id) {
@@ -207,6 +247,9 @@ public class CanvasCostrucao extends MyCanvas {
 	public void mouseMoved(MouseEvent e) {
 		// TODO Auto-generated method stub
 
+		mouseX = e.getX();
+		mouseY = e.getY();
+		
 		Rectangle rect = new Rectangle(Constantes.telaW - 150, Constantes.telaH - 78, 128, 38);
 		if (rect.contains(e.getX(), e.getY())) {
 			isSelectedSalvar = true;
@@ -253,7 +296,6 @@ public class CanvasCostrucao extends MyCanvas {
 		}
 
 		if (my_base != null) {
-		
 				for (int j = 0; j < base.length; j++) {
 					for (int i = 0; i < base[j].length; i++) {
 						Rectangle rect = new Rectangle(i * 16 + 384, j * 16 + 50, 16, 16);
@@ -261,6 +303,8 @@ public class CanvasCostrucao extends MyCanvas {
 							if (Constantes.gold >= my_base.custo) {
 								Constantes.gold -= my_base.custo;
 								base[j][i] = my_base.id;
+							}else {
+								semGrana = true;
 							}
 							break;
 						}
@@ -276,9 +320,16 @@ public class CanvasCostrucao extends MyCanvas {
 						Rectangle rect = new Rectangle(i * 16 + 384, j * 16 + 50, 16, 16);
 						if (rect.contains(arg0.getX(), arg0.getY())) {
 							if (Constantes.gold >= my_arma.custo) {
-								Constantes.gold -= my_arma.custo;
-								armas[j][i] = my_arma.id;
+								if( base[j][i] !=0) {
+									Constantes.gold -= my_arma.custo;
+									armas[j][i] = my_arma.id;
+								}else {
+									semBase = true;
+								}
+							}else {
+								semGrana = true;
 							}
+							
 							break;
 						}
 					}
