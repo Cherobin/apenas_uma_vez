@@ -46,9 +46,10 @@ public class Personagem extends Sprite {
 
 		boundingbox = new Rectangle(0, 0, 100, 100);
 
-		layer0 = naveBase.layer0;
-		layer1 = naveBase.layer1;
-		
+		if(naveBase!=null) {
+			layer0 = naveBase.layer0;
+			layer1 = naveBase.layer1;
+		}
 		/*
 		layer0[15][15] = 1;
 		layer0[15][16] = 2;
