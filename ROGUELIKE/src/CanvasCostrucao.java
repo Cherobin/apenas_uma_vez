@@ -40,13 +40,13 @@ public class CanvasCostrucao extends MyCanvas {
 		NTileX = NTileY = 32;
 		for (int j = 0; j < base.length; j++) {
 			for (int i = 0; i < base[j].length; i++) {
-				base[j][i] = 0;
+				base[j][i] = Constantes.heroi.layer0[j][i];
 			}
 		}
 		
 		for (int j = 0; j < armas.length; j++) {
 			for (int i = 0; i < armas[j].length; i++) {
-				armas[j][i] = 0;
+				armas[j][i] = Constantes.heroi.layer1[j][i];
 			}
 		}
 	}
@@ -206,11 +206,22 @@ public class CanvasCostrucao extends MyCanvas {
 		// TODO Auto-generated method stub
 		
 		if(isSelectedCancelar) {
-			
+			GamePanel.telaAtiva = canvasOrigem;
 		}
 		
 		if(isSelectedSalvar) {
+			for (int j = 0; j < base.length; j++) {
+				for (int i = 0; i < base[j].length; i++) {
+					Constantes.heroi.layer0[j][i] = base[j][i]; 
+				}
+			}
 			
+			for (int j = 0; j < armas.length; j++) {
+				for (int i = 0; i < armas[j].length; i++) {
+				 Constantes.heroi.layer1[j][i] = armas[j][i];
+				}
+			}
+			GamePanel.telaAtiva = canvasOrigem;
 		}
 		
 		
