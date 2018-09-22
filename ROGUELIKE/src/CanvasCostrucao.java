@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
@@ -27,6 +28,9 @@ public class CanvasCostrucao extends MyCanvas {
     
     Arma my_arma = new Arma();
     Base my_base = new Base();
+    
+    boolean isSelectedSalvar = false;
+    boolean isSelectedCancelar = false;
     
 	public CanvasCostrucao(MyCanvas canvasOrigem,Color cor) {
 		fundo = GamePanel.instance.carregaImagem("fundo.png");
@@ -105,8 +109,28 @@ public class CanvasCostrucao extends MyCanvas {
 		}
 		
 		
-	
 		
+		dbg.setFont(new Font("TimesRoman", Font.PLAIN, 40));
+		
+		dbg.setColor(Color.black);
+		dbg.drawString("Salvar",Constantes.telaW - 149,  Constantes.telaH - 49);
+		dbg.setColor(Color.WHITE);
+		dbg.drawString("Salvar",Constantes.telaW - 150,  Constantes.telaH - 50);
+		
+		if(isSelectedSalvar){
+			dbg.setColor(Color.YELLOW);
+			dbg.drawString("Salvar",Constantes.telaW - 150,  Constantes.telaH - 50);
+		}
+
+		dbg.setColor(Color.BLACK);
+		dbg.drawString("Cancelar",49,  Constantes.telaH - 49);
+		dbg.setColor(Color.WHITE);
+		dbg.drawString("Cancelar",50,  Constantes.telaH - 50);
+		
+		if(isSelectedCancelar){
+			dbg.setColor(Color.YELLOW);
+			dbg.drawString("Cancelar",50,  Constantes.telaH - 50);
+		}
 	}
 
 	BufferedImage getImageBase(int id) {
@@ -153,6 +177,22 @@ public class CanvasCostrucao extends MyCanvas {
 	public void mouseMoved(MouseEvent e) {
 		// TODO Auto-generated method stub
 
+		Rectangle rect = new Rectangle(Constantes.telaW - 150,  Constantes.telaH - 78, 128,38);
+		 if(rect.contains(e.getX(),e.getY())) { 
+			 isSelectedSalvar = true;
+		 }else {
+			 isSelectedSalvar = false;
+		 }
+		 
+		 
+		 rect = new Rectangle( 50,  Constantes.telaH - 78, 158,38);
+			 if(rect.contains(e.getX(),e.getY())) { 
+				 isSelectedCancelar = true;
+			 }else {
+				 isSelectedCancelar = false;
+			 }
+			 
+		 
 	}
 
 	@Override
@@ -164,6 +204,14 @@ public class CanvasCostrucao extends MyCanvas {
 	@Override
 	public void mouseReleased(MouseEvent arg0) {
 		// TODO Auto-generated method stub
+		
+		if(isSelectedCancelar) {
+			
+		}
+		
+		if(isSelectedSalvar) {
+			
+		}
 		
 		
 		if(my_base !=null) {
