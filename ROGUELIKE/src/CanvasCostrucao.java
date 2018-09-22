@@ -33,9 +33,11 @@ public class CanvasCostrucao extends MyCanvas {
 	boolean isSelectedCancelar = false;
 	boolean semBase = false;
 	boolean semGrana = false;
-	
+	boolean semVizinhos = false;
 	float counterTooltipGrana = 0;
 	float counterTooltipBase = 0;
+	float counterTooltipVizinhos = 0;
+	
 	public CanvasCostrucao(MyCanvas canvasOrigem, Color cor) {
 		fundo = GamePanel.instance.carregaImagem("fundo.png");
 
@@ -70,6 +72,10 @@ public class CanvasCostrucao extends MyCanvas {
 		
 		if(semGrana) {
 			counterTooltipGrana += diftime/1000f;
+		}
+		
+		if(semVizinhos) {
+			counterTooltipVizinhos += diftime/1000f;
 		}
 	}
 
@@ -178,9 +184,12 @@ public class CanvasCostrucao extends MyCanvas {
 		}
 		
 		
+
+		dbg.setFont(new Font("TimesRoman", Font.PLAIN, 12));
+		
+		
 		//toooltip kkkk
 		if(semBase && counterTooltipBase < 3) {
-			dbg.setFont(new Font("TimesRoman", Font.PLAIN, 12));
 			dbg.setColor(Color.white);
 			dbg.fillRect((int)mouseX, (int)mouseY-12, 270, 20);
 			dbg.setColor(Color.RED);
@@ -191,8 +200,7 @@ public class CanvasCostrucao extends MyCanvas {
 		}
 		
 		
-		if(semGrana&& counterTooltipGrana < 3) {
-			dbg.setFont(new Font("TimesRoman", Font.PLAIN, 12));
+		if(semGrana&& counterTooltipGrana < 3) { 
 			dbg.setColor(Color.white);
 			dbg.fillRect((int)mouseX, (int)mouseY-12, 160, 20);
 			dbg.setColor(Color.RED);
@@ -201,6 +209,19 @@ public class CanvasCostrucao extends MyCanvas {
 			semGrana = false;
 			counterTooltipGrana = 0;
 		}
+		
+		
+		if(semVizinhos&& counterTooltipVizinhos < 3) { 
+			dbg.setColor(Color.white);
+			dbg.fillRect((int)mouseX, (int)mouseY-12, 200, 20);
+			dbg.setColor(Color.RED);
+			dbg.drawString("  Um bloco deve estar conectado ao outro!", mouseX, mouseY);
+		}else {
+			semVizinhos = false;
+			counterTooltipVizinhos = 0;
+		}
+		
+		
 		
 	}
 
@@ -222,6 +243,19 @@ public class CanvasCostrucao extends MyCanvas {
 			}
 		}
 		return fundo;
+	}
+	
+	boolean podeCriar(int x, int y) {
+		
+		 for (int j = x-1; j <= x+1; j++) {
+			for (int i = y-1; i <= y+1; i++) {
+				if(base[j][i]!=0){
+					return true;
+				}
+			}
+		}
+		
+		return false;
 	}
 
 	@Override
@@ -301,8 +335,12 @@ public class CanvasCostrucao extends MyCanvas {
 						Rectangle rect = new Rectangle(i * 16 + 384, j * 16 + 50, 16, 16);
 						if (rect.contains(arg0.getX(), arg0.getY())) {
 							if (Constantes.gold >= my_base.custo) {
-								Constantes.gold -= my_base.custo;
-								base[j][i] = my_base.id;
+								if(podeCriar(j,i)) {
+									Constantes.gold -= my_base.custo;
+									base[j][i] = my_base.id;
+								}else {
+									semVizinhos = true;
+								}
 							}else {
 								semGrana = true;
 							}
