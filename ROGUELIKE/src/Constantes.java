@@ -14,5 +14,5 @@ public class Constantes {
 
 	public static Quadrante quadrantes[][] = new Quadrante[40][40];
 	
-	public static double gold = 10000;
+	public static double gold = 1000000;
 }

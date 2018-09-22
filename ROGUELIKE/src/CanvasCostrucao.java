@@ -335,7 +335,7 @@ public class CanvasCostrucao extends MyCanvas {
 						Rectangle rect = new Rectangle(i * 16 + 384, j * 16 + 50, 16, 16);
 						if (rect.contains(arg0.getX(), arg0.getY())) {
 							if (Constantes.gold >= my_base.custo) {
-								if(podeCriar(j,i)) {
+								if(podeCriar(j,i) && base[j][i] ==0) {
 									Constantes.gold -= my_base.custo;
 									base[j][i] = my_base.id;
 								}else {
@@ -358,7 +358,7 @@ public class CanvasCostrucao extends MyCanvas {
 						Rectangle rect = new Rectangle(i * 16 + 384, j * 16 + 50, 16, 16);
 						if (rect.contains(arg0.getX(), arg0.getY())) {
 							if (Constantes.gold >= my_arma.custo) {
-								if( base[j][i] !=0) {
+								if( base[j][i] !=0 && armas[j][i] ==0) {
 									Constantes.gold -= my_arma.custo;
 									armas[j][i] = my_arma.id;
 								}else {
