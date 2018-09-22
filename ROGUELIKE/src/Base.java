@@ -8,5 +8,6 @@ public class Base {
 	public int tipo_base;
 	public float custo;
 	public int poder;
+	public Boolean isSelected = false;
 	
 }

@@ -12,5 +12,6 @@ public class Arma {
 	public int tipo_tiro;
 	public float custo;
 	public float energia;
+	public Boolean isSelected = false;
 	
 }

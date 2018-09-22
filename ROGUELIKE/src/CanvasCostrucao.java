@@ -1,5 +1,6 @@
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
@@ -14,13 +15,19 @@ public class CanvasCostrucao extends MyCanvas {
 	
 	private BufferedImage fundo;
 	
-	
     int NTileX,NTileY;
     int base[][] = new int[31][31];
     int armas[][] = new int[31][31];
     
-    
+    int posXArma = 50+16;
+    int posYArma = 10+16;
 
+    int posXBase = 70+34;
+    int posYBase = 10+16;
+    
+    Arma my_arma = new Arma();
+    Base my_base = new Base();
+    
 	public CanvasCostrucao(MyCanvas canvasOrigem,Color cor) {
 		fundo = GamePanel.instance.carregaImagem("fundo.png");
 		
@@ -55,27 +62,74 @@ public class CanvasCostrucao extends MyCanvas {
 		dbg.setColor(Color.white);
 		dbg.drawString("Clique nos icones para construção", 10, 10);
 	 
+		
+		//DESENHA GRID
 		for (int j = 0; j < base.length; j++) {
-			for (int i = 0; i < base[j].length; i++) {
-				    int tilex = (base[j][i]%NTileX);
-	                int tiley = (base[j][i]/NTileY);
+			for (int i = 0; i < base[j].length; i++) { 
 	                if(base[j][i]==0) {
-	                	 dbg.drawImage(fundo,i*16+384,j*16+50,(i*16)+16+384,(j*16)+16+50,tilex*16,tiley*16,(tilex*16)+16,(tiley*16)+16,null); 	
-	                }
+	                	dbg.drawImage(fundo, i*16+384, j*16+50, 16, 16, null);
+	                  }else {
+	                	 	dbg.drawImage(getImageBase(base[j][i]), i*16+384, j*16+50, 16, 16, null);
+	                  }
 	           	}
 		}
 		
-		for (int j = 0; j < Constantes.armas.size(); j++) {
-			dbg.drawImage(Constantes.armas.get(j).imagem, 10+16, 10+16*j, null);
+		
+		for (int j = 0; j < armas.length; j++) {
+			for (int i = 0; i < armas[j].length; i++) { 
+	                if(armas[j][i]!=0) { 
+	                	 	dbg.drawImage(getImageArma(armas[j][i]), i*16+384, j*16+50, 16, 16, null);
+	                  }
+	           	}
 		}
 		
 		
+		
+		
+		//DESENHA MENU
 		for (int j = 0; j < Constantes.bases.size(); j++) {
-			dbg.drawImage(Constantes.bases.get(j).imagem, 10+34, 10+16*j, null);
+			if(Constantes.bases.get(j).isSelected) {
+				dbg.setColor(Color.YELLOW);
+				dbg.drawRect(100+posXBase, 50+posYBase*j, 17, 17);
+			}
+			
+			dbg.drawImage(Constantes.bases.get(j).imagem, 100+posXBase,50+ posYBase*j, null);
 		}
+		
+		for (int j = 0; j < Constantes.armas.size(); j++) {
+			if(Constantes.armas.get(j).isSelected) {
+				dbg.setColor(Color.YELLOW);
+				dbg.drawRect(100+posXArma,50+ posYArma*j, 17, 17);
+			}
+			dbg.drawImage(Constantes.armas.get(j).imagem, 100+posXArma, 50+posYArma*j, null);
+		}
+		
+		
+	
 		
 	}
 
+	BufferedImage getImageBase(int id) {
+		
+		for (int j = 0; j < Constantes.bases.size(); j++) {
+			if(Constantes.bases.get(j).id == id) {
+				return Constantes.bases.get(j).imagem;
+			}
+		}
+		return fundo;
+	}
+	
+	BufferedImage getImageArma(int id) {
+		
+		for (int j = 0; j < Constantes.armas.size(); j++) {
+			if(Constantes.armas.get(j).id == id) {
+				return Constantes.armas.get(j).imagem;
+			}
+		}
+		return fundo;
+	}
+	
+	
 	@Override
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
@@ -110,13 +164,76 @@ public class CanvasCostrucao extends MyCanvas {
 	@Override
 	public void mouseReleased(MouseEvent arg0) {
 		// TODO Auto-generated method stub
-
+		
+		
+		if(my_base !=null) {
+			for (int j = 0; j < base.length; j++) {
+				for (int i = 0; i < base[j].length; i++) {
+					Rectangle rect = new Rectangle(i*16+384, j*16+50, 16, 16);
+					 if(rect.contains(arg0.getX(),arg0.getY())) { 
+						 base[j][i] = my_base.id; 
+						 break;
+					 }      
+		          }
+			}
+		}
+		
+		if(my_arma !=null) {
+			for (int j = 0; j < armas.length; j++) {
+				for (int i = 0; i < armas[j].length; i++) {
+					Rectangle rect = new Rectangle(i*16+384, j*16+50, 16, 16);
+					 if(rect.contains(arg0.getX(),arg0.getY())) { 
+						 armas[j][i] = my_arma.id;
+						 break;
+					 }      
+		          }
+			}
+		}
+		
+		
 	}
 
 	@Override
 	public void mousePressed(MouseEvent arg0) {
 		// TODO Auto-generated method stub
-
+		 
+		
+		for (int j = 0; j < Constantes.armas.size(); j++) { 
+			Rectangle rect = new Rectangle(100+posXArma, 50+posYArma*j, 16, 16);
+			 if(rect.contains(arg0.getX(),arg0.getY())) {
+				 Constantes.armas.get(j).isSelected = true;
+				 for (int i = 0; i < Constantes.armas.size(); i++) { 
+					 if(!Constantes.armas.get(j).equals(Constantes.armas.get(i))) {
+						 Constantes.armas.get(i).isSelected = false;
+					 }
+				 }
+				  for (int i = 0; i < Constantes.bases.size(); i++) { 
+						  Constantes.bases.get(i).isSelected = false;
+					}
+				 my_base = null;
+				 my_arma = Constantes.armas.get(j);
+				 break;
+			 }
+		}
+		
+		
+		for (int j = 0; j < Constantes.bases.size(); j++) {
+			Rectangle rect = new Rectangle(100+posXBase, 50+posYBase*j, 16, 16);
+			 if(rect.contains(arg0.getX(),arg0.getY())) { 
+				 Constantes.bases.get(j).isSelected = true;
+				   for (int i = 0; i < Constantes.bases.size(); i++) { 
+						 if(!Constantes.bases.get(j).equals(Constantes.bases.get(i))) {
+							 Constantes.bases.get(i).isSelected = false;
+						 }
+					 }
+				   for (int i = 0; i < Constantes.armas.size(); i++) { 
+						  Constantes.armas.get(i).isSelected = false;
+					}
+				 my_arma = null;
+				 my_base =  Constantes.bases.get(j);
+				 break;
+			 }
+		}
 	}
 
 	@Override
