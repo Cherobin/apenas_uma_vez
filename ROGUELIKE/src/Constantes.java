@@ -11,5 +11,7 @@ public class Constantes {
 	public static Rectangle telaRect = new Rectangle();
 	
 	public static Personagem heroi;
+
 	
+	public static double gold = 10000;
 }
