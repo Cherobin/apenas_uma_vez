@@ -20,6 +20,7 @@ public class Personagem extends Sprite {
 
 	int raio = 496;
 
+	int lifeMax = 1000;
 	int life = 1000;
 
 	Rectangle boundingbox;
@@ -36,9 +37,12 @@ public class Personagem extends Sprite {
 	
 	boolean rodaia = false;
 
-	public Personagem(float x, float y) {
+	public Personagem(float x, float y,int lifemax) {
 		this.X = x;
 		this.Y = y;
+		
+		this.lifeMax = lifemax;
+		life = lifeMax;
 
 		boundingbox = new Rectangle(0, 0, 100, 100);
 

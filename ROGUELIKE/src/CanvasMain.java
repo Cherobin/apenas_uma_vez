@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
@@ -58,13 +59,17 @@ public class CanvasMain extends MyCanvas {
 	double zoom;
 	double newzoom;
 	
+	public Font fonte = new Font("", Font.BOLD,16);
 	
+	public Font fonteG1 = new Font("", Font.BOLD,22);
+	
+	public Color lifebarcolor = new Color(0, 155, 0,155) ;
 	
 	public CanvasMain() {
-		imgFundo = GamePanel.instance.carregaImagem("nebulosa.jpg");
-		imgCharset = GamePanel.instance.carregaImagem("rmxp004tw4.png");
-		tileset = GamePanel.instance.carregaImagem("Bridge.png");
-		fumaca = GamePanel.instance.carregaImagem("fumaca.png");
+		//imgFundo = GamePanel.instance.carregaImagem("nebulosa.jpg");
+		//imgCharset = GamePanel.instance.carregaImagem("rmxp004tw4.png");
+		//tileset = GamePanel.instance.carregaImagem("Bridge.png");
+		//fumaca = GamePanel.instance.carregaImagem("fumaca.png");
 		
 		x = 0;
 		y = 50; 
@@ -72,9 +77,9 @@ public class CanvasMain extends MyCanvas {
 		x2 = 0;
 		y2 = 200;
 
-		Constantes.heroi = new Personagem(100, 100);
-		Constantes.heroi.vel = 100;
-		Constantes.heroi.life = 5000;
+		Constantes.heroi = new Personagem(100, 100,5000);
+		Constantes.heroi.vel = 200;
+
 
 		listaDePersonagens.add(Constantes.heroi);
 		
@@ -109,7 +114,7 @@ public class CanvasMain extends MyCanvas {
 			}while(colidiu);
 
 			
-			Personagem pers = new Personagem(posx, posy);
+			Personagem pers = new Personagem(posx, posy,500);
 			pers.vel = 50+GamePanel.rnd.nextInt(50);
 			pers.angulo = (Math.PI*2)*GamePanel.rnd.nextDouble();
 			pers.rodaia = true;
@@ -249,9 +254,23 @@ public class CanvasMain extends MyCanvas {
 		
 		dbg.setTransform(trans);
 		
-		dbg.setColor(Color.BLUE);	
-//		dbg.drawString("FPS: "+FPS+" MouseX: "+MouseX+" MouseY: "+MouseY+" LEFT "+LEFT+" RIGHT "+RIGHT+" UP "+UP+" DOWN "+DOWN, 10, 10);	
-		dbg.drawString("FPS: "+GamePanel.FPS+" TMov1: "+tempomovimento+" TMov2: "+tempomovimento2  , 10, 10);			
+		Font f = dbg.getFont();
+		
+		dbg.setFont(fonte);
+		dbg.setColor(Color.YELLOW);	
+		dbg.drawString("FPS: "+GamePanel.FPS, 10, 20);
+		
+		dbg.setFont(fonteG1);	
+		dbg.drawString(""+(int)(Constantes.heroi.vel), 10, Constantes.telaH-15);
+		
+		dbg.setColor(lifebarcolor);
+		dbg.fillRoundRect(100, Constantes.telaH-40, (int)(400*(Constantes.heroi.life/(float)Constantes.heroi.lifeMax)), 30, 10, 10);
+		
+		dbg.setColor(Color.lightGray);
+		dbg.drawRoundRect(100, Constantes.telaH-40, 400, 30, 10, 10);
+		
+		
+		dbg.setFont(f);
 	}
 	
 	

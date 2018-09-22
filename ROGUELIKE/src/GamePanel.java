@@ -38,6 +38,7 @@ public static Random rnd = new Random();
 
 
 
+
 public GamePanel()
 {
 	instance = this;
