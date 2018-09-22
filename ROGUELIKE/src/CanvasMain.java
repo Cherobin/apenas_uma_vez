@@ -1,5 +1,6 @@
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
@@ -55,6 +56,7 @@ public class CanvasMain extends MyCanvas {
 	int MapY = 0;
 	
 	double zoom;
+	
 	
 	
 	
@@ -141,21 +143,13 @@ public class CanvasMain extends MyCanvas {
 
 		}
 		
+
+		heroi.FIRE = FIRE;
+
 		
-		if(FIRE&&timertiro>400){
-			double dx = (MouseX/zoom+MapX)-(heroi.X);
-			double dy = (MouseY/zoom+MapY)-(heroi.Y);
-			
-			double ang = Math.atan2(dy, dx);
-			
-			float velo = 400;
-			
-			Projetil proj = new Projetil(heroi.X, heroi.Y, (float)(velo*Math.cos(ang)), (float)(velo*Math.sin(ang)),heroi);
-			
-			listaDeProjeteis.add(proj);
-			
-			timertiro = 0;
-		}
+		heroi.xAlvo = (float)(MouseX/zoom+MapX);
+		heroi.yAlvo = (float)(MouseY/zoom+MapY);
+
 
 //		heroi.SimulaSe((int)diftime);
 		for(int i = 0; i < listaDePersonagens.size();i++){

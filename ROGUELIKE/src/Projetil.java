@@ -11,9 +11,11 @@ BufferedImage charset = null;
 	float velX = 0;
 	float velY = 0;
 
-	float raio = 2;
+	float raio = 4;
 	
 	Object pai = null;
+	
+	int tempoDeVida = 10000;
 	
 	public Projetil(float x,float y,float velX,float velY,Object pai){
 		this.X = x;
@@ -29,6 +31,11 @@ BufferedImage charset = null;
 	@Override
 	public void SimulaSe(int diftime) {
 		// TODO Auto-generated method stub
+		
+		tempoDeVida-=diftime;
+		if(tempoDeVida<=0) {
+			vivo = false;
+		}
 
 		float xold = X;
 		float yold = Y;
@@ -89,28 +96,28 @@ BufferedImage charset = null;
 			}
 		}
 		
-		double ang = Math.atan2(velY, velX);
-		for(int i = 0; i < 10; i++){
-			double newang = ang+(GamePanel.rnd.nextInt(2)==0?(Math.PI/2):(-Math.PI/2))+((Math.random()*Math.PI/8)-Math.PI/16);
-			float v = (float)(Math.random()*25);
-			float vx = (float)(v*Math.cos(newang));
-			float vy = (float)(v*Math.sin(newang));
-			
-			int dist  = GamePanel.rnd.nextInt(10);
-			float x = X+(float)(dist*Math.cos(-ang));
-			float y = Y+(float)(dist*Math.sin(-ang));
-			
-			//GamePanel.listaDeParticulas.add(new Particula3Cores(x,y,vx,vy,500+GamePanel.rnd.nextInt(500),Color.red,Color.yellow,Color.white));
-			
-			CanvasMain.listaDeParticulas.add(new ParticulaIMG(x,y,vx,vy,500+GamePanel.rnd.nextInt(500),CanvasMain.fumaca));
-		}
+//		double ang = Math.atan2(velY, velX);
+//		for(int i = 0; i < 10; i++){
+//			double newang = ang+(GamePanel.rnd.nextInt(2)==0?(Math.PI/2):(-Math.PI/2))+((Math.random()*Math.PI/8)-Math.PI/16);
+//			float v = (float)(Math.random()*25);
+//			float vx = (float)(v*Math.cos(newang));
+//			float vy = (float)(v*Math.sin(newang));
+//			
+//			int dist  = GamePanel.rnd.nextInt(10);
+//			float x = X+(float)(dist*Math.cos(-ang));
+//			float y = Y+(float)(dist*Math.sin(-ang));
+//			
+//			//GamePanel.listaDeParticulas.add(new Particula3Cores(x,y,vx,vy,500+GamePanel.rnd.nextInt(500),Color.red,Color.yellow,Color.white));
+//			
+//			CanvasMain.listaDeParticulas.add(new ParticulaIMG(x,y,vx,vy,500+GamePanel.rnd.nextInt(500),CanvasMain.fumaca));
+//		}
 	}
 
 	@Override
 	public void DesenhaSe(Graphics2D dbg,int xMundo,int yMundo) {
 		// TODO Auto-generated method stub
 		
-		dbg.setColor(Color.black);
+		dbg.setColor(Color.white);
 		dbg.fillOval((int)(X-raio-xMundo), (int)(Y-raio-yMundo), (int)(raio*2), (int)(raio*2));
 //		dbg.setColor(Color.red);
 //		dbg.drawRect((int)X-xMundo+2, (int)Y-yMundo+2, 28, 44);
