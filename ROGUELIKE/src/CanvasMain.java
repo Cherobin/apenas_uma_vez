@@ -286,8 +286,6 @@ public class CanvasMain extends MyCanvas {
 		if(UP){
 			Constantes.heroi.vel += Constantes.heroi.velocidadeMaxima*diftime/1000.0f;
 			
-			System.out.println("Constantes.heroi.vel "+Constantes.heroi.vel);
-			
 			if(Constantes.heroi.vel>=Constantes.heroi.velocidadeMaxima) {
 				Constantes.heroi.vel=Constantes.heroi.velocidadeMaxima;
 			}

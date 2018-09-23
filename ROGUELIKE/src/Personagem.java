@@ -312,8 +312,9 @@ public class Personagem extends Sprite {
 
 		dbg.translate((int)(X - xMundo),(int)(Y - yMundo));
 
-		dbg.rotate(angulo);
-
+		if(vel>0) {// só gira se tem velocidade, pois as estacionarias não podem rotacionar
+		  dbg.rotate(angulo);
+		}
 		//dbg.setColor(Color.white);
 		//dbg.drawOval((int) -raio, (int) -raio, raio * 2, raio * 2);
 
