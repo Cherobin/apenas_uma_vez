@@ -96,7 +96,7 @@ public class Personagem extends Sprite {
 			velocidadeMaxima = 0;
 		}
 		
-		System.out.println(" "+velocidadeMaxima+" "+enegiaPorSegundo+" "+gastoEnegia+" "+lifeMax+" "+bateriaMaxima);
+		//System.out.println(" "+velocidadeMaxima+" "+enegiaPorSegundo+" "+gastoEnegia+" "+lifeMax+" "+bateriaMaxima);
 		if(life>lifeMax) {
 			life = lifeMax;
 		}
@@ -256,6 +256,9 @@ public class Personagem extends Sprite {
 		// dbg.drawImage(charset,(int)X-xMundo, (int)Y-yMundo,(int)X+charw-xMundo,
 		// (int)Y+charh-yMundo,charposx+charw*frame,charposy+charh*anim,charposx+charw*frame+charw,charposy+charh*anim+charh,null);
 
+		
+	
+		
 		AffineTransform trans = dbg.getTransform();
 
 		dbg.translate((int)(X - xMundo),(int)(Y - yMundo));
@@ -301,7 +304,21 @@ public class Personagem extends Sprite {
 		dbg.drawLine(0, -basey, basex, 0);
 		dbg.drawLine(0, basey, basex, 0);
 
+		
+		
+		
+		
 		dbg.setTransform(trans);
+		
+		dbg.setColor(Color.white);
+		dbg.fillRoundRect((int)(X - xMundo-1),(int)(Y - yMundo-2), (int)(69*(lifeMax/(float)lifeMax)+3), 10, 2, 2);
+		
+		dbg.setColor(Color.black);
+		dbg.fillRect((int)(X - xMundo),(int)(Y - yMundo-1), (int)(69*(lifeMax/(float)lifeMax)), 8);
+	
+		dbg.setColor(Color.red);
+		dbg.fillRect((int)(X - xMundo),(int)(Y - yMundo-1), (int)(70*(life/(float)lifeMax)), 8);
+		
 	}
 
 	public boolean testaColisao(Personagem pers) {
