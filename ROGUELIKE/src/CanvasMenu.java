@@ -75,7 +75,10 @@ public class CanvasMenu extends MyCanvas {
 		 dbg.drawString("TECLA S: DIMINUI VELOCIDADE", 150, 620);
 		 
 		 //lado direito
-		 dbg.drawString("TECLA H: HANGER",540, 500);
+		 dbg.drawString("MOUSE SCROLL: ZOOM IN/OUT",540, 500);
+		 dbg.drawString("TECLA ALT: CURA",540, 530);
+		 dbg.drawString("TECLA BARRRA DE ESPAÇO: DASH",540, 560);
+		 dbg.drawString("TECLA H: HANGER",540, 590);
 		 
 		 
 	}

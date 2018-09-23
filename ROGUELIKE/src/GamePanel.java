@@ -234,11 +234,7 @@ private void carregaAssetsEntreOutrasCoisas() {
 	    System.out.println(e.getMessage()+ "  abreaA!!!");
 		e.printStackTrace();
 	}
-	
-	
-	Constantes.navePLayer = carregaNaveReturn("nave_player.csv"); //0
-	//Constantes.navePLayer = carregaNaveReturn("nave_criacao.csv");
-	
+ 
 	//naves estacionaria sem armas
 	carregaNave("nave_estacionaria_sa_1.csv");
 	carregaNave("nave_estacionaria_sa_2.csv");
