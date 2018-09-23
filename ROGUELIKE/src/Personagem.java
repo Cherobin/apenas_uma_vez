@@ -257,31 +257,40 @@ public class Personagem extends Sprite {
 						Projetil proj = null;
 						
 						if(layer1[i][j]==1) {
+							Constantes.somtiro2.TocaSom();
 							proj = new Projetil((float)(xy[0]+X), (float)(xy[1]+Y), (float) (velo * Math.cos(ang)), (float) (velo * Math.sin(ang)),this);
 						}
 						if(layer1[i][j]==2) {
+							Constantes.somtiro1.TocaSom();
 							proj = new Tiro01((float)(xy[0]+X), (float)(xy[1]+Y), (float) (velo * Math.cos(ang)), (float) (velo * Math.sin(ang)),this,0);
 						}
 						if(layer1[i][j]==3) {
+							Constantes.somtiro1.TocaSom();
 							proj = new Tiro01((float)(xy[0]+X), (float)(xy[1]+Y), (float) (velo * Math.cos(ang)), (float) (velo * Math.sin(ang)),this,2);
 						}
 	
 						if(layer1[i][j]==4) {
+							Constantes.somtiro1.TocaSom();
 							proj = new Tiro01((float)(xy[0]+X), (float)(xy[1]+Y), (float) (velo * Math.cos(ang)), (float) (velo * Math.sin(ang)),this,1);
 						}
 						if(layer1[i][j]==5) {
+							Constantes.somtiro1.TocaSom();
 							proj = new Tiro01((float)(xy[0]+X), (float)(xy[1]+Y), (float) (velo * Math.cos(ang)), (float) (velo * Math.sin(ang)),this,2);
 						}
 						if(layer1[i][j]==6) {
+							Constantes.somtiro1.TocaSom();
 							proj = new Tiro01((float)(xy[0]+X), (float)(xy[1]+Y), (float) (velo * Math.cos(ang)), (float) (velo * Math.sin(ang)),this,2);
 						}
 						if(layer1[i][j]==7) {
+							Constantes.somtiro1.TocaSom();
 							proj = new Tiro01((float)(xy[0]+X), (float)(xy[1]+Y), (float) (velo * Math.cos(ang)), (float) (velo * Math.sin(ang)),this,2);
 						}
 						if(layer1[i][j]==8) {
+							Constantes.somtiro1.TocaSom();
 							proj = new Tiro01((float)(xy[0]+X), (float)(xy[1]+Y), (float) (velo * Math.cos(ang)), (float) (velo * Math.sin(ang)),this,2);
 						}
 						if(layer1[i][j]==9) {
+							Constantes.somtiro1.TocaSom();
 							proj = new Tiro02((float)(xy[0]+X), (float)(xy[1]+Y), (float) (velo * Math.cos(ang)), (float) (velo * Math.sin(ang)),this);
 						}
 
@@ -441,6 +450,8 @@ public class Personagem extends Sprite {
 		if (life <= 0) {
 			
 			vivo = false;
+			
+			Constantes.somexplosao01.TocaSom();
 			
 			for (int i = 0; i < 31; i++) {
 				for (int j = 0; j < 31; j++) {

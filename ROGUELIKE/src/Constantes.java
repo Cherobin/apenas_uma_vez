@@ -31,6 +31,12 @@ public class Constantes {
 	
 	public static long randomSeed;
 	
+	public static Som somtiro1;
+	public static Som somtiro2;
+	public static Som somexplosao01;
+	public static Som musica01;
+	public static PS_SoundPlayer soundplayer;
+	
 	public static void carregaImagens() {
 		expolsao[0] = GamePanel.instance.carregaImagem("exp01.png");
 		expolsao[1] = GamePanel.instance.carregaImagem("exp02.png");
@@ -66,6 +72,15 @@ public class Constantes {
 		radar_ponteiro = GamePanel.instance.carregaImagem("radar_ponteiro.png"); 
 		
 		randomSeed = System.currentTimeMillis();
+		
+		somtiro1 = new Som("Som_Tiro_02.wav",10); 
+		somtiro2 = new Som("Som_Tiro_01.wav",10); 
+		
+		somexplosao01 = new Som("Som_Explosao_01.wav",10); 
+		musica01 = new Som("Misica02.wav",1); 
+		
+		soundplayer = new PS_SoundPlayer();
+		soundplayer.addtrack("Misica01.wav", 1, true);
 	}
 
 	

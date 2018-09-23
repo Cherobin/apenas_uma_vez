@@ -76,6 +76,10 @@ public class CanvasMain extends MyCanvas {
 		DASH = false;
 		HEALING = false;
 		
+		
+		Constantes.soundplayer.playTrack(0);
+		
+		
 		rnd = new Random();
 		x = 0;
 		y = 50; 
@@ -207,6 +211,8 @@ public class CanvasMain extends MyCanvas {
 		listaDeBilboards.add(new Bilboard(400, 400, 40,Constantes.bilboards[5]));
 		listaDeBilboards.add(new Bilboard(-100, 0, 20,Constantes.bilboards[6]));
 		
+		
+		
 		/*listaDeBilboards.add(new Bilboard(0, 0, 80,Constantes.bilboards[0]));
 		listaDeBilboards.add(new Bilboard(800,800, 80,Constantes.bilboards[4]));
 		listaDeBilboards.add(new Bilboard(-1000,400, 80,Constantes.bilboards[5]));
@@ -221,6 +227,7 @@ public class CanvasMain extends MyCanvas {
 		
 		
 		//GamePanel.telaAtiva = new CanvasCostrucao(this,Color.blue);
+		
 	}
 	@Override
 	public void SimulaSe(int diftime) {

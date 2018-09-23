@@ -30,7 +30,6 @@ BufferedImage charset = null;
 		this.pai = pai;
 		
 		angulo = Math.atan2(velY, velX);
-
 	}
 	
 	@Override
