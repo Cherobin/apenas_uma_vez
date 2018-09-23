@@ -173,6 +173,9 @@ public class CanvasMain extends MyCanvas {
 		listaDeBilboards.add(new Bilboard(400, 400, 40,Constantes.bilboards[1]));
 		listaDeBilboards.add(new Bilboard(-100, 0, 20,Constantes.bilboards[2]));
 		
+		
+		
+		//GamePanel.telaAtiva = new CanvasCostrucao(this,Color.blue);
 	}
 	@Override
 	public void SimulaSe(int diftime) {
@@ -472,7 +475,7 @@ public class CanvasMain extends MyCanvas {
 		if(keyCode == KeyEvent.VK_ALT){
 			HEALING = true;
 		}
-		if(keyCode == KeyEvent.VK_M){
+		if(keyCode == KeyEvent.VK_H){
 			GamePanel.telaAtiva = new CanvasCostrucao(this,Color.blue);
 		}
 	}

@@ -37,7 +37,7 @@ public class CanvasMenu extends MyCanvas {
 		dbg.fillRect(0, 0, Constantes.telaW, Constantes.telaH);
 		
 		 dbg.setFont(Constantes.font.deriveFont(Font.PLAIN, 70));
-		 dbg.setColor(Color.YELLOW);
+		 dbg.setColor(Color.WHITE);
 		 dbg.drawString("Bullet of Hell", Constantes.telaW/2 - 250, 70);
 		 dbg.setFont(Constantes.font.deriveFont(Font.PLAIN, 69));
 		
@@ -55,13 +55,29 @@ public class CanvasMenu extends MyCanvas {
 		 if(isStart) {
 		 dbg.setColor(Color.RED);
 		 }else {
-			 dbg.setColor(Color.WHITE);
+			 dbg.setColor(Color.YELLOW);
 		 }
 		 dbg.drawString("CLICK TO START", Constantes.telaW/2 - 220, Constantes.telaH/2);
-		 dbg.setFont(Constantes.font.deriveFont(Font.PLAIN, 69));
-		 
-		 //dbg.fillRect(Constantes.telaW/2 - 220, Constantes.telaH/2-65, 440, 70);
+		
+		  
  
+		 
+		 dbg.setFont(Constantes.font.deriveFont(Font.PLAIN, 18));
+		 dbg.setColor(Color.WHITE);
+		 
+		 dbg.drawString("Controles:", 50, 470);
+		 
+		 //lado esquerdo
+		 dbg.drawString("MOUSE: MIRA", 150, 500);  
+		 dbg.drawString("TECLA A: ROTACIONA PARA ESQUERDA", 150, 530);
+		 dbg.drawString("TECLA D: ROTACIONA PARA DIREITA", 150, 560);
+		 dbg.drawString("TECLA W: AUMENTA VELOCIDADE", 150, 590);
+		 dbg.drawString("TECLA S: DIMINUI VELOCIDADE", 150, 620);
+		 
+		 //lado direito
+		 dbg.drawString("TECLA H: HANGER",540, 500);
+		 
+		 
 	}
 
 	@Override
