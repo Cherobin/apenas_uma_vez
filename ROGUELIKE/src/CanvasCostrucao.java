@@ -164,7 +164,7 @@ public class CanvasCostrucao extends MyCanvas {
 			dbg.drawString("Candêcia tiro: " + my_arma.candecia_tiro, 10, 180);
 			dbg.drawString("Velocidade tiro: " + my_arma.velocidade_tiro, 10, 210);
 			dbg.drawString("Tiro automático: " + my_arma.tiro_automatico, 10, 240);
-			dbg.drawString("Tipo Tiro: " + my_arma.tiro_automatico, 10, 270);
+			dbg.drawString("Range: " + my_arma.range, 10, 270);
 		}   
 		
 		
