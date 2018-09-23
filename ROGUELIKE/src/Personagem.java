@@ -218,7 +218,7 @@ public class Personagem extends Sprite {
 					statusArm[i][j].angulo = ang;
 					statusArm[i][j].timertir+=diftime;
 					
-					if (FIRE && statusArm[i][j].timertir> arma.candecia_tiro) {
+					if (FIRE && (statusArm[i][j].timertir > arma.candecia_tiro)) {
 						
 						float velo = arma.velocidade_tiro;
 						Projetil proj = null;
@@ -228,18 +228,33 @@ public class Personagem extends Sprite {
 						}
 						if(layer1[i][j]==2) {
 							proj = new Tiro01((float)(xy[0]+X), (float)(xy[1]+Y), (float) (velo * Math.cos(ang)), (float) (velo * Math.sin(ang)),this,0);
-						}	
+						}
 						if(layer1[i][j]==3) {
-							proj = new Tiro02((float)(xy[0]+X), (float)(xy[1]+Y), (float) (velo * Math.cos(ang)), (float) (velo * Math.sin(ang)),this);
-						}	
+							proj = new Tiro01((float)(xy[0]+X), (float)(xy[1]+Y), (float) (velo * Math.cos(ang)), (float) (velo * Math.sin(ang)),this,2);
+						}
+	
 						if(layer1[i][j]==4) {
 							proj = new Tiro01((float)(xy[0]+X), (float)(xy[1]+Y), (float) (velo * Math.cos(ang)), (float) (velo * Math.sin(ang)),this,1);
 						}
 						if(layer1[i][j]==5) {
 							proj = new Tiro01((float)(xy[0]+X), (float)(xy[1]+Y), (float) (velo * Math.cos(ang)), (float) (velo * Math.sin(ang)),this,2);
 						}
+						if(layer1[i][j]==6) {
+							proj = new Tiro01((float)(xy[0]+X), (float)(xy[1]+Y), (float) (velo * Math.cos(ang)), (float) (velo * Math.sin(ang)),this,2);
+						}
+						if(layer1[i][j]==7) {
+							proj = new Tiro01((float)(xy[0]+X), (float)(xy[1]+Y), (float) (velo * Math.cos(ang)), (float) (velo * Math.sin(ang)),this,2);
+						}
+						if(layer1[i][j]==8) {
+							proj = new Tiro01((float)(xy[0]+X), (float)(xy[1]+Y), (float) (velo * Math.cos(ang)), (float) (velo * Math.sin(ang)),this,2);
+						}
+						if(layer1[i][j]==9) {
+							proj = new Tiro02((float)(xy[0]+X), (float)(xy[1]+Y), (float) (velo * Math.cos(ang)), (float) (velo * Math.sin(ang)),this);
+						}
+
 						
 						if(proj!=null) {
+							proj.dano = arma.dano;
 							CanvasMain.listaDeProjeteis.add(proj);
 							statusArm[i][j].timertir = 0;
 						}
