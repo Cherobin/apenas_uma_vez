@@ -218,7 +218,10 @@ private void carregaAssetsEntreOutrasCoisas() {
 						base.imagem = carregaImagem(strs[2]);
 						base.tipo_base = Integer.parseInt(strs[3]);
 						base.custo = Float.parseFloat(strs[4]);
-						base.poder = Integer.parseInt(strs[5]);
+						base.bateria = Float.parseFloat(strs[5]);
+						base.energia = Float.parseFloat(strs[6]);
+						base.propulsao = Float.parseFloat(strs[7]);
+						base.vida = Float.parseFloat(strs[8]);
 						 
 						Constantes.bases.add(base);
 				  

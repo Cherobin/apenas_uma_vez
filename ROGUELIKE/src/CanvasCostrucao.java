@@ -151,7 +151,11 @@ public class CanvasCostrucao extends MyCanvas {
 			dbg.drawString("Nome: " + my_base.nome, 10, 60);
 			dbg.drawString("R$: " + my_base.custo, 10, 90);
 			dbg.drawString("Tipo Base: " + my_base.tipo_base, 10, 120);
-			dbg.drawString("Poder: " + my_base.poder, 10, 150); 
+			dbg.drawString("Vida: " + my_base.vida, 10, 150); 
+			dbg.drawString("Bateria: " + my_base.bateria, 10, 180);
+			dbg.drawString("Energia: " + my_base.energia, 10, 210);
+			dbg.drawString("Propulsão: " + my_base.propulsao, 10, 240);
+			
 		} else  if (my_arma != null) {	
 			dbg.drawString("Nome: " + my_arma.nome, 10, 60);
 			dbg.drawString("R$: " + my_arma.custo, 10, 90);
