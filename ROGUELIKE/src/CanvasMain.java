@@ -13,12 +13,7 @@ import java.util.Random;
 
 public class CanvasMain extends MyCanvas {
 	
-
-
-	private BufferedImage imgFundo;
-	private BufferedImage imgCharset;
-	private BufferedImage tileset;
-
+ 
 	public static BufferedImage fumaca = null;
 	
 	BufferedImage imagefundo;
@@ -48,6 +43,8 @@ public class CanvasMain extends MyCanvas {
 
 	public static ArrayList<Sprite> listaDeParticulas = new ArrayList<Sprite>();
 
+	public static ArrayList<Sprite> listaDeAsteroides = new ArrayList<Sprite>();
+	
 	public static GerenciadorDeEventos gerenciadorEventos = new GerenciadorDeEventos();
 	
 	int timerfps = 0;
@@ -116,16 +113,48 @@ public class CanvasMain extends MyCanvas {
 //					}
 				}
 				
-			}while(colidiu);
-
-			int x = rnd.nextInt(Constantes.navesBase.size()-1);
-			Personagem pers = new Personagem(posx, posy,500,Constantes.navesBase.get(x));
+			}while(colidiu); 
+			Personagem pers = new Personagem(posx, posy,500,Constantes.navesBase.get(rnd.nextInt(Constantes.navesBase.size()-1)));
 			pers.vel = 50+GamePanel.rnd.nextInt(50);
 			pers.angulo = (Math.PI*2)*GamePanel.rnd.nextDouble();
 			pers.rodaia = true;
 			//pers.vel = (int)Math.sqrt(pers.velX*pers.velX + pers.velY*pers.velY);
 			
 			listaDePersonagens.add(pers);
+		}
+		
+		 
+		
+		for(int i = 0; i < 100;i++){
+			int posx = 0;
+			int posy = 0;
+			
+			int bx = 0;
+			int by = 0;
+			
+			boolean colidiu = false;
+				
+			do{
+				
+					
+				colidiu = false;
+				posx = GamePanel.rnd.nextInt(16000)-8000;
+				posy = GamePanel.rnd.nextInt(16000)-8000;
+				
+				bx = (int)((posx+16)/16);
+				by = (int)((posy+40)/16);
+				
+			 
+				
+			}while(colidiu);
+ 
+			Asteroides pers = new Asteroides(posx, posy,500,Constantes.imgBigAsteroide.get(rnd.nextInt(Constantes.imgBigAsteroide.size()-1)), true);
+			pers.vel = 50+GamePanel.rnd.nextInt(50);
+			pers.angulo = (Math.PI*2)*GamePanel.rnd.nextDouble();
+			pers.rodaia = true;
+			//pers.vel = (int)Math.sqrt(pers.velX*pers.velX + pers.velY*pers.velY);
+			
+			listaDeAsteroides.add(pers);
 		}
 		
 		zoom = 0.5;
@@ -204,6 +233,17 @@ public class CanvasMain extends MyCanvas {
 			}
 		}	
 		
+		for(int i = 0; i < listaDeAsteroides.size();i++){
+			Sprite sp = listaDeAsteroides.get(i);
+			sp.SimulaSe((int)diftime);
+			if(!sp.vivo){
+				listaDeAsteroides.remove(i);
+				i--;
+			}
+		}	
+		
+		
+		
 //		gerenciadorEventos.testaEventos(heroi);
 		
 		MapX = (int)(Constantes.heroi.X-(Constantes.telaW/zoom)/2);
@@ -253,6 +293,13 @@ public class CanvasMain extends MyCanvas {
 		for(int i = 0; i < listaDeParticulas.size();i++){
 			listaDeParticulas.get(i).DesenhaSe(dbg,MapX,MapY);
 		}	
+		
+		for(int i = 0; i < listaDeAsteroides.size();i++){
+			listaDeAsteroides.get(i).DesenhaSe(dbg,MapX,MapY);
+		}	
+		
+		
+		
 //		heroi.DesenhaSe(dbg);
 		
 		//gerenciadorEventos.desenhase(dbg, MapX,MapY);

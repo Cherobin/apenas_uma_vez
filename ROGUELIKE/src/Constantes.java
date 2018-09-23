@@ -1,4 +1,5 @@
 import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,5 +18,10 @@ public class Constantes {
 	public static double gold = 1000000;
 	
 	public static List<NaveBase> navesBase = new ArrayList<>();
+
+	
+	public static List<BufferedImage> imgBigAsteroide = new ArrayList<>();
+	public static List<BufferedImage> imgSmallAsteroide = new ArrayList<>(); 
+ 
 
 }

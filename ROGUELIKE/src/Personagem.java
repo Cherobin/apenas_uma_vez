@@ -48,7 +48,7 @@ public class Personagem extends Sprite {
 
 		if(naveBase!=null) {
 			layer0 = naveBase.layer0;
-			layer1 = naveBase.layer1;
+	        layer1 = naveBase.layer1;
 		}
 		/*
 		layer0[15][15] = 1;
@@ -152,6 +152,8 @@ public class Personagem extends Sprite {
 				}
 			}
 		}
+		
+		
 
 		if (FIRE && timertiro > 100) {
 			
