@@ -365,6 +365,15 @@ public class CanvasMain extends MyCanvas {
 		//dbg.drawString("Life", 105, Constantes.telaH-28);
 		
 		//dbg.setFont(f);
+	 
+		if(Constantes.heroi.life<=0) { 
+			dbg.setFont(Constantes.font.deriveFont(Font.PLAIN, 70));	 
+			 dbg.setColor(Color.WHITE);
+			 dbg.drawString("GAME OVER!", Constantes.telaW/2 - 120, Constantes.telaH/2);
+			 dbg.setFont(Constantes.font.deriveFont(Font.PLAIN, 69));	 
+			 dbg.setColor(Color.RED);
+			 dbg.drawString("GAME OVER!", Constantes.telaW/2 - 121, Constantes.telaH/2);
+		}
 		
 		
 		
@@ -372,7 +381,7 @@ public class CanvasMain extends MyCanvas {
 		
 		dbg.setColor(new Color(34,139,34,150));
 		
-		dbg.fillOval(Constantes.telaW-150, Constantes.telaH-150, 150, 150);
+		dbg.fillOval(Constantes.telaW-150-2, Constantes.telaH-150-2, 150, 150);
 		
 		int centerX = Constantes.telaW-75;
 		int centerY = Constantes.telaH-75;
