@@ -55,6 +55,7 @@ public class Constantes {
 
 		fundohangar = GamePanel.instance.carregaImagem("fundohangar.png");
 
+		faisca  = GamePanel.instance.carregaImagem("faisca.png");
 	}
 
 	
@@ -65,6 +66,7 @@ public class Constantes {
 	public static BufferedImage lifeImage;
 	public static BufferedImage hudImage;
 	public static BufferedImage fundohangar;
+	public static BufferedImage faisca;
 	
 	public static Font font;
 	    
