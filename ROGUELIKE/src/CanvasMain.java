@@ -371,8 +371,35 @@ public class CanvasMain extends MyCanvas {
 		
 		//dbg.setFont(f);
 		
+		
+		
 		dbg.drawImage(Constantes.hudImage, 0, 0, null);
-		 
+		
+		dbg.setColor(new Color(34,139,34,150));
+		
+		dbg.fillOval(Constantes.telaW-150, Constantes.telaH-150, 150, 150);
+		
+		int centerX = Constantes.telaW-75;
+		int centerY = Constantes.telaH-75;
+		
+		dbg.setColor(Color.WHITE);
+		dbg.fillRect(centerX-1, centerY-1, 3, 3);
+		
+		double radardistprecision = 500;
+		
+		for(int i = 0; i < listaDePersonagens.size();i++){
+			Personagem p = (Personagem)listaDePersonagens.get(i);
+			if(p!=Constantes.heroi) {
+				double dx =  p.X - Constantes.heroi.X;
+				double dy =  p.Y - Constantes.heroi.Y;
+				double iang = Math.atan2(dy, dx);
+				double idist = Math.sqrt(dx*dx+dy*dy);
+				//System.out.println("idist "+idist);
+				
+				dbg.setColor(new Color(0,255,0,255));
+				dbg.fillRect((int)(centerX-1+Math.cos(iang)*idist/radardistprecision), (int)(centerY-1+Math.sin(iang)*idist/radardistprecision), 2, 2);
+			}
+		}
 	}
 	
 	
