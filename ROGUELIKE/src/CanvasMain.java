@@ -188,8 +188,8 @@ public class CanvasMain extends MyCanvas {
 			
 			System.out.println("Constantes.heroi.vel "+Constantes.heroi.vel);
 			
-			if(Constantes.heroi.vel>=400) {
-				Constantes.heroi.vel=400;
+			if(Constantes.heroi.vel>=Constantes.heroi.velMax) {
+				Constantes.heroi.vel=Constantes.heroi.velMax;
 			}
 		}else if(DOWN){
 			Constantes.heroi.vel-=50*diftime/1000.0f;

@@ -20,8 +20,7 @@ public class Personagem extends Sprite {
 	double velMax = 0;
 	int raio = 496;
 
-	int lifeMax = 1000;
-	int life = 1000;
+
 
 	Rectangle boundingbox;
 
@@ -38,6 +37,15 @@ public class Personagem extends Sprite {
 	double xy[] = new double[2];
 	
 	boolean rodaia = false;
+	
+	int lifeMax = 1000;
+	int life = 1000;
+	float enegiaPorSegundo;
+	float bateriaMaxima;
+	float bateria;
+	float gastoEnegia;
+	float velocidadeMaxima;
+	
 
 	public Personagem(float x, float y,int lifemax, NaveBase naveBase) {
 		this.X = x;
@@ -68,6 +76,34 @@ public class Personagem extends Sprite {
 		layer1[14][15] = 2;
 		layer1[16][15] = 2;
 		*/
+		
+		calculaAtributos();
+	}
+	
+	public void calculaAtributos() {
+		lifeMax = 0;
+		enegiaPorSegundo = 0;
+		bateriaMaxima = 0;
+		//bateria;
+		gastoEnegia = 0;
+		velocidadeMaxima = 0;
+		
+		for (int i = 0; i < 31; i++) {
+			for (int j = 0; j < 31; j++) {
+
+				if (layer0[i][j] != 0) {
+					Base b = Constantes.bases.get(layer0[i][j]-1);
+					lifeMax += b.vida;
+					enegiaPorSegundo += b.energia;
+					gastoEnegia+= b.propulsao;
+					velocidadeMaxima+= b.propulsao;
+				}
+			}
+		}
+		if(life>lifeMax) {
+			life = lifeMax;
+		}
+		vel = velMax/2;
 	}
 
 	@Override
@@ -189,8 +225,7 @@ public class Personagem extends Sprite {
 						if(layer1[i][j]==2) {
 							float velo = 2000;
 		
-							Projetil proj = new Tiro01((float)(xy[0]+X), (float)(xy[1]+Y), (float) (velo * Math.cos(ang)), (float) (velo * Math.sin(ang)),
-									this);
+							Projetil proj = new Tiro01((float)(xy[0]+X), (float)(xy[1]+Y), (float) (velo * Math.cos(ang)), (float) (velo * Math.sin(ang)),this,0);
 		
 							CanvasMain.listaDeProjeteis.add(proj);
 		
@@ -206,6 +241,24 @@ public class Personagem extends Sprite {
 		
 							statusArm[i][j].timertir = 0;
 						}	
+						if(layer1[i][j]==4) {
+							float velo = 2000;
+		
+							Projetil proj = new Tiro01((float)(xy[0]+X), (float)(xy[1]+Y), (float) (velo * Math.cos(ang)), (float) (velo * Math.sin(ang)),this,1);
+		
+							CanvasMain.listaDeProjeteis.add(proj);
+		
+							statusArm[i][j].timertir = 0;
+						}
+						if(layer1[i][j]==5) {
+							float velo = 2000;
+		
+							Projetil proj = new Tiro01((float)(xy[0]+X), (float)(xy[1]+Y), (float) (velo * Math.cos(ang)), (float) (velo * Math.sin(ang)),this,2);
+		
+							CanvasMain.listaDeProjeteis.add(proj);
+		
+							statusArm[i][j].timertir = 0;
+						}
 					}
 				}
 			}

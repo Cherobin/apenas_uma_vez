@@ -8,9 +8,20 @@ public class Tiro01 extends Projetil {
 	Color cor2 = new Color(160, 160, 255);
 	Color cor3 = new Color(100, 100, 155);
 
-	public Tiro01(float x, float y, float velX, float velY, Object pai) {
+	public Tiro01(float x, float y, float velX, float velY, Object pai,int corset) {
 		super(x, y, velX, velY, pai);
 		// TODO Auto-generated constructor stub
+		
+		if(corset==1) {
+			cor1 = new Color(210, 255 , 210);
+			cor2 = new Color(160, 255 , 160);
+			cor3 = new Color(100, 155,  100);
+		}else if(corset==2) {
+			cor1 = new Color(255 , 210 , 210);
+			cor2 = new Color(255 , 160 , 160);
+			cor3 = new Color(155,  100 , 100);
+		}
+		
 	}
 	
 	@Override
