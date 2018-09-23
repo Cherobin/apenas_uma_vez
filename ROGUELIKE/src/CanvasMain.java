@@ -30,8 +30,8 @@ public class CanvasMain extends MyCanvas {
 	int tempomovimento = 0;
 	int tempomovimento2 = 0;
 
-
-
+	boolean isExit;
+	boolean isRestart;
 	double posx = 0;
 	double posy = 0;
 
@@ -67,11 +67,52 @@ public class CanvasMain extends MyCanvas {
 	public Color lifebarcolor = new Color(0, 155, 0,155) ;
 	
 	
-	public CanvasMain() {
-		//imgFundo = GamePanel.instance.carregaImagem("nebulosa.jpg");
-		//imgCharset = GamePanel.instance.carregaImagem("rmxp004tw4.png");
-		//tileset = GamePanel.instance.carregaImagem("Bridge.png");
-		//fumaca = GamePanel.instance.carregaImagem("fumaca.png");
+	public CanvasMain() { 
+		
+		initGame();
+		 
+	}
+	
+	public void resetGame() {
+		initGame();
+	}
+	
+	public void initGame(){
+		 isExit = false;
+		 isRestart = false;
+		 
+		 Constantes.gold = 1000;
+		 
+		 tempomovimento = 0;
+		 tempomovimento2 = 0;
+		 
+		 posx = 0;
+		 posy = 0;
+
+		 rotx = 0;
+		 rotate_ponteiro = 0.0;
+
+		listaDePersonagens.clear();
+
+		listaDeProjeteis.clear();
+
+		listaDeParticulas.clear();
+
+		listaDeAsteroides.clear();
+		
+		listaDeItens.clear();
+		
+		listaDeBilboards.clear();
+		
+		gerenciadorEventos = new GerenciadorDeEventos();
+		
+		 timerfps = 0;
+		 somacor = 0;
+		 timertiro = 0;
+		
+		 MapX = 0;
+		 MapY = 0;
+		
 		
 		DASH = false;
 		HEALING = false;
@@ -83,9 +124,10 @@ public class CanvasMain extends MyCanvas {
 		x2 = 0;
 		y2 = 200;
 
-		Constantes.heroi = new Personagem(100, 100,5000, Constantes.navePLayer);
-
-
+		Constantes.heroi = new Personagem(100, 100,5000, GamePanel.instance.carregaNaveReturn("nave_player.csv"));
+ 
+		//GamePanel.telaAtiva = new CanvasCostrucao(this,Color.blue);
+		
 		listaDePersonagens.add(Constantes.heroi);
 		
 		
@@ -220,14 +262,14 @@ public class CanvasMain extends MyCanvas {
 		
 		
 		
-		//GamePanel.telaAtiva = new CanvasCostrucao(this,Color.blue);
+		
 	}
 	@Override
 	public void SimulaSe(int diftime) {
 		timertiro+=diftime;
 		zoom = newzoom;
  
-		  
+		
 		rotate_ponteiro+= 1* diftime / 1000.0f;
 	 
 		if(rotate_ponteiro>6.05) {
@@ -472,6 +514,24 @@ public class CanvasMain extends MyCanvas {
 			 dbg.setFont(Constantes.font.deriveFont(Font.PLAIN, 69));	 
 			 dbg.setColor(Color.RED);
 			 dbg.drawString("GAME OVER!", Constantes.telaW/2 - 121, Constantes.telaH/2);
+			 
+			 dbg.setFont(Constantes.font.deriveFont(Font.PLAIN, 19));	 
+			 dbg.setColor(Color.WHITE);
+			 if(isRestart) {
+				 dbg.setColor(Color.YELLOW);
+			 }
+			 dbg.drawString("RESTART", Constantes.telaW/2 - 40, Constantes.telaH/2+ 40);
+			 
+			
+			 dbg.setFont(Constantes.font.deriveFont(Font.PLAIN, 19));
+			 dbg.setColor(Color.RED);
+			 if(isExit) {
+				 dbg.setColor(Color.YELLOW);
+			 }
+			 
+			 dbg.drawString("EXIT", Constantes.telaW/2+100 , Constantes.telaH/2+ 40);
+			 
+			
 		}
 		
 		
@@ -564,6 +624,8 @@ public class CanvasMain extends MyCanvas {
 		if(keyCode == KeyEvent.VK_H){
 			GamePanel.telaAtiva = new CanvasCostrucao(this,Color.blue);
 		}
+		
+	 
 	}
 
 	@Override
@@ -595,6 +657,23 @@ public class CanvasMain extends MyCanvas {
 		// TODO Auto-generated method stub
 		MouseX = e.getX();
 		MouseY = e.getY();
+		
+		
+		if(Constantes.heroi.life<=0) { 
+			Rectangle rect = new Rectangle(Constantes.telaW/2 +100, Constantes.telaH/2+20 , 40, 20);
+			if (rect.contains(e.getX(), e.getY())) {
+				isExit = true;
+			} else {
+				isExit = false;
+			}
+	
+			rect = new Rectangle(Constantes.telaW/2 - 40, Constantes.telaH/2+20 , 70, 20);
+			if (rect.contains(e.getX(), e.getY())) {
+				isRestart = true;
+			} else {
+				isRestart = false;
+			}
+		}
 	}
 
 	@Override
@@ -608,6 +687,14 @@ public class CanvasMain extends MyCanvas {
 	public void mouseReleased(MouseEvent arg0) {
 		// TODO Auto-generated method stub
 		FIRE = false;
+		
+		if(isExit) {
+			GamePanel.telaAtiva = new CanvasMenu(this,Color.black);
+		}
+		
+		if(isRestart) {
+			resetGame();
+		}
 	}
 
 	@Override
