@@ -18,7 +18,7 @@ public class CanvasMain extends MyCanvas {
 	
 	BufferedImage imagefundo;
 
-	boolean LEFT, RIGHT,UP,DOWN,FIRE;
+	boolean LEFT, RIGHT,UP,DOWN,FIRE,DASH,HEALING;
 
 
 	int MouseX,MouseY;
@@ -69,6 +69,9 @@ public class CanvasMain extends MyCanvas {
 		//imgCharset = GamePanel.instance.carregaImagem("rmxp004tw4.png");
 		//tileset = GamePanel.instance.carregaImagem("Bridge.png");
 		//fumaca = GamePanel.instance.carregaImagem("fumaca.png");
+		
+		DASH = false;
+		HEALING = false;
 		
 		rnd = new Random();
 		x = 0;
@@ -201,7 +204,8 @@ public class CanvasMain extends MyCanvas {
 		
 
 		Constantes.heroi.FIRE = FIRE;
-
+		Constantes.heroi.DASH = DASH;
+		Constantes.heroi.HEALING = HEALING;
 
 		
 		Constantes.heroi.xAlvo = (float)(MouseX/zoom+MapX);
@@ -428,7 +432,10 @@ public class CanvasMain extends MyCanvas {
 			DOWN = true;
 		}	
 		if(keyCode == KeyEvent.VK_SPACE){
-
+			DASH = true;
+		}
+		if(keyCode == KeyEvent.VK_ALT){
+			HEALING = true;
 		}
 		if(keyCode == KeyEvent.VK_M){
 			GamePanel.telaAtiva = new CanvasCostrucao(this,Color.blue);
@@ -450,6 +457,12 @@ public class CanvasMain extends MyCanvas {
 		}
 		if(keyCode == KeyEvent.VK_DOWN || keyCode == KeyEvent.VK_S){
 			DOWN = false;
+		}
+		if(keyCode == KeyEvent.VK_SPACE){
+			DASH = false;
+		}
+		if(keyCode == KeyEvent.VK_ALT){
+			HEALING = false;
 		}
 	}
 

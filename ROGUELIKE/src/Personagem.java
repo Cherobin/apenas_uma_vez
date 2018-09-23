@@ -30,6 +30,9 @@ public class Personagem extends Sprite {
 	StatusArmas statusArm[][] = new StatusArmas[31][31];
 
 	boolean FIRE = false;
+	boolean DASH = false;
+	boolean HEALING = false;
+	
 	float xAlvo = 0;
 	float yAlvo = 0;
 	int timertiro = 0;
@@ -109,13 +112,37 @@ public class Personagem extends Sprite {
 	@Override
 	public void SimulaSe(int diftime) {
 		
-		bateria += enegiaPorSegundo*diftime/1000.0f;
+		bateria += (enegiaPorSegundo-gastoEnegia)*diftime/1000.0f;
+		
 		if(bateria>bateriaMaxima) {
 			bateria = bateriaMaxima;
 		}
 		
 		if(rodaia) {
 			rodaia(diftime);
+		}
+		
+		if(DASH) {
+			double dashenergi = (gastoEnegia*10)*diftime/1000.0f;
+			if(bateria>dashenergi) {
+				bateria-=dashenergi;
+				vel = velocidadeMaxima*4;
+			}
+		}else {
+			if(vel > velocidadeMaxima) {
+				vel = velocidadeMaxima;
+			}
+		}
+		
+		if(HEALING) {
+			double lifeenergi = (lifeMax/5)*diftime/1000.0f;
+			if(bateria>lifeenergi && life < lifeMax) {
+				bateria-=lifeenergi;
+				life += lifeenergi/2;
+				if(life > lifeMax ) {
+					life = lifeMax;
+				}
+			}
 		}
 		
 		// TODO Auto-generated method stub

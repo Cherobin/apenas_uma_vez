@@ -14,7 +14,7 @@ public class CanvasSplash extends MyCanvas{
 		// TODO Auto-generated method stub
 		timer+=diftime;
 		
-		if(timer > 8000) {
+		if(timer > 1000/*8000*/) {
 			GamePanel.telaAtiva = new CanvasMain();
 		}
 	}
@@ -23,39 +23,51 @@ public class CanvasSplash extends MyCanvas{
 	public void DesenhaSe(Graphics2D dbg) {
 		// TODO Auto-generated method stub
 		if(timer < 1000) {
+			dbg.setColor(Color.WHITE);
+			dbg.fillRect(0, 0, Constantes.telaW, Constantes.telaH);
+			
 		AffineTransform trans = dbg.getTransform();
-		dbg.scale(1.2*timer/1000.0, 1.2*timer/1000.0);
-		 dbg.setFont(Constantes.font.deriveFont(Font.PLAIN, 72));	 
+		//dbg.scale(1.2*timer/1000.0, 1.2*timer/1000.0);
+		 
+		dbg.translate(Constantes.telaW/2 - 120+(timer-1000), Constantes.telaH/2);
+		 dbg.setFont(Constantes.font.deriveFont(Font.PLAIN, 70));	 
 		 dbg.setColor(Color.black);
-		 dbg.drawString("DKC", Constantes.telaW/2 - 120, Constantes.telaH/2);
+		 dbg.drawString("DKC", 0,0);
 		 dbg.setFont(Constantes.font.deriveFont(Font.PLAIN, 69));	 
 		 dbg.setColor(Color.blue);
-		 dbg.drawString("DKC", Constantes.telaW/2 - 121, Constantes.telaH/2);
-		 dbg.setFont(Constantes.font.deriveFont(Font.PLAIN, 72));
+		 dbg.drawString("DKC", -1,0);
+		 
+		 dbg.setTransform(trans);
+		 
+		 dbg.translate(Constantes.telaW/2 - 120+(1000-timer), Constantes.telaH/2);
+		 dbg.setFont(Constantes.font.deriveFont(Font.PLAIN, 70));
 		 dbg.setColor(Color.black);
-		 dbg.drawString("ENGINE", Constantes.telaW/2 - 120, Constantes.telaH/2+50);
+		 dbg.drawString("ENGINE",  0,50);
 		 dbg.setFont(Constantes.font.deriveFont(Font.PLAIN, 69));	 
 		 dbg.setColor(Color.blue);
-		 dbg.drawString("ENGINE", Constantes.telaW/2 - 121, Constantes.telaH/2+50);
+		 dbg.drawString("ENGINE",  -1,50);
 		 
 		 dbg.setTransform(trans);
 		 
 		}else if(timer < 2500){
+			dbg.setColor(Color.WHITE);
+			dbg.fillRect(0, 0, Constantes.telaW, Constantes.telaH);
+			
 			AffineTransform trans = dbg.getTransform();
 			
-			dbg.scale(1.2, 1.2);
-			 dbg.setFont(Constantes.font.deriveFont(Font.PLAIN, 72));	 
+			 dbg.translate(Constantes.telaW/2 - 120, Constantes.telaH/2);
+			 dbg.setFont(Constantes.font.deriveFont(Font.PLAIN, 70));	 
 			 dbg.setColor(Color.black);
-			 dbg.drawString("DKC", Constantes.telaW/2 - 120, Constantes.telaH/2);
+			 dbg.drawString("DKC", 0,0);
 			 dbg.setFont(Constantes.font.deriveFont(Font.PLAIN, 69));	 
 			 dbg.setColor(Color.blue);
-			 dbg.drawString("DKC", Constantes.telaW/2 - 121, Constantes.telaH/2);
-			 dbg.setFont(Constantes.font.deriveFont(Font.PLAIN, 72));
+			 dbg.drawString("DKC", -1,0);
+			 dbg.setFont(Constantes.font.deriveFont(Font.PLAIN, 70));
 			 dbg.setColor(Color.black);
-			 dbg.drawString("ENGINE", Constantes.telaW/2 - 120, Constantes.telaH/2+50);
+			 dbg.drawString("ENGINE",  0,50);
 			 dbg.setFont(Constantes.font.deriveFont(Font.PLAIN, 69));	 
 			 dbg.setColor(Color.blue);
-			 dbg.drawString("ENGINE", Constantes.telaW/2 - 121, Constantes.telaH/2+50);
+			 dbg.drawString("ENGINE",  -1,50);
 			 
 			 dbg.setTransform(trans);
 		}else {
