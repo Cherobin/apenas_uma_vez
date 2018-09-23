@@ -37,7 +37,7 @@ public class Constantes {
 		
 		goldImage = GamePanel.instance.carregaImagem("gold.png");
 		lifeImage = GamePanel.instance.carregaImagem("life.png");
- 
+		hudImage = GamePanel.instance.carregaImagem("hud.png");
 	}
 
 	
@@ -46,6 +46,7 @@ public class Constantes {
  
 	public static BufferedImage goldImage;
 	public static BufferedImage lifeImage;
+	public static BufferedImage hudImage;
 
 	
 
