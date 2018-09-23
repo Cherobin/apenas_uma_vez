@@ -407,7 +407,7 @@ public class CanvasMain extends MyCanvas {
 
 		dbg.translate((int) Constantes.telaW-150-2+ Constantes.radar_ponteiro.getWidth()/2,Constantes.telaH-150-2+Constantes.radar_ponteiro.getHeight()/2);
 		float prop = (float) (1.0f - (rotate_ponteiro/(float)6.05));
-		 System.out.println(prop);
+		
 		 Composite cp = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, prop);
 		 dbg.setComposite(cp);
 		dbg.rotate(rotate_ponteiro);

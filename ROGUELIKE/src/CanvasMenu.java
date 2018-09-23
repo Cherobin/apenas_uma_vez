@@ -1,6 +1,7 @@
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
@@ -12,12 +13,14 @@ public class CanvasMenu extends MyCanvas {
 	
 	public Color cor = null;
 	
-	
-	
-	
+	boolean isStart = false;
+	String[] split;
+	String name = "B u l l e t of h e l l";
 	public CanvasMenu(MyCanvas canvasOrigem,Color cor) {
 		this.canvasOrigem = canvasOrigem;
 		this.cor = cor;
+		
+		split= name.split(" ");
 	}
 	
 	long somatime = 0;
@@ -33,10 +36,32 @@ public class CanvasMenu extends MyCanvas {
 		dbg.setColor(cor);
 		dbg.fillRect(0, 0, Constantes.telaW, Constantes.telaH);
 		
-		dbg.setColor(Color.white);
-		dbg.setFont(Constantes.font.deriveFont(Font.PLAIN, 20));
-		dbg.drawString("MENU DO JOGO PRESSIONE ESC PARA SAIR", 10, 10);
-		dbg.drawString(""+somatime,300,250);
+		 dbg.setFont(Constantes.font.deriveFont(Font.PLAIN, 70));
+		 dbg.setColor(Color.YELLOW);
+		 dbg.drawString("Bullet of Hell", Constantes.telaW/2 - 250, 70);
+		 dbg.setFont(Constantes.font.deriveFont(Font.PLAIN, 69));
+		
+		 
+		 dbg.setColor(Color.RED);
+		if(somatime%30==0) {
+			 dbg.setColor(Color.BLACK);
+			 somatime=0;
+		}
+
+	
+		 dbg.drawString("          Hell", Constantes.telaW/2 - 250+3, 70);
+		 
+		 dbg.setFont(Constantes.font.deriveFont(Font.PLAIN, 65));
+		 if(isStart) {
+		 dbg.setColor(Color.RED);
+		 }else {
+			 dbg.setColor(Color.WHITE);
+		 }
+		 dbg.drawString("CLICK TO START", Constantes.telaW/2 - 220, Constantes.telaH/2);
+		 dbg.setFont(Constantes.font.deriveFont(Font.PLAIN, 69));
+		 
+		 //dbg.fillRect(Constantes.telaW/2 - 220, Constantes.telaH/2-65, 440, 70);
+ 
 	}
 
 	@Override
@@ -61,7 +86,14 @@ public class CanvasMenu extends MyCanvas {
 	@Override
 	public void mouseMoved(MouseEvent e) {
 		// TODO Auto-generated method stub
-
+ 
+		
+		Rectangle rect = new Rectangle( Constantes.telaW/2 - 220, Constantes.telaH/2-70, 440, 70);
+		if (rect.contains(e.getX(), e.getY())) {
+			isStart = true;
+		} else {
+			isStart = false;
+		}
 	}
 
 	@Override
@@ -74,6 +106,11 @@ public class CanvasMenu extends MyCanvas {
 	public void mouseReleased(MouseEvent arg0) {
 		// TODO Auto-generated method stub
 
+		if (isStart) {
+			GamePanel.telaAtiva = new CanvasMain();
+		}
+
+		
 	}
 
 	@Override
