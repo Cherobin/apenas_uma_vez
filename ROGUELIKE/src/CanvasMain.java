@@ -45,6 +45,8 @@ public class CanvasMain extends MyCanvas {
 
 	public static ArrayList<Sprite> listaDeAsteroides = new ArrayList<Sprite>();
 	
+	public static ArrayList<Sprite> listaDeItens = new ArrayList<Sprite>();
+	
 	public static GerenciadorDeEventos gerenciadorEventos = new GerenciadorDeEventos();
 	
 	int timerfps = 0;
@@ -242,6 +244,15 @@ public class CanvasMain extends MyCanvas {
 			}
 		}	
 		
+		for(int i = 0; i < listaDeItens.size();i++){
+			Sprite sp = listaDeItens.get(i);
+			sp.SimulaSe((int)diftime);
+			if(!sp.vivo){
+				listaDeItens.remove(i);
+				i--;
+			}
+		}
+		
 		
 		
 //		gerenciadorEventos.testaEventos(heroi);
@@ -282,6 +293,10 @@ public class CanvasMain extends MyCanvas {
 
 //		dbg.drawImage(imgFundo, null,0,0);
 		
+		for(int i = 0; i < listaDeItens.size();i++){
+			listaDeItens.get(i).DesenhaSe(dbg,MapX,MapY);
+		}
+		
 		for(int i = 0; i < listaDePersonagens.size();i++){
 			listaDePersonagens.get(i).DesenhaSe(dbg,MapX,MapY);
 		}
@@ -298,7 +313,7 @@ public class CanvasMain extends MyCanvas {
 			listaDeAsteroides.get(i).DesenhaSe(dbg,MapX,MapY);
 		}	
 		
-		
+	
 		
 //		heroi.DesenhaSe(dbg);
 		
@@ -315,6 +330,10 @@ public class CanvasMain extends MyCanvas {
 		dbg.setFont(fonteMini);	
 		dbg.drawString("Velocidade", 10, Constantes.telaH-26);
 		dbg.drawString(""+(int)(Constantes.heroi.vel), 10, Constantes.telaH-15);
+		
+		dbg.setFont(fonteMini);	
+		dbg.drawString("Gold", 10, Constantes.telaH-80);
+		dbg.drawString(""+(int)(Constantes.gold), 10, Constantes.telaH-70);
 		
 		dbg.setColor(lifebarcolor);
 	

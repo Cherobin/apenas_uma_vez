@@ -4,6 +4,8 @@ import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.util.Random; 
 
+
+//35 por 55
 public class Asteroides extends Personagem {
 	
 	BufferedImage charset = null;
@@ -77,13 +79,21 @@ public class Asteroides extends Personagem {
 		if(life < 0) {
 			vivo = false;
 			if(recreate) {
+				if(rnd.nextInt(100)>80) {		
+					Item item = new Item(Constantes.goldImage,X+charset.getWidth()/2, Y+charset.getHeight()/2,rnd.nextInt(500), 0 ,100, 7, 38, 55, 30, true); 
+					CanvasMain.listaDeItens.add(item);
+				}else {
+					Item item = new Item(Constantes.lifeImage,X+charset.getWidth()/2, Y+charset.getHeight()/2,0, rnd.nextInt(500),100, 1, 44, 44, 50, false);
+					CanvasMain.listaDeItens.add(item);
+				}
 				for(int i = 0; i < 20;i++){
 					Asteroides pers = new Asteroides(X+charset.getWidth()/2, Y+charset.getHeight()/2,10,Constantes.imgSmallAsteroide.get(rnd.nextInt(Constantes.imgSmallAsteroide.size()-1)),false);
 					pers.vel = 50+GamePanel.rnd.nextInt(50);
 					pers.angulo = (Math.PI*2)*GamePanel.rnd.nextDouble();
 					CanvasMain.listaDeAsteroides.add(pers);
-					}
 				}
+				
+			}
 		} 
 	}
 	

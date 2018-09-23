@@ -27,11 +27,18 @@ public class Constantes {
 		expolsao[2] = GamePanel.instance.carregaImagem("exp03.png");
 		expolsao[3] = GamePanel.instance.carregaImagem("exp04.png");
 		expolsao[4] = GamePanel.instance.carregaImagem("exp05.png");
+		
+		goldImage = GamePanel.instance.carregaImagem("gold.png");
+		lifeImage = GamePanel.instance.carregaImagem("life.png");
 	}
 
 	
 	public static List<BufferedImage> imgBigAsteroide = new ArrayList<>();
 	public static List<BufferedImage> imgSmallAsteroide = new ArrayList<>(); 
  
+	public static BufferedImage goldImage;
+	public static BufferedImage lifeImage;
+
+	
 
 }
