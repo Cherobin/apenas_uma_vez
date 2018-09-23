@@ -21,7 +21,7 @@ public class Item extends Sprite {
 	int raio = 55;
  
 	double gold;
- 
+	double xy[] = new double[2];
 	int charw = 36; 
 	int charh = 55;
 	int qtSprites = 0;
@@ -57,7 +57,7 @@ public class Item extends Sprite {
 		}
 		
  
-		if (ColisaoRetangular(Constantes.heroi)) {
+		if (testaColisao(Constantes.heroi.X,Constantes.heroi.Y,Constantes.heroi.raio,Constantes.heroi)) {
 			vivo = false;
 			Constantes.gold += gold;
 			Constantes.heroi.life += life;
@@ -100,15 +100,30 @@ public class Item extends Sprite {
 		return false;
 	}
 
-	public boolean testaColisao(float x, float y, float r, Projetil proj) {
+	public boolean testaColisao(float x, float y, float r, Personagem proj) {
 		float dx = x - X;
 		float dy = y - Y;
 		float sr = r + raio;
 
 		if (sr * sr > (dx * dx + dy * dy)) {
-						//	levaDano((int)proj.dano);
+			
+			for (int i = 0; i < 31; i++) {
+				for (int j = 0; j < 31; j++) {
+					if (proj.layer0[i][j] != 0) {
+						
+						proj.basetToXY(j, i, xy);
+						double dx2 = X - (x+xy[0]);
+						double dy2 = Y - (y+xy[1]);
+						double sr2 = raio + 16;
+						
+						if (sr2 * sr2 > (dx2 * dx2 + dy2* dy2)) { 
 							return true;
-		 
+						}
+					}
+				}
+			}
+			
+			
 		}
 
 		return false;
