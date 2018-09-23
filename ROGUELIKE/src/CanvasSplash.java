@@ -15,7 +15,7 @@ public class CanvasSplash extends MyCanvas{
 		timer+=diftime;
 		
 		if(timer > 1000/*8000*/) {
-			GamePanel.telaAtiva = new CanvasMain();
+			GamePanel.telaAtiva = new CanvasMenu(this, Color.black);
 		}
 	}
 
@@ -74,7 +74,7 @@ public class CanvasSplash extends MyCanvas{
 			dbg.setColor(Color.black);
 			dbg.fillRect(0, 0, Constantes.telaW, Constantes.telaH);
 			
-			dbg.setFont(Constantes.font.deriveFont(Font.PLAIN, 70));
+			 dbg.setFont(Constantes.font.deriveFont(Font.PLAIN, 70));
 			 dbg.setColor(Color.YELLOW);
 			 dbg.drawString("A GAME BY: ", Constantes.telaW/2 - 321, Constantes.telaH/2);
 			 dbg.drawString("  RICARDO GEROBIN ", Constantes.telaW/2 - 321, Constantes.telaH/2+50);

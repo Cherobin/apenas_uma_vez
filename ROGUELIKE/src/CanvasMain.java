@@ -207,6 +207,9 @@ public class CanvasMain extends MyCanvas {
 		listaDeBilboards.add(new Bilboard(400, 400, 40,Constantes.bilboards[1]));
 		listaDeBilboards.add(new Bilboard(-100, 0, 20,Constantes.bilboards[2]));
 		
+		
+		
+		//GamePanel.telaAtiva = new CanvasCostrucao(this,Color.blue);
 	}
 	@Override
 	public void SimulaSe(int diftime) {
@@ -474,7 +477,7 @@ public class CanvasMain extends MyCanvas {
 
 		dbg.translate((int) Constantes.telaW-150-2+ Constantes.radar_ponteiro.getWidth()/2,Constantes.telaH-150-2+Constantes.radar_ponteiro.getHeight()/2);
 		float prop = (float) (1.0f - (rotate_ponteiro/(float)6.05));
-		 System.out.println(prop);
+		
 		 Composite cp = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, prop);
 		 dbg.setComposite(cp);
 		dbg.rotate(rotate_ponteiro);
@@ -545,7 +548,7 @@ public class CanvasMain extends MyCanvas {
 		if(keyCode == KeyEvent.VK_ALT){
 			HEALING = true;
 		}
-		if(keyCode == KeyEvent.VK_M){
+		if(keyCode == KeyEvent.VK_H){
 			GamePanel.telaAtiva = new CanvasCostrucao(this,Color.blue);
 		}
 	}
