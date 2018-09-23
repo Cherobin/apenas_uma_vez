@@ -362,6 +362,9 @@ public class CanvasCostrucao extends MyCanvas {
 					Constantes.heroi.layer1[j][i] = armas[j][i];
 				}
 			}
+			
+			Constantes.heroi.calculaAtributos();
+			
 			GamePanel.telaAtiva = canvasOrigem;
 		}
 
