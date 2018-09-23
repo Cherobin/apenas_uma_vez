@@ -101,7 +101,14 @@ public class CanvasMain extends MyCanvas {
 				bx = (int)((posx+16)/16);
 				by = (int)((posy+40)/16);
 				
- 
+				for(int j = 0; j < listaDePersonagens.size();j++){
+					Personagem pers = (Personagem)listaDePersonagens.get(j);
+					
+//					if(pers.ColisaoRetangular(new Personagem(posx, posy))){
+//						colidiu = true;
+//						continue;
+//					}
+				}
 				
 			}while(colidiu); 
 			Personagem pers = new Personagem(posx, posy,500,Constantes.navesBase.get(rnd.nextInt(Constantes.navesBase.size()-1)));
@@ -109,7 +116,7 @@ public class CanvasMain extends MyCanvas {
 			pers.angulo = (Math.PI*2)*GamePanel.rnd.nextDouble();
 			pers.rodaia = true;
 			//pers.vel = (int)Math.sqrt(pers.velX*pers.velX + pers.velY*pers.velY);
-			 
+			
 			listaDePersonagens.add(pers);
 		}
 		
@@ -172,11 +179,10 @@ public class CanvasMain extends MyCanvas {
 
 		}else if(RIGHT){
 			Constantes.heroi.angulo+=Math.PI*diftime/1000.0f;
-
 		}
 		
 		if(UP){
-			Constantes.heroi.vel += 50*diftime/1000.0f;
+			Constantes.heroi.vel += Constantes.heroi.velocidadeMaxima*diftime/1000.0f;
 			
 			System.out.println("Constantes.heroi.vel "+Constantes.heroi.vel);
 			
@@ -184,7 +190,7 @@ public class CanvasMain extends MyCanvas {
 				Constantes.heroi.vel=Constantes.heroi.velocidadeMaxima;
 			}
 		}else if(DOWN){
-			Constantes.heroi.vel-=50*diftime/1000.0f;
+			Constantes.heroi.vel-=Constantes.heroi.velocidadeMaxima*diftime/1000.0f;
 			
 			//System.out.println("DDD Constantes.heroi.vel "+Constantes.heroi.vel);
 			
@@ -357,7 +363,7 @@ public class CanvasMain extends MyCanvas {
 		dbg.fillRect(51, 41, (int)(270*(Constantes.heroi.life/(float)Constantes.heroi.lifeMax)), 21);
 
 		dbg.setColor(Color.BLUE);
-		dbg.fillRect(51, 65, (int)(270*(Constantes.heroi.vel/(float)400)), 10);
+		dbg.fillRect(51, 65, (int)(270*(Constantes.heroi.bateria/Constantes.heroi.bateriaMaxima)), 10);
 	
 		//dbg.drawString("Life", 105, Constantes.telaH-28);
 		
