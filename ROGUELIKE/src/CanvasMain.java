@@ -80,7 +80,7 @@ public class CanvasMain extends MyCanvas {
 		x2 = 0;
 		y2 = 200;
 
-		Constantes.heroi = new Personagem(100, 100,5000, Constantes.navesBase.get(0));
+		Constantes.heroi = new Personagem(100, 100,5000, Constantes.navePLayer);
 
 
 		listaDePersonagens.add(Constantes.heroi);

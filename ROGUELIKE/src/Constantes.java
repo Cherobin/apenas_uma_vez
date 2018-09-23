@@ -21,6 +21,8 @@ public class Constantes {
 	
 	public static List<NaveBase> navesBase = new ArrayList<>();
 	
+	public static NaveBase navePLayer;
+	
 	public static BufferedImage expolsao[] = new BufferedImage[5];
 	
 	public static BufferedImage fragmento[] = new BufferedImage[2];

@@ -236,13 +236,48 @@ private void carregaAssetsEntreOutrasCoisas() {
 	}
 	
 	
+	Constantes.navePLayer = carregaNaveReturn("nave_player.csv");
+	//Constantes.navePLayer = carregaNaveReturn("nave_criacao.csv");
 	
+	//naves estacionaria sem armas
+	carregaNave("nave_estacionaria_sa_1.csv");
+	carregaNave("nave_estacionaria_sa_2.csv");
+	carregaNave("nave_estacionaria_sa_3.csv");
+	carregaNave("nave_estacionaria_sa_4.csv");
+	carregaNave("nave_estacionaria_sa_5.csv");
+	carregaNave("nave_estacionaria_sa_6.csv");
+	carregaNave("nave_estacionaria_sa_7.csv");
+	carregaNave("nave_estacionaria_sa_8.csv");
+	carregaNave("nave_estacionaria_sa_9.csv");
+	carregaNave("nave_estacionaria_sa_10.csv");
+	
+	
+	//naves estacionarias com armas, ta meio apelão =x
+	carregaNave("nave_estacionaria.csv");
+	carregaNave("nave_estacionaria_1.csv");
+	carregaNave("nave_estacionaria_2.csv");
+	carregaNave("nave_estacionaria_3.csv");
+	carregaNave("nave_estacionaria_4.csv");
+	carregaNave("nave_estacionaria_5.csv");
+	carregaNave("nave_estacionaria_6.csv");
+	carregaNave("nave_estacionaria_7.csv");
+	carregaNave("nave_estacionaria_8.csv");
+	carregaNave("nave_estacionaria_9.csv");
+	carregaNave("nave_estacionaria_10.csv");
+	
+	
+	//naves inimigas
 	carregaNave("nave_1.csv");
 	carregaNave("nave_2.csv");
 	carregaNave("nave_3.csv");
 	carregaNave("nave_4.csv");
+	carregaNave("nave_5.csv");
+	carregaNave("nave_6.csv");
+	carregaNave("nave_7.csv");
+	carregaNave("nave_8.csv");
+	carregaNave("nave_9.csv");
+	carregaNave("nave_10.csv");
 	
- 
 	Constantes.imgBigAsteroide.add(carregaImagem("asteroide_1.png"));
 	Constantes.imgBigAsteroide.add(carregaImagem("asteroide_2.png"));
 	Constantes.imgBigAsteroide.add(carregaImagem("asteroide_3.png"));
@@ -278,6 +313,49 @@ private void carregaAssetsEntreOutrasCoisas() {
 	
 	
 }
+
+public NaveBase carregaNaveReturn(String file) {
+	try {
+		 
+		InputStream In = getClass().getResourceAsStream(file);
+	
+			String line = "";
+		
+			BufferedReader bfr = new BufferedReader(new InputStreamReader(In));
+			NaveBase nave = new NaveBase();
+			int isBase = -1;
+			int e =0;
+			while((line = bfr.readLine())!=null){
+				if(line.charAt(0)=='#'){
+					isBase++; 
+					e = 0; 
+				}
+				if(line.charAt(0)!='#'){
+					String strs[] = line.split(";");
+				 
+					for (int i = 0; i < strs.length; i++) {
+						 if(isBase == 0) {
+							 nave.layer0[e][i] = Integer.parseInt(strs[i]);
+						 }else {
+							 nave.layer1[e][i] = Integer.parseInt(strs[i]);
+						 }
+					}
+					e++;
+				} 
+				
+			} 
+			return nave;
+			 
+		 
+		
+	} catch (IOException e) {
+		// TODO Auto-generated catch block
+	    System.out.println(e.getMessage()+ "  abrea Nave!!!");
+		e.printStackTrace();
+	}
+	return null;
+}
+
 public void carregaNave(String file) {
 	try {
 		 
@@ -307,14 +385,14 @@ public void carregaNave(String file) {
 					e++;
 				} 
 				
-			}
+			} 
 			 Constantes.navesBase.add(nave);
-			
+			 
 		 
 		
 	} catch (IOException e) {
 		// TODO Auto-generated catch block
-	    System.out.println(e.getMessage()+ "  abreaA!!!");
+	    System.out.println(e.getMessage()+ "  abrea Nave!!!");
 		e.printStackTrace();
 	}
 }
