@@ -101,7 +101,7 @@ public class Personagem extends Sprite {
 				}
 			}
 		}
-		velocidadeMaxima-=(lifeMax/10);
+		velocidadeMaxima-=(lifeMax/50);
 		if(velocidadeMaxima<0) {
 			velocidadeMaxima = 0;
 		}
