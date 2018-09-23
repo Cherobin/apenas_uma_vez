@@ -91,7 +91,7 @@ public class CanvasMain extends MyCanvas {
 		
 		Random maprnd = new Random(Constantes.randomSeed); 
 		
-		for(int i = 0; i < 1200;i++){
+		for(int i = 0; i < 1000;i++){
 			int posx = 0;
 			int posy = 0;
 
@@ -198,14 +198,25 @@ public class CanvasMain extends MyCanvas {
 		
 //		gerenciadorEventos.carregaEventos(this.getClass().getResourceAsStream("ecentos.csv"));
 		
+		for(int i = 0; i < 8;i++) {
+			for(int j = 0; j < 8;j++) {
+				listaDeBilboards.add(new Bilboard((i-4)*900, (j-4)*900, 100,Constantes.bilboards[maprnd.nextInt(5)]));
+			}
+		}
 		
-		listaDeBilboards.add(new Bilboard(0, 0, 80,Constantes.bilboards[0]));
+		listaDeBilboards.add(new Bilboard(400, 400, 40,Constantes.bilboards[5]));
+		listaDeBilboards.add(new Bilboard(-100, 0, 20,Constantes.bilboards[6]));
+		
+		/*listaDeBilboards.add(new Bilboard(0, 0, 80,Constantes.bilboards[0]));
 		listaDeBilboards.add(new Bilboard(800,800, 80,Constantes.bilboards[4]));
 		listaDeBilboards.add(new Bilboard(-1000,400, 80,Constantes.bilboards[5]));
 		listaDeBilboards.add(new Bilboard(400,400, 80,Constantes.bilboards[6]));
 		listaDeBilboards.add(new Bilboard(-400,-400, 80,Constantes.bilboards[3]));
+		
+		
+		
 		listaDeBilboards.add(new Bilboard(400, 400, 40,Constantes.bilboards[1]));
-		listaDeBilboards.add(new Bilboard(-100, 0, 20,Constantes.bilboards[2]));
+		listaDeBilboards.add(new Bilboard(-100, 0, 20,Constantes.bilboards[2]));*/
 		
 		
 		
@@ -347,15 +358,17 @@ public class CanvasMain extends MyCanvas {
 		//dbg.drawImage(imgFundo,(int)(-500+(heroi.X/100)),(int)(-500+(heroi.Y/100)),null);
 		
 		for(int i = 0; i < listaDeBilboards.size();i++){
-			AffineTransform trans = dbg.getTransform();
 			Bilboard bilb = listaDeBilboards.get(i);
 			
-			dbg.translate(bilb.x - Constantes.heroi.X/(double)bilb.z , bilb.y - Constantes.heroi.Y/(double)bilb.z );
-			
-
-			dbg.drawImage(bilb.img, - bilb.img.getWidth()/2, - bilb.img.getHeight()/2, null);
-			
-			dbg.setTransform(trans);
+			//if(Constantes.telaRect.intersects(new Rectangle((int)(bilb.x - Constantes.heroi.X/(double)bilb.z - bilb.img.getWidth()/2),(int)( bilb.y - Constantes.heroi.Y/(double)bilb.z - bilb.img.getWidth()/2) , bilb.img.getWidth(), bilb.img.getHeight()))) {	
+				AffineTransform trans = dbg.getTransform();
+				dbg.translate(bilb.x - Constantes.heroi.X/(double)bilb.z , bilb.y - Constantes.heroi.Y/(double)bilb.z );
+				
+	
+				dbg.drawImage(bilb.img, - bilb.img.getWidth()/2, - bilb.img.getHeight()/2, null);
+				
+				dbg.setTransform(trans);
+			//}
 			
 		}
 		

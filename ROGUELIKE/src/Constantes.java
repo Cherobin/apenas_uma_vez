@@ -48,12 +48,13 @@ public class Constantes {
 
 		
 		bilboards[0] = GamePanel.instance.carregaImagem("Bilboard_1.png");
-		bilboards[1] = GamePanel.instance.carregaImagem("Bilboard_2.png");
-		bilboards[2] = GamePanel.instance.carregaImagem("Bilboard_3.png");
-		bilboards[3] = GamePanel.instance.carregaImagem("Bilboard_4.png");
-		bilboards[4] = GamePanel.instance.carregaImagem("Bilboard_5.png");
-		bilboards[5] = GamePanel.instance.carregaImagem("Bilboard_6.png");
-		bilboards[6] = GamePanel.instance.carregaImagem("Bilboard_7.png");
+
+		bilboards[1] = GamePanel.instance.carregaImagem("Bilboard_4.png");
+		bilboards[2] = GamePanel.instance.carregaImagem("Bilboard_5.png");
+		bilboards[3] = GamePanel.instance.carregaImagem("Bilboard_6.png");
+		bilboards[4] = GamePanel.instance.carregaImagem("Bilboard_7.png");
+		bilboards[5] = GamePanel.instance.carregaImagem("Bilboard_2.png");
+		bilboards[6] = GamePanel.instance.carregaImagem("Bilboard_3.png");
 		
 		hudImage = GamePanel.instance.carregaImagem("hud.png");
 

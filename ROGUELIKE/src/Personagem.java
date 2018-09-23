@@ -314,8 +314,8 @@ public class Personagem extends Sprite {
 
 		dbg.rotate(angulo);
 
-		dbg.setColor(Color.white);
-		dbg.drawOval((int) -raio, (int) -raio, raio * 2, raio * 2);
+		//dbg.setColor(Color.white);
+		//dbg.drawOval((int) -raio, (int) -raio, raio * 2, raio * 2);
 
 		// dbg.setColor(Color.red);
 		// dbg.drawRect((int)X-xMundo-boundingbox.width/2,
@@ -349,9 +349,11 @@ public class Personagem extends Sprite {
 			}
 		}
 
-		dbg.setColor(Color.green);
-		dbg.drawLine(0, -basey, basex, 0);
-		dbg.drawLine(0, basey, basex, 0);
+		if(Constantes.heroi==this) {
+			dbg.setColor(new Color(0,255,0,140));
+			dbg.drawLine(0, -basey, basex, 0);
+			dbg.drawLine(0, basey, basex, 0);
+		}
 
 		
 		
