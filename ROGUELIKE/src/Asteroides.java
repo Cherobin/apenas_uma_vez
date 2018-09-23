@@ -80,10 +80,10 @@ public class Asteroides extends Personagem {
 			vivo = false;
 			if(recreate) {
 				if(rnd.nextInt(100)>60) {		
-					Item item = new Item(Constantes.goldImage,X+charset.getWidth()/2, Y+charset.getHeight()/2,rnd.nextInt(500), 0 ,100, 7, 38, 55, 30, true); 
+					Item item = new Item(Constantes.goldImage,X+charset.getWidth()/2, Y+charset.getHeight()/2,rnd.nextInt(500), 0 ,100, 7, 38, 55, 60, true); 
 					CanvasMain.listaDeItens.add(item);
 				}else if(rnd.nextInt(100)>72) {
-					Item item = new Item(Constantes.lifeImage,X+charset.getWidth()/2, Y+charset.getHeight()/2,0, rnd.nextInt(500),100, 1, 44, 44, 50, false);
+					Item item = new Item(Constantes.lifeImage,X+charset.getWidth()/2, Y+charset.getHeight()/2,0, rnd.nextInt(500),100, 1, 44, 44, 60, false);
 					CanvasMain.listaDeItens.add(item);
 				}
 				for(int i = 0; i < 20;i++){

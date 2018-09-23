@@ -349,8 +349,8 @@ public class CanvasMain extends MyCanvas {
 		//Font f = dbg.getFont();
 		
 		//dbg.setFont(fonte);
-		//dbg.setColor(Color.YELLOW);	
-		//dbg.drawString("FPS: "+GamePanel.FPS, 10, 20);
+		dbg.setColor(Color.YELLOW);	
+		dbg.drawString("FPS: "+GamePanel.FPS,  Constantes.telaW-80, 12);
 		
 		//dbg.setFont(fonteMini);	
 	//	dbg.drawString("Velocidade", 10, Constantes.telaH-26);
@@ -362,9 +362,10 @@ public class CanvasMain extends MyCanvas {
 		
 		dbg.setColor(lifebarcolor);
 	
-		dbg.fillRect(51, 41, (int)(587*(Constantes.heroi.life/(float)Constantes.heroi.lifeMax)), 21);
+		dbg.fillRect(51, 41, (int)(270*(Constantes.heroi.life/(float)Constantes.heroi.lifeMax)), 21);
 
-	
+		dbg.setColor(Color.BLUE);
+		dbg.fillRect(51, 65, (int)(270*(Constantes.heroi.vel/(float)400)), 10);
 	
 		//dbg.drawString("Life", 105, Constantes.telaH-28);
 		

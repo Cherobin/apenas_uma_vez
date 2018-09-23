@@ -51,6 +51,8 @@ public class Constantes {
 		
 		hudImage = GamePanel.instance.carregaImagem("hud.png");
 
+		fundohangar = GamePanel.instance.carregaImagem("fundohangar.png");
+
 	}
 
 	
@@ -60,7 +62,7 @@ public class Constantes {
 	public static BufferedImage goldImage;
 	public static BufferedImage lifeImage;
 	public static BufferedImage hudImage;
-
+	public static BufferedImage fundohangar;
 	
 
 }

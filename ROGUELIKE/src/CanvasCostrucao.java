@@ -86,9 +86,9 @@ public class CanvasCostrucao extends MyCanvas {
 	@Override
 	public void DesenhaSe(Graphics2D dbg) {
 		// TODO Auto-generated method stub
-		dbg.setColor(cor);
-		dbg.fillRect(0, 0, Constantes.telaW, Constantes.telaH);
-
+		
+		dbg.drawImage(Constantes.fundohangar, 0, 0, null);
+	 
 		dbg.setColor(Color.white);
 		dbg.drawString("Clique nos icones para construção", 10, 10);
 
