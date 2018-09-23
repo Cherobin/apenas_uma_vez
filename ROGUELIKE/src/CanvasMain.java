@@ -78,7 +78,6 @@ public class CanvasMain extends MyCanvas {
 		y2 = 200;
 
 		Constantes.heroi = new Personagem(100, 100,5000, Constantes.navesBase.get(0));
-		Constantes.heroi.vel = 200;
 
 
 		listaDePersonagens.add(Constantes.heroi);
@@ -113,7 +112,7 @@ public class CanvasMain extends MyCanvas {
 				
 			}while(colidiu); 
 			Personagem pers = new Personagem(posx, posy,500,Constantes.navesBase.get(rnd.nextInt(Constantes.navesBase.size()-1)));
-			pers.vel = 50+GamePanel.rnd.nextInt(50);
+			//pers.vel = 50+GamePanel.rnd.nextInt(50);
 			pers.angulo = (Math.PI*2)*GamePanel.rnd.nextDouble();
 			pers.rodaia = true;
 			//pers.vel = (int)Math.sqrt(pers.velX*pers.velX + pers.velY*pers.velY);
@@ -188,8 +187,8 @@ public class CanvasMain extends MyCanvas {
 			
 			System.out.println("Constantes.heroi.vel "+Constantes.heroi.vel);
 			
-			if(Constantes.heroi.vel>=Constantes.heroi.velMax) {
-				Constantes.heroi.vel=Constantes.heroi.velMax;
+			if(Constantes.heroi.vel>=Constantes.heroi.velocidadeMaxima) {
+				Constantes.heroi.vel=Constantes.heroi.velocidadeMaxima;
 			}
 		}else if(DOWN){
 			Constantes.heroi.vel-=50*diftime/1000.0f;
