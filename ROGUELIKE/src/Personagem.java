@@ -220,20 +220,20 @@ public class Personagem extends Sprite {
 		// velX = -velX;
 		// }
 
-		for (int i = 0; i < CanvasMain.listaDePersonagens.size(); i++) {
-			Personagem pers = (Personagem) CanvasMain.listaDePersonagens.get(i);
-
-			if (pers != this) {
-				if (ColisaoRetangular(pers)) {
-					X = xold;
-					Y = yold;
-					velY = -velY;
-					velX = -velX;
-				
-					break;
-				}
-			}
-		}
+//		for (int i = 0; i < CanvasMain.listaDePersonagens.size(); i++) {
+//			Personagem pers = (Personagem) CanvasMain.listaDePersonagens.get(i);
+//
+//			if (pers != this) {
+//				if (ColisaoRetangular(pers)) {
+//					X = xold;
+//					Y = yold;
+//					velY = -velY;
+//					velX = -velX;
+//				
+//					break;
+//				}
+//			}
+//		}
 		
 
 		for (int i = 0; i < 31; i++) {
@@ -411,7 +411,7 @@ public class Personagem extends Sprite {
 						basetToXY(j, i, xy);
 						double dx2 = x - (X+xy[0]);
 						double dy2 = y - (Y+xy[1]);
-						double sr2 = r + 16;
+						double sr2 = r + 25;
 						
 						if (sr2 * sr2 > (dx2 * dx2 + dy2* dy2)) {
 							levaDano((int)proj.dano);
