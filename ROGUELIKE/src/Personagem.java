@@ -17,7 +17,7 @@ public class Personagem extends Sprite {
 
 	double angulo = 0;
 	double vel = 0;
-
+	double velMax = 0;
 	int raio = 496;
 
 	int lifeMax = 1000;
