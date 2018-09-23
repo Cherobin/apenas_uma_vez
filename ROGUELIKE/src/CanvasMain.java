@@ -179,7 +179,6 @@ public class CanvasMain extends MyCanvas {
 
 		}else if(RIGHT){
 			Constantes.heroi.angulo+=Math.PI*diftime/1000.0f;
-
 		}
 		
 		if(UP){
@@ -364,7 +363,7 @@ public class CanvasMain extends MyCanvas {
 		dbg.fillRect(51, 41, (int)(270*(Constantes.heroi.life/(float)Constantes.heroi.lifeMax)), 21);
 
 		dbg.setColor(Color.BLUE);
-		dbg.fillRect(51, 65, (int)(270*(Constantes.heroi.vel/(float)400)), 10);
+		dbg.fillRect(51, 65, (int)(270*(Constantes.heroi.bateria/Constantes.heroi.bateriaMaxima)), 10);
 	
 		//dbg.drawString("Life", 105, Constantes.telaH-28);
 		

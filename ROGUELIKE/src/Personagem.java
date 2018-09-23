@@ -218,7 +218,7 @@ public class Personagem extends Sprite {
 					statusArm[i][j].angulo = ang;
 					statusArm[i][j].timertir+=diftime;
 					
-					if (FIRE && (statusArm[i][j].timertir > arma.candecia_tiro)) {
+					if (FIRE && (statusArm[i][j].timertir > arma.candecia_tiro) && bateria > arma.energia) {
 						
 						float velo = arma.velocidade_tiro;
 						Projetil proj = null;
@@ -255,6 +255,7 @@ public class Personagem extends Sprite {
 						
 						if(proj!=null) {
 							proj.dano = arma.dano;
+							bateria-=arma.energia;
 							CanvasMain.listaDeProjeteis.add(proj);
 							statusArm[i][j].timertir = 0;
 						}
