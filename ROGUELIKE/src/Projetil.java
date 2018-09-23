@@ -91,7 +91,8 @@ BufferedImage charset = null;
 				if(pers.testaColisao(X,Y,raio,this)){
 					X = xold;
 					Y = yold;
-					vivo = false;
+					vivo = false; 
+					
 					break;
 				}
 			}

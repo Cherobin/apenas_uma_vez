@@ -197,6 +197,7 @@ public class Personagem extends Sprite {
 					Y = yold;
 					velY = -velY;
 					velX = -velX;
+				
 					break;
 				}
 			}

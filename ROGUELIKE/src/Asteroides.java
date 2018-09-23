@@ -95,6 +95,7 @@ public class Asteroides extends Personagem {
 				
 			}
 		} 
+		
 	}
 	
 	@Override
@@ -107,6 +108,7 @@ public class Asteroides extends Personagem {
 			levaDano((int)proj.dano);
 		}
 
+		
 		return false;
 	}
 	
