@@ -66,6 +66,7 @@ public class CanvasMain extends MyCanvas {
 	
 	public Color lifebarcolor = new Color(0, 155, 0,155) ;
 	
+	
 	public CanvasMain() {
 		//imgFundo = GamePanel.instance.carregaImagem("nebulosa.jpg");
 		//imgCharset = GamePanel.instance.carregaImagem("rmxp004tw4.png");
@@ -87,47 +88,80 @@ public class CanvasMain extends MyCanvas {
 
 		listaDePersonagens.add(Constantes.heroi);
 		
-		for(int i = 0; i < 10;i++){
+		
+		Random maprnd = new Random(Constantes.randomSeed); 
+		
+		for(int i = 0; i < 1200;i++){
 			int posx = 0;
 			int posy = 0;
+
+
+			posx = maprnd.nextInt(200000)-100000;
+			posy = maprnd.nextInt(200000)-100000;
 			
-			int bx = 0;
-			int by = 0;
+			double dist = Math.sqrt(posx*posx + posy*posy);
+				
+			Personagem pers = null;
 			
-			boolean colidiu = false;
-				
-			do{
-				
-					
-				colidiu = false;
-				posx = GamePanel.rnd.nextInt(16000)-8000;
-				posy = GamePanel.rnd.nextInt(16000)-8000;
-				
-				bx = (int)((posx+16)/16);
-				by = (int)((posy+40)/16);
-				
-				for(int j = 0; j < listaDePersonagens.size();j++){
-					Personagem pers = (Personagem)listaDePersonagens.get(j);
-					
-//					if(pers.ColisaoRetangular(new Personagem(posx, posy))){
-//						colidiu = true;
-//						continue;
-//					}
+			if(dist < 10000) {
+				pers = new Personagem(posx, posy,1,Constantes.navesBase.get(0));
+			}else if(dist < 60000) {
+				if(maprnd.nextInt(4)==0) {
+					pers = new Personagem(posx, posy,1,Constantes.navesBase.get(maprnd.nextInt(10)+11));
+				}else {
+					pers = new Personagem(posx, posy,1,Constantes.navesBase.get(maprnd.nextInt(4)+24));
 				}
-				
-			}while(colidiu); 
-			Personagem pers = new Personagem(posx, posy,500,Constantes.navesBase.get(rnd.nextInt(Constantes.navesBase.size()-1)));
-			//pers.vel = 50+GamePanel.rnd.nextInt(50);
+			}else {
+				if(maprnd.nextInt(4)==0) {
+					pers = new Personagem(posx, posy,1,Constantes.navesBase.get(maprnd.nextInt(10)+11));
+				}else {
+					pers = new Personagem(posx, posy,1,Constantes.navesBase.get(maprnd.nextInt(3)+28));
+				}
+				//pers = new Personagem(posx, posy,1,Constantes.navesBase.get(rnd.nextInt(Constantes.navesBase.size()-1)));
+			}
+			
+
 			pers.angulo = (Math.PI*2)*GamePanel.rnd.nextDouble();
 			pers.rodaia = true;
-			//pers.vel = (int)Math.sqrt(pers.velX*pers.velX + pers.velY*pers.velY);
+
 			
 			listaDePersonagens.add(pers);
 		}
 		
-		 
+		for(int i = 0; i < 20;i++){
+			int posx = 0;
+			int posy = 0;
+
+			posx = maprnd.nextInt(20000)-10000;
+			posy = maprnd.nextInt(20000)-10000;
+			
+			double dist = posx*posx+posy*posy;
+				
+			Personagem pers = null;
+
+			pers = new Personagem(posx, posy,1,Constantes.navesBase.get(maprnd.nextInt(10)));
+
+			pers.angulo = (Math.PI*2)*GamePanel.rnd.nextDouble();
+			pers.rodaia = true;
+
+			
+			listaDePersonagens.add(pers);
+		}
 		
-		for(int i = 0; i < 100;i++){
+		Personagem pers1 = new Personagem(0, -120000,1,Constantes.navesBase.get(21));
+		pers1.rodaia = true;
+		listaDePersonagens.add(pers1);
+		pers1 = new Personagem(0,120000,1,Constantes.navesBase.get(21));
+		pers1.rodaia = true;
+		listaDePersonagens.add(pers1);
+		pers1 = new Personagem(-120000,0,1,Constantes.navesBase.get(21));
+		pers1.rodaia = true;
+		listaDePersonagens.add(pers1);
+		pers1 = new Personagem(120000,0,1,Constantes.navesBase.get(21));
+		pers1.rodaia = true;
+		listaDePersonagens.add(pers1);
+		
+		for(int i = 0; i < 5000;i++){
 			int posx = 0;
 			int posy = 0;
 			
@@ -140,8 +174,8 @@ public class CanvasMain extends MyCanvas {
 				
 					
 				colidiu = false;
-				posx = GamePanel.rnd.nextInt(16000)-8000;
-				posy = GamePanel.rnd.nextInt(16000)-8000;
+				posx = GamePanel.rnd.nextInt(240000)-120000;
+				posy = GamePanel.rnd.nextInt(240000)-120000;
 				
 				bx = (int)((posx+16)/16);
 				by = (int)((posy+40)/16);
@@ -222,12 +256,33 @@ public class CanvasMain extends MyCanvas {
 
 
 //		heroi.SimulaSe((int)diftime);
+		
+		double distsimula = 32000*32000;
 		for(int i = 0; i < listaDePersonagens.size();i++){
-			Sprite sp = listaDePersonagens.get(i);
-			sp.SimulaSe((int)diftime);
-			if(!sp.vivo){
-				listaDePersonagens.remove(i);
-				i--;
+			Personagem sp = (Personagem)listaDePersonagens.get(i);
+			
+			double dx =  sp.X - Constantes.heroi.X;
+			double dy =  sp.Y - Constantes.heroi.Y;
+			double iang = Math.atan2(dy, dx);
+			double idist = dx*dx+dy*dy;
+			
+			sp.heoiAng = iang;
+			sp.heroiDist = idist;
+			
+			if(idist < distsimula) {
+				sp.SimulaSe((int)diftime);
+				if(!sp.vivo){
+					listaDePersonagens.remove(i);
+					i--;
+				}else {
+					dx =  sp.X - Constantes.heroi.X;
+					dy =  sp.Y - Constantes.heroi.Y;
+					iang = Math.atan2(dy, dx);
+					idist = dx*dx+dy*dy;
+					
+					sp.heoiAng = iang;
+					sp.heroiDist = idist;
+				}
 			}
 		}
 		
@@ -327,9 +382,17 @@ public class CanvasMain extends MyCanvas {
 			listaDeItens.get(i).DesenhaSe(dbg,MapX,MapY);
 		}
 		
+		double distview = 20000*20000;
+		int count = 0;
 		for(int i = 0; i < listaDePersonagens.size();i++){
-			listaDePersonagens.get(i).DesenhaSe(dbg,MapX,MapY);
+			Personagem pers = (Personagem)listaDePersonagens.get(i);
+			
+			if(pers.heroiDist < distview) {
+				pers.DesenhaSe(dbg,MapX,MapY);
+				count++;
+			}
 		}
+		//System.out.println("count "+count +" "+Constantes.telaRect );
 		
 		for(int i = 0; i < listaDeProjeteis.size();i++){
 			listaDeProjeteis.get(i).DesenhaSe(dbg,MapX,MapY);
@@ -340,7 +403,11 @@ public class CanvasMain extends MyCanvas {
 		}	
 		
 		for(int i = 0; i < listaDeAsteroides.size();i++){
-			listaDeAsteroides.get(i).DesenhaSe(dbg,MapX,MapY);
+			Asteroides asteroid = (Asteroides)listaDeAsteroides.get(i);
+			
+			if(Constantes.telaRect.contains(asteroid.X, asteroid.Y)) {
+				asteroid.DesenhaSe(dbg,MapX,MapY);
+			}
 		}	
 		
 	
@@ -432,18 +499,24 @@ public class CanvasMain extends MyCanvas {
 		dbg.fillRect(centerX-1, centerY-1, 3, 3);
 		
 		double radardistprecision = 500;
+		double radardist = (75*radardistprecision)*(75*radardistprecision);
 		
 		for(int i = 0; i < listaDePersonagens.size();i++){
 			Personagem p = (Personagem)listaDePersonagens.get(i);
 			if(p!=Constantes.heroi) {
-				double dx =  p.X - Constantes.heroi.X;
-				double dy =  p.Y - Constantes.heroi.Y;
-				double iang = Math.atan2(dy, dx);
-				double idist = Math.sqrt(dx*dx+dy*dy);
-				//System.out.println("idist "+idist);
+
+				double iang = p.heoiAng;
+				double distq = p.heroiDist;
+
+
 				
-				dbg.setColor(new Color(0,255,0,255));
-				dbg.fillRect((int)(centerX-1+Math.cos(iang)*idist/radardistprecision), (int)(centerY-1+Math.sin(iang)*idist/radardistprecision), 2, 2);
+				if(distq < radardist ) {
+					double idist = Math.sqrt(p.heroiDist);
+					double rasao = idist/radardistprecision;
+					
+					dbg.setColor(new Color(0,255,0,255));
+					dbg.fillRect((int)(centerX-1+Math.cos(iang)*rasao), (int)(centerY-1+Math.sin(iang)*rasao), 2, 2);
+				}
 			}
 		}
 	}

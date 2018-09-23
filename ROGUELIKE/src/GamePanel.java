@@ -236,7 +236,7 @@ private void carregaAssetsEntreOutrasCoisas() {
 	}
 	
 	
-	Constantes.navePLayer = carregaNaveReturn("nave_player.csv");
+	Constantes.navePLayer = carregaNaveReturn("nave_player.csv"); //0
 	//Constantes.navePLayer = carregaNaveReturn("nave_criacao.csv");
 	
 	//naves estacionaria sem armas
@@ -249,7 +249,7 @@ private void carregaAssetsEntreOutrasCoisas() {
 	carregaNave("nave_estacionaria_sa_7.csv");
 	carregaNave("nave_estacionaria_sa_8.csv");
 	carregaNave("nave_estacionaria_sa_9.csv");
-	carregaNave("nave_estacionaria_sa_10.csv");
+	carregaNave("nave_estacionaria_sa_10.csv");//10
 	
 	
 	//naves estacionarias com armas, ta meio apelão =x
@@ -263,7 +263,7 @@ private void carregaAssetsEntreOutrasCoisas() {
 	carregaNave("nave_estacionaria_7.csv");
 	carregaNave("nave_estacionaria_8.csv");
 	carregaNave("nave_estacionaria_9.csv");
-	carregaNave("nave_estacionaria_10.csv");
+	carregaNave("nave_estacionaria_10.csv"); //21
 	
 	
 	//naves inimigas
@@ -276,7 +276,7 @@ private void carregaAssetsEntreOutrasCoisas() {
 	carregaNave("nave_7.csv");
 	carregaNave("nave_8.csv");
 	carregaNave("nave_9.csv");
-	carregaNave("nave_10.csv");
+	carregaNave("nave_10.csv"); // 31
 	
 	Constantes.imgBigAsteroide.add(carregaImagem("asteroide_1.png"));
 	Constantes.imgBigAsteroide.add(carregaImagem("asteroide_2.png"));

@@ -6,6 +6,11 @@ import java.awt.image.BufferedImage;
 
 public class Personagem extends Sprite {
 	BufferedImage charset = null;
+	
+	// Variaveis temporarias de controle
+		double heroiDist = 0;
+		double heoiAng = 0;
+	// vars
 
 	static int basex = 496;
 	static int basey = 496;

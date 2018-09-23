@@ -29,6 +29,8 @@ public class Constantes {
 	
 	public static BufferedImage bilboards[] = new BufferedImage[7];
 	
+	public static long randomSeed;
+	
 	public static void carregaImagens() {
 		expolsao[0] = GamePanel.instance.carregaImagem("exp01.png");
 		expolsao[1] = GamePanel.instance.carregaImagem("exp02.png");
@@ -61,6 +63,8 @@ public class Constantes {
 		
 		radar  = GamePanel.instance.carregaImagem("radar.png"); 
 		radar_ponteiro = GamePanel.instance.carregaImagem("radar_ponteiro.png"); 
+		
+		randomSeed = System.currentTimeMillis();
 	}
 
 	
