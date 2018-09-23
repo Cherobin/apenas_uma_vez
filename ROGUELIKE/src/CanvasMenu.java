@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
@@ -33,6 +34,7 @@ public class CanvasMenu extends MyCanvas {
 		dbg.fillRect(0, 0, Constantes.telaW, Constantes.telaH);
 		
 		dbg.setColor(Color.white);
+		dbg.setFont(Constantes.font.deriveFont(Font.PLAIN, 20));
 		dbg.drawString("MENU DO JOGO PRESSIONE ESC PARA SAIR", 10, 10);
 		dbg.drawString(""+somatime,300,250);
 	}

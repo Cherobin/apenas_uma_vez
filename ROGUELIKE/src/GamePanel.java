@@ -255,6 +255,24 @@ private void carregaAssetsEntreOutrasCoisas() {
 	Constantes.imgSmallAsteroide.add(carregaImagem("asteroide_micro_2.png"));
 	Constantes.imgSmallAsteroide.add(carregaImagem("asteroide_micro_3.png"));
 	
+    InputStream is = this.getClass().getResourceAsStream("smallest_pixel-7.ttf");
+    try {
+		
+    	Font font = Font.createFont(Font.TRUETYPE_FONT, is);
+        Constantes.font = font.deriveFont(Font.BOLD, 16);
+   
+        
+		
+	} catch (FontFormatException e) {
+		System.out.println("erro font");
+		e.printStackTrace();
+	} catch (IOException e) {
+		// TODO Auto-generated catch block
+		System.out.println("erro font");
+		e.printStackTrace();
+	}
+	
+	
 	
 }
 public void carregaNave(String file) {

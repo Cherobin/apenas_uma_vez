@@ -1,5 +1,7 @@
+import java.awt.Font;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -64,5 +66,8 @@ public class Constantes {
 	public static BufferedImage hudImage;
 	public static BufferedImage fundohangar;
 	
+	public static Font font;
+	    
+ 
 
 }

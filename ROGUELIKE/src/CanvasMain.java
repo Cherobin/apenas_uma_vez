@@ -60,13 +60,7 @@ public class CanvasMain extends MyCanvas {
 	
 	double zoom;
 	double newzoom;
-	
-	
-	public Font fonteMini = new Font("", Font.BOLD,8);
-	
-	public Font fonte = new Font("", Font.BOLD,16);
-	
-	public Font fonteG1 = new Font("", Font.BOLD,22);
+	 
 	
 	public Color lifebarcolor = new Color(0, 155, 0,155) ;
 	
@@ -349,6 +343,7 @@ public class CanvasMain extends MyCanvas {
 		//Font f = dbg.getFont();
 		
 		//dbg.setFont(fonte);
+		dbg.setFont(Constantes.font.deriveFont(Font.PLAIN, 20));
 		dbg.setColor(Color.YELLOW);	
 		dbg.drawString("FPS: "+GamePanel.FPS,  Constantes.telaW-80, 12);
 		
@@ -356,7 +351,7 @@ public class CanvasMain extends MyCanvas {
 	//	dbg.drawString("Velocidade", 10, Constantes.telaH-26);
 		//dbg.drawString(""+(int)(Constantes.heroi.vel), 10, Constantes.telaH-15);
 		
-		 dbg.setFont(fonteMini);	 
+		dbg.setFont(Constantes.font.deriveFont(Font.PLAIN, 14));	 
 		 dbg.setColor(Color.YELLOW);
 		 dbg.drawString(""+(int)(Constantes.gold), 60, 32);
 		

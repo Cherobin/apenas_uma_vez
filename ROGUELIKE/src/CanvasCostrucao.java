@@ -87,10 +87,12 @@ public class CanvasCostrucao extends MyCanvas {
 	public void DesenhaSe(Graphics2D dbg) {
 		// TODO Auto-generated method stub
 		
+		dbg.setFont(Constantes.font);
+		 
 		dbg.drawImage(Constantes.fundohangar, 0, 0, null);
 	 
 		dbg.setColor(Color.white);
-		dbg.drawString("Clique nos icones para construção", 10, 10);
+		dbg.drawString("Clique nos icones para construção", 10, 15);
 
 		
 		dbg.drawString("Planta de Construção", 384, 48);
@@ -115,8 +117,8 @@ public class CanvasCostrucao extends MyCanvas {
 			}
 		}
 
-		
-		dbg.setFont(new Font("TimesRoman", Font.PLAIN, 12));
+		dbg.setFont(Constantes.font.deriveFont(Font.BOLD, 10));
+	  
 		dbg.setColor(Color.WHITE);
 		dbg.drawString("Bases", 165 + posXBase, 45);
 		
@@ -142,7 +144,7 @@ public class CanvasCostrucao extends MyCanvas {
 		}
 
 		
-		dbg.setFont(new Font("TimesRoman", Font.PLAIN, 20));
+		dbg.setFont(Constantes.font.deriveFont(Font.PLAIN, 20));
 		dbg.setColor(Color.WHITE);
 		
 		if (my_base != null) {
@@ -162,10 +164,10 @@ public class CanvasCostrucao extends MyCanvas {
 		}   
 		
 		
-		dbg.setFont(new Font("TimesRoman", Font.PLAIN, 40));
+		dbg.setFont(Constantes.font.deriveFont(Font.BOLD, 40));
 		
 		dbg.setColor(Color.GREEN);
-		dbg.drawString("R$: " + Constantes.gold, 50, 400);
+		dbg.drawString("$: " + Constantes.gold, 10, 310);
 
 		dbg.setColor(Color.black);
 		dbg.drawString("Salvar", Constantes.telaW - 149, Constantes.telaH - 49);
@@ -178,18 +180,18 @@ public class CanvasCostrucao extends MyCanvas {
 		}
 
 		dbg.setColor(Color.BLACK);
-		dbg.drawString("Cancelar", 49, Constantes.telaH - 49);
+		dbg.drawString("Cancelar", 75, Constantes.telaH - 49);
 		dbg.setColor(Color.WHITE);
-		dbg.drawString("Cancelar", 50, Constantes.telaH - 50);
+		dbg.drawString("Cancelar", 76, Constantes.telaH - 50);
 
 		if (isSelectedCancelar) {
 			dbg.setColor(Color.YELLOW);
-			dbg.drawString("Cancelar", 50, Constantes.telaH - 50);
+			dbg.drawString("Cancelar", 76, Constantes.telaH - 50);
 		}
 		
 		
 
-		dbg.setFont(new Font("TimesRoman", Font.PLAIN, 12));
+		dbg.setFont(Constantes.font.deriveFont(Font.PLAIN, 10));
 		
 		
 		//toooltip kkkk
@@ -321,7 +323,7 @@ public class CanvasCostrucao extends MyCanvas {
 			isSelectedSalvar = false;
 		}
 
-		rect = new Rectangle(50, Constantes.telaH - 78, 158, 38);
+		rect = new Rectangle(75, Constantes.telaH - 78, 158, 38);
 		if (rect.contains(e.getX(), e.getY())) {
 			isSelectedCancelar = true;
 		} else {
