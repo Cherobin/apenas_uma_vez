@@ -16,8 +16,8 @@ public class Personagem extends Sprite {
 	int anim = 0;
 
 	double angulo = 0;
-	double vel = 0;
-	double velMax = 0;
+
+
 	int raio = 496;
 
 
@@ -45,7 +45,7 @@ public class Personagem extends Sprite {
 	float bateria;
 	float gastoEnegia;
 	float velocidadeMaxima;
-	
+	double vel = 0;
 
 	public Personagem(float x, float y,int lifemax, NaveBase naveBase) {
 		this.X = x;
@@ -95,15 +95,25 @@ public class Personagem extends Sprite {
 					Base b = Constantes.bases.get(layer0[i][j]-1);
 					lifeMax += b.vida;
 					enegiaPorSegundo += b.energia;
-					gastoEnegia+= b.propulsao;
+					gastoEnegia+= b.propulsao/2;
 					velocidadeMaxima+= b.propulsao;
+					bateriaMaxima+=b.bateria;
 				}
 			}
 		}
+		velocidadeMaxima-=(lifeMax/10);
+		if(velocidadeMaxima<0) {
+			velocidadeMaxima = 0;
+		}
+		
+		System.out.println(" "+velocidadeMaxima+" "+enegiaPorSegundo+" "+gastoEnegia+" "+lifeMax+" "+bateriaMaxima);
 		if(life>lifeMax) {
 			life = lifeMax;
 		}
-		vel = velMax/2;
+		vel = velocidadeMaxima/2;
+		if(bateria>bateriaMaxima) {
+			bateria = bateriaMaxima;
+		}
 	}
 
 	@Override
@@ -434,6 +444,7 @@ public class Personagem extends Sprite {
 		
 		
 		if((dx*dx+dy*dy) < 10000000 && Constantes.heroi.vivo) {
+			vel = velocidadeMaxima;
 			double ang = Math.atan2(dy, dx);
 			if(ang<0) {
 				ang = (Math.PI*2)+ang;
