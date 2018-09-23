@@ -238,6 +238,23 @@ private void carregaAssetsEntreOutrasCoisas() {
 	carregaNave("nave_3.csv");
 	carregaNave("nave_4.csv");
 	
+ 
+	Constantes.imgBigAsteroide.add(carregaImagem("asteroide_1.png"));
+	Constantes.imgBigAsteroide.add(carregaImagem("asteroide_2.png"));
+	Constantes.imgBigAsteroide.add(carregaImagem("asteroide_3.png"));
+	
+	
+	Constantes.imgSmallAsteroide.add(carregaImagem("asteroide_small_1.png"));
+	Constantes.imgSmallAsteroide.add(carregaImagem("asteroide_small_2.png"));
+	Constantes.imgSmallAsteroide.add(carregaImagem("asteroide_small_3.png"));
+	Constantes.imgSmallAsteroide.add(carregaImagem("asteroide_small_4.png"));
+	Constantes.imgSmallAsteroide.add(carregaImagem("asteroide_small_5.png"));
+	Constantes.imgSmallAsteroide.add(carregaImagem("asteroide_small_6.png"));
+	Constantes.imgSmallAsteroide.add(carregaImagem("asteroide_micro_1.png"));
+	Constantes.imgSmallAsteroide.add(carregaImagem("asteroide_micro_2.png"));
+	Constantes.imgSmallAsteroide.add(carregaImagem("asteroide_micro_3.png"));
+	
+	
 }
 public void carregaNave(String file) {
 	try {

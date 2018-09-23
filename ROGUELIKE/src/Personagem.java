@@ -50,7 +50,7 @@ public class Personagem extends Sprite {
 
 		if(naveBase!=null) {
 			layer0 = naveBase.layer0;
-			layer1 = naveBase.layer1;
+	        layer1 = naveBase.layer1;
 		}
 		
 		for(int i = 0; i < statusArm.length;i++) {
@@ -161,6 +161,7 @@ public class Personagem extends Sprite {
 			}
 		}
 		
+
 		for (int i = 0; i < 31; i++) {
 			for (int j = 0; j < 31; j++) {
 

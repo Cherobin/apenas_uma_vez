@@ -29,4 +29,9 @@ public class Constantes {
 		expolsao[4] = GamePanel.instance.carregaImagem("exp05.png");
 	}
 
+	
+	public static List<BufferedImage> imgBigAsteroide = new ArrayList<>();
+	public static List<BufferedImage> imgSmallAsteroide = new ArrayList<>(); 
+ 
+
 }

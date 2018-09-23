@@ -97,6 +97,17 @@ BufferedImage charset = null;
 			}
 		}
 		
+		for(int i = 0; i < CanvasMain.listaDeAsteroides.size();i++){
+			Asteroides pers = (Asteroides)CanvasMain.listaDeAsteroides.get(i);
+			 
+				if(pers.testaColisao(X,Y,raio,this)){
+					X = xold;
+					Y = yold;
+					vivo = false; 
+					break;
+				}
+		}
+		
 //		double ang = Math.atan2(velY, velX);
 //		for(int i = 0; i < 10; i++){
 //			double newang = ang+(GamePanel.rnd.nextInt(2)==0?(Math.PI/2):(-Math.PI/2))+((Math.random()*Math.PI/8)-Math.PI/16);
