@@ -151,6 +151,8 @@ public GamePanel()
 	carregaAssetsEntreOutrasCoisas();
 	
 	telaAtiva = new CanvasMain();
+	
+	Constantes.carregaImagens();
   
 } // end of GamePanel()
 

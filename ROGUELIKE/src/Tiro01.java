@@ -4,7 +4,9 @@ import java.awt.geom.AffineTransform;
 
 public class Tiro01 extends Projetil {
 	
-	Color cor = new Color(100, 100, 255);
+	Color cor1 = new Color(150, 150, 255);
+	Color cor2 = new Color(100, 100, 255);
+	Color cor3 = new Color(50, 50, 155);
 
 	public Tiro01(float x, float y, float velX, float velY, Object pai) {
 		super(x, y, velX, velY, pai);
@@ -18,8 +20,13 @@ public class Tiro01 extends Projetil {
 			AffineTransform trans = dbg.getTransform();
 			dbg.translate((int)(X-xMundo), (int)(Y-1-yMundo));
 			dbg.rotate(angulo);
-			dbg.setColor(cor);
-			dbg.fillRect(0,0, 10, 3);
+			
+			dbg.setColor(cor3);
+			dbg.fillRect(-1,-2, 10, 5);
+			dbg.setColor(cor2);
+			dbg.fillRect(0,-1, 10, 3);
+			dbg.setColor(cor1);
+			dbg.fillRect(0,0, 10, 1);
 			
 			dbg.setTransform(trans);
 		}

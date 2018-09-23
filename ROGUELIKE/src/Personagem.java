@@ -27,6 +27,8 @@ public class Personagem extends Sprite {
 
 	int layer0[][] = new int[31][31];
 	int layer1[][] = new int[31][31];
+	
+	StatusArmas statusArm[][] = new StatusArmas[31][31];
 
 	boolean FIRE = false;
 	float xAlvo = 0;
@@ -49,6 +51,12 @@ public class Personagem extends Sprite {
 		if(naveBase!=null) {
 			layer0 = naveBase.layer0;
 			layer1 = naveBase.layer1;
+		}
+		
+		for(int i = 0; i < statusArm.length;i++) {
+			for(int j = 0; j < statusArm[i].length;j++) {
+				statusArm[i][j] = new StatusArmas();
+			}
 		}
 		/*
 		layer0[15][15] = 1;
@@ -152,21 +160,22 @@ public class Personagem extends Sprite {
 				}
 			}
 		}
+		
+		for (int i = 0; i < 31; i++) {
+			for (int j = 0; j < 31; j++) {
 
-		if (FIRE && timertiro > 100) {
-			
-			for (int i = 0; i < 31; i++) {
-				for (int j = 0; j < 31; j++) {
+				if (layer1[i][j] != 0) {
+					basetToXY(j,i,xy);
+					
+					double dx = xAlvo - (xy[0]+X);
+					double dy = yAlvo - (xy[1]+Y);
 
-					if (layer1[i][j] != 0) {
+					double ang = Math.atan2(dy, dx);
+					statusArm[i][j].angulo = ang;
+					statusArm[i][j].timertir+=diftime;
+					
+					if (FIRE && statusArm[i][j].timertir> 100) {
 						if(layer1[i][j]==1) {
-							basetToXY(j, i, xy);
-							
-							double dx = xAlvo - (xy[0]+X);
-							double dy = yAlvo - (xy[1]+Y);
-		
-							double ang = Math.atan2(dy, dx);
-		
 							float velo = 2000;
 		
 							Projetil proj = new Projetil((float)(xy[0]+X), (float)(xy[1]+Y), (float) (velo * Math.cos(ang)), (float) (velo * Math.sin(ang)),
@@ -174,16 +183,9 @@ public class Personagem extends Sprite {
 		
 							CanvasMain.listaDeProjeteis.add(proj);
 		
-							timertiro = 0;
+							statusArm[i][j].timertir = 0;
 						}
 						if(layer1[i][j]==2) {
-							basetToXY(j, i, xy);
-							
-							double dx = xAlvo - (xy[0]+X);
-							double dy = yAlvo - (xy[1]+Y);
-		
-							double ang = Math.atan2(dy, dx);
-		
 							float velo = 2000;
 		
 							Projetil proj = new Tiro01((float)(xy[0]+X), (float)(xy[1]+Y), (float) (velo * Math.cos(ang)), (float) (velo * Math.sin(ang)),
@@ -191,16 +193,9 @@ public class Personagem extends Sprite {
 		
 							CanvasMain.listaDeProjeteis.add(proj);
 		
-							timertiro = 0;
+							statusArm[i][j].timertir = 0;
 						}	
 						if(layer1[i][j]==3) {
-							basetToXY(j, i, xy);
-							
-							double dx = xAlvo - (xy[0]+X);
-							double dy = yAlvo - (xy[1]+Y);
-		
-							double ang = Math.atan2(dy, dx);
-		
 							float velo = 10000;
 		
 							Projetil proj = new Tiro02((float)(xy[0]+X), (float)(xy[1]+Y), (float) (velo * Math.cos(ang)), (float) (velo * Math.sin(ang)),
@@ -208,12 +203,13 @@ public class Personagem extends Sprite {
 		
 							CanvasMain.listaDeProjeteis.add(proj);
 		
-							timertiro = 0;
-						}							
+							statusArm[i][j].timertir = 0;
+						}	
 					}
 				}
 			}
 		}
+
 	}
 
 	@Override
@@ -252,7 +248,13 @@ public class Personagem extends Sprite {
 					dbg.drawImage(Constantes.bases.get(layer0[i][j]-1).imagem,(int) -basex + j * 32, (int) -basey + i * 32,32,32,null);
 				}
 				if (layer1[i][j] != 0) {
-					dbg.drawImage(Constantes.armas.get(layer1[i][j]-1).imagem,(int) -basex + j * 32, (int) -basey + i * 32,32,32,null);
+					AffineTransform trans2 = dbg.getTransform();
+					dbg.translate((int) -basex + j * 32+16, (int) -basey + i * 32+16);
+					dbg.rotate(statusArm[i][j].angulo-angulo);
+					
+					dbg.drawImage(Constantes.armas.get(layer1[i][j]-1).imagem,-16,-16,32,32,null);
+					
+					dbg.setTransform(trans2);
 				}
 			}
 		}
@@ -329,7 +331,17 @@ public class Personagem extends Sprite {
 	public void levaDano(int dano) {
 		life -= dano;
 		if (life <= 0) {
+			
 			vivo = false;
+			
+			for (int i = 0; i < 31; i++) {
+				for (int j = 0; j < 31; j++) {
+					if (layer0[i][j] != 0) {
+						basetToXY(j,i,xy);
+						CanvasMain.listaDeParticulas.add(new ParticulaExplosao((int)(X+xy[0]), (int)(Y+xy[1]), 0, 0, 400, Constantes.expolsao));
+					}
+				}
+			}
 		}
 	}
 
