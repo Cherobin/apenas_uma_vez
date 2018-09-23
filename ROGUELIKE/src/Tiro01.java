@@ -4,9 +4,9 @@ import java.awt.geom.AffineTransform;
 
 public class Tiro01 extends Projetil {
 	
-	Color cor1 = new Color(150, 150, 255);
-	Color cor2 = new Color(100, 100, 255);
-	Color cor3 = new Color(50, 50, 155);
+	Color cor1 = new Color(210, 210, 255);
+	Color cor2 = new Color(160, 160, 255);
+	Color cor3 = new Color(100, 100, 155);
 
 	public Tiro01(float x, float y, float velX, float velY, Object pai) {
 		super(x, y, velX, velY, pai);

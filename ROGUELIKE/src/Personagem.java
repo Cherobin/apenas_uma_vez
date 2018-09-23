@@ -339,12 +339,12 @@ public class Personagem extends Sprite {
 				for (int j = 0; j < 31; j++) {
 					if (layer0[i][j] != 0) {
 						basetToXY(j,i,xy);
-						CanvasMain.listaDeParticulas.add(new ParticulaExplosao((int)(X+xy[0]), (int)(Y+xy[1]), 0, 0, 400, Constantes.expolsao));
+						CanvasMain.listaDeParticulas.add(new ParticulaExplosao((int)(X+xy[0]), (int)(Y+xy[1]), 0, 0, 400+GamePanel.rnd.nextInt(3000), Constantes.expolsao));
 						for(int ii = 0; ii < 4;ii++) {
 							double angproj = GamePanel.rnd.nextDouble()*2*Math.PI;
 							double velproj = 1000+GamePanel.rnd.nextInt(1500);
 							Projetil proj = new Projetil((float)(xy[0]+X), (float)(xy[1]+Y), (float) (velproj * Math.cos(angproj)), (float) (velproj * Math.sin(angproj)),this);
-							proj.tempoDeVida = 1000;
+							proj.tempoDeVida = 800+GamePanel.rnd.nextInt(400);
 							CanvasMain.listaDeProjeteis.add(proj);
 							}
 					}

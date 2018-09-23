@@ -47,6 +47,8 @@ public class CanvasMain extends MyCanvas {
 	
 	public static ArrayList<Sprite> listaDeItens = new ArrayList<Sprite>();
 	
+	public static ArrayList<Bilboard> listaDeBilboards = new ArrayList<Bilboard>();
+	
 	public static GerenciadorDeEventos gerenciadorEventos = new GerenciadorDeEventos();
 	
 	int timerfps = 0;
@@ -165,6 +167,14 @@ public class CanvasMain extends MyCanvas {
 //		gerenciadorEventos.carregaEventos(this.getClass().getResourceAsStream("ecentos.csv"));
 		
 		
+		listaDeBilboards.add(new Bilboard(0, 0, 80,Constantes.bilboards[0]));
+		listaDeBilboards.add(new Bilboard(800,800, 80,Constantes.bilboards[4]));
+		listaDeBilboards.add(new Bilboard(-1000,400, 80,Constantes.bilboards[5]));
+		listaDeBilboards.add(new Bilboard(400,400, 80,Constantes.bilboards[6]));
+		listaDeBilboards.add(new Bilboard(-400,-400, 80,Constantes.bilboards[3]));
+		listaDeBilboards.add(new Bilboard(400, 400, 40,Constantes.bilboards[1]));
+		listaDeBilboards.add(new Bilboard(-100, 0, 20,Constantes.bilboards[2]));
+		
 	}
 	@Override
 	public void SimulaSe(int diftime) {
@@ -269,6 +279,29 @@ public class CanvasMain extends MyCanvas {
 		dbg.setColor(Color.BLACK);
 		dbg.fillRect (0, 0, Constantes.telaW, Constantes.telaH);
 		
+
+		
+		//dbg.drawImage(imgFundo,(int)(-500+(heroi.X/100)),(int)(-500+(heroi.Y/100)),null);
+		
+		for(int i = 0; i < listaDeBilboards.size();i++){
+			AffineTransform trans = dbg.getTransform();
+			Bilboard bilb = listaDeBilboards.get(i);
+			
+			dbg.translate(bilb.x - Constantes.heroi.X/(double)bilb.z , bilb.y - Constantes.heroi.Y/(double)bilb.z );
+			
+
+			dbg.drawImage(bilb.img, - bilb.img.getWidth()/2, - bilb.img.getHeight()/2, null);
+			
+			dbg.setTransform(trans);
+			
+		}
+		
+		AffineTransform trans = dbg.getTransform();	
+		
+		dbg.scale(zoom, zoom);
+
+//		dbg.drawImage(imgFundo, null,0,0);
+
 		for(int i = 0; i < 40; i++) {
 			for(int j = 0; j < 40; j++) {
 				Rectangle bquadrante = new Rectangle((j-20)*8000, (i-20)*8000, 8000, 8000);
@@ -284,14 +317,6 @@ public class CanvasMain extends MyCanvas {
 				}
 			}
 		}
-		
-		//dbg.drawImage(imgFundo,(int)(-500+(heroi.X/100)),(int)(-500+(heroi.Y/100)),null);
-		
-		AffineTransform trans = dbg.getTransform();
-		
-		dbg.scale(zoom, zoom);
-
-//		dbg.drawImage(imgFundo, null,0,0);
 		
 		for(int i = 0; i < listaDeItens.size();i++){
 			listaDeItens.get(i).DesenhaSe(dbg,MapX,MapY);
