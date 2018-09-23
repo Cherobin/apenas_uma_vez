@@ -326,15 +326,17 @@ public class Personagem extends Sprite {
 		
 		dbg.setTransform(trans);
 		
-		dbg.setColor(Color.white);
-		dbg.fillRoundRect((int)(X - xMundo-1),(int)(Y - yMundo-2), (int)(69*(lifeMax/(float)lifeMax)+3), 10, 2, 2);
 		
-		dbg.setColor(Color.black);
-		dbg.fillRect((int)(X - xMundo),(int)(Y - yMundo-1), (int)(69*(lifeMax/(float)lifeMax)), 8);
+		if(this!=Constantes.heroi) {
+			dbg.setColor(Color.white);
+			dbg.fillRoundRect((int)(X - xMundo-1),(int)(Y - yMundo-2), (int)(69*(lifeMax/(float)lifeMax)+3), 10, 2, 2);
+		
+			dbg.setColor(Color.black);
+			dbg.fillRect((int)(X - xMundo),(int)(Y - yMundo-1), (int)(69*(lifeMax/(float)lifeMax)), 8);
 	
-		dbg.setColor(Color.red);
-		dbg.fillRect((int)(X - xMundo),(int)(Y - yMundo-1), (int)(70*(life/(float)lifeMax)), 8);
-		
+			dbg.setColor(Color.red);
+			dbg.fillRect((int)(X - xMundo),(int)(Y - yMundo-1), (int)(70*(life/(float)lifeMax)), 8);
+		}
 	}
 
 	public boolean testaColisao(Personagem pers) {
