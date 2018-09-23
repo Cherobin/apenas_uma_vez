@@ -151,8 +151,8 @@ public GamePanel()
 	
 	carregaAssetsEntreOutrasCoisas();
 	
-	telaAtiva = new CanvasMain();
-	
+	//telaAtiva = new CanvasMain();
+	telaAtiva = new CanvasSplash();
 	
   
 } // end of GamePanel()

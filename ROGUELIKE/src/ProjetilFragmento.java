@@ -6,6 +6,7 @@ public class ProjetilFragmento extends Projetil {
 	public ProjetilFragmento(float x, float y, float velX, float velY, Object pai) {
 		super(x, y, velX, velY, pai);
 		// TODO Auto-generated constructor stub
+		dano = 250;
 	}
 	
 	@Override
