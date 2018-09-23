@@ -51,8 +51,7 @@ public class Personagem extends Sprite {
 		this.X = x;
 		this.Y = y;
 		
-		this.lifeMax = lifemax;
-		life = lifeMax;
+
 
 		boundingbox = new Rectangle(0, 0, 100, 100);
 
@@ -66,18 +65,9 @@ public class Personagem extends Sprite {
 				statusArm[i][j] = new StatusArmas();
 			}
 		}
-		/*
-		layer0[15][15] = 1;
-		layer0[15][16] = 2;
-		layer0[15][17] = 2;
-		layer0[14][15] = 2;
-		layer0[16][15] = 2;
-		
-		layer1[14][15] = 2;
-		layer1[16][15] = 2;
-		*/
 		
 		calculaAtributos();
+		life = lifeMax;
 	}
 	
 	public void calculaAtributos() {
