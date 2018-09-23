@@ -354,8 +354,13 @@ public class CanvasMain extends MyCanvas {
 		 dbg.setColor(Color.YELLOW);
 		 dbg.drawString(""+(int)(Constantes.gold), 60, 32);
 		
+		 
+		dbg.setColor(Color.black);
+		dbg.fillRect(51, 41, (int)(270*(Constantes.heroi.lifeMax/(float)Constantes.heroi.lifeMax)), 21);
+			
 		dbg.setColor(lifebarcolor);
 	
+		
 		dbg.fillRect(51, 41, (int)(270*(Constantes.heroi.life/(float)Constantes.heroi.lifeMax)), 21);
 
 		dbg.setColor(Color.BLUE);
