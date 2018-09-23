@@ -1,4 +1,6 @@
+import java.awt.AlphaComposite;
 import java.awt.Color;
+import java.awt.Composite;
 import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
@@ -35,7 +37,7 @@ public class CanvasMain extends MyCanvas {
 
 	double rotx = 0;
 	public Random rnd;
-
+	Double rotate_ponteiro = 0.0;
 
 	public static ArrayList<Sprite> listaDePersonagens = new ArrayList<Sprite>();
 
@@ -176,7 +178,14 @@ public class CanvasMain extends MyCanvas {
 	public void SimulaSe(int diftime) {
 		timertiro+=diftime;
 		zoom = newzoom;
-
+ 
+		  
+		rotate_ponteiro+= 1* diftime / 1000.0f;
+	 
+		if(rotate_ponteiro>6.05) {
+			rotate_ponteiro = 0d;
+		} 
+			
 		if(LEFT){
 			Constantes.heroi.angulo-=Math.PI*diftime/1000.0f;
 
@@ -389,6 +398,32 @@ public class CanvasMain extends MyCanvas {
 		dbg.setColor(new Color(34,139,34,150));
 		
 		dbg.fillOval(Constantes.telaW-150-2, Constantes.telaH-150-2, 150, 150);
+		
+ 
+		dbg.drawImage(Constantes.radar, Constantes.telaW-150-3, Constantes.telaH-150-3, null);
+		
+		Composite com = dbg.getComposite();
+		AffineTransform trans2 = dbg.getTransform();
+
+		dbg.translate((int) Constantes.telaW-150-2+ Constantes.radar_ponteiro.getWidth()/2,Constantes.telaH-150-2+Constantes.radar_ponteiro.getHeight()/2);
+		float prop = (float) (1.0f - (rotate_ponteiro/(float)6.05));
+		 System.out.println(prop);
+		 Composite cp = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, prop);
+		 dbg.setComposite(cp);
+		dbg.rotate(rotate_ponteiro);
+  
+		dbg.drawImage(Constantes.radar_ponteiro, - Constantes.radar_ponteiro.getWidth()/2,- Constantes.radar_ponteiro.getHeight()/2, null);
+ 
+		 
+		dbg.setTransform(trans2);
+		dbg.setComposite(com);
+		 
+		
+		//dbg.setColor(new Color(255,255,0,200));
+		//dbg.fillOval(Constantes.telaW-85-2, Constantes.telaH-85-2, 20, 20);
+		//dbg.drawOval(Constantes.telaW-95-2, Constantes.telaH-95-2, 50, 50);
+		
+		
 		
 		int centerX = Constantes.telaW-75;
 		int centerY = Constantes.telaH-75;

@@ -58,6 +58,9 @@ public class Constantes {
 		fundohangar = GamePanel.instance.carregaImagem("fundohangar.png");
 
 		faisca  = GamePanel.instance.carregaImagem("faisca.png");
+		
+		radar  = GamePanel.instance.carregaImagem("radar.png"); 
+		radar_ponteiro = GamePanel.instance.carregaImagem("radar_ponteiro.png"); 
 	}
 
 	
@@ -69,7 +72,8 @@ public class Constantes {
 	public static BufferedImage hudImage;
 	public static BufferedImage fundohangar;
 	public static BufferedImage faisca;
-	
+	public static BufferedImage radar;
+	public static BufferedImage radar_ponteiro;
 	public static Font font;
 	    
  
