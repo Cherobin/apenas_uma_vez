@@ -11,6 +11,7 @@ public class Arma {
 	public boolean tiro_automatico;
 	public int tipo_tiro;
 	public float custo;
+	public float range;
 	public float energia;
 	public Boolean isSelected = false;
 	

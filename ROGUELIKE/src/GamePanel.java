@@ -184,9 +184,9 @@ private void carregaAssetsEntreOutrasCoisas() {
 						arma.tiro_automatico = Boolean.parseBoolean(strs[6]);
 						arma.tipo_tiro = Integer.parseInt(strs[7]);
 						arma.custo = Float.parseFloat(strs[8]);
-						arma.energia = Float.parseFloat(strs[9]);
-						Constantes.armas.add(arma);
-				  
+						arma.range = Float.parseFloat(strs[9]);
+						arma.energia = Float.parseFloat(strs[10]);
+						Constantes.armas.add(arma);  
 				}
 			}
 		 
