@@ -21,6 +21,8 @@ public class Constantes {
 	
 	public static BufferedImage expolsao[] = new BufferedImage[5];
 	
+	public static BufferedImage fragmento[] = new BufferedImage[2];
+	
 	public static void carregaImagens() {
 		expolsao[0] = GamePanel.instance.carregaImagem("exp01.png");
 		expolsao[1] = GamePanel.instance.carregaImagem("exp02.png");
@@ -28,8 +30,14 @@ public class Constantes {
 		expolsao[3] = GamePanel.instance.carregaImagem("exp04.png");
 		expolsao[4] = GamePanel.instance.carregaImagem("exp05.png");
 		
+ 
+
+		fragmento[0] = GamePanel.instance.carregaImagem("fragmento_1.png");
+		fragmento[1] = GamePanel.instance.carregaImagem("fragmento_2.png");
+		
 		goldImage = GamePanel.instance.carregaImagem("gold.png");
 		lifeImage = GamePanel.instance.carregaImagem("life.png");
+ 
 	}
 
 	
