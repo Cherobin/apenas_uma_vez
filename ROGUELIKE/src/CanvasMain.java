@@ -62,7 +62,7 @@ public class CanvasMain extends MyCanvas {
 	double newzoom;
 	
 	
-	public Font fonteMini = new Font("", Font.BOLD,12);
+	public Font fonteMini = new Font("", Font.BOLD,8);
 	
 	public Font fonte = new Font("", Font.BOLD,16);
 	
@@ -346,29 +346,32 @@ public class CanvasMain extends MyCanvas {
 		
 		dbg.setTransform(trans);
 		
-		Font f = dbg.getFont();
+		//Font f = dbg.getFont();
 		
-		dbg.setFont(fonte);
-		dbg.setColor(Color.YELLOW);	
-		dbg.drawString("FPS: "+GamePanel.FPS, 10, 20);
+		//dbg.setFont(fonte);
+		//dbg.setColor(Color.YELLOW);	
+		//dbg.drawString("FPS: "+GamePanel.FPS, 10, 20);
 		
-		dbg.setFont(fonteMini);	
-		dbg.drawString("Velocidade", 10, Constantes.telaH-26);
-		dbg.drawString(""+(int)(Constantes.heroi.vel), 10, Constantes.telaH-15);
+		//dbg.setFont(fonteMini);	
+	//	dbg.drawString("Velocidade", 10, Constantes.telaH-26);
+		//dbg.drawString(""+(int)(Constantes.heroi.vel), 10, Constantes.telaH-15);
 		
-		dbg.setFont(fonteMini);	
-		dbg.drawString("Gold", 10, Constantes.telaH-80);
-		dbg.drawString(""+(int)(Constantes.gold), 10, Constantes.telaH-70);
+		 dbg.setFont(fonteMini);	 
+		 dbg.setColor(Color.YELLOW);
+		 dbg.drawString(""+(int)(Constantes.gold), 60, 32);
 		
 		dbg.setColor(lifebarcolor);
 	
-		dbg.fillRoundRect(100, Constantes.telaH-40, (int)(400*(Constantes.heroi.life/(float)Constantes.heroi.lifeMax)), 30, 10, 10);
+		dbg.fillRect(51, 41, (int)(587*(Constantes.heroi.life/(float)Constantes.heroi.lifeMax)), 21);
 
-		dbg.setColor(Color.lightGray);
-		dbg.drawRoundRect(100, Constantes.telaH-40, 400, 30, 10, 10);
-		dbg.drawString("Life", 105, Constantes.telaH-28);
+	
+	
+		//dbg.drawString("Life", 105, Constantes.telaH-28);
 		
-		dbg.setFont(f);
+		//dbg.setFont(f);
+		
+		dbg.drawImage(Constantes.hudImage, 0, 0, null);
+		 
 	}
 	
 	
