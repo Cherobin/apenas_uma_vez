@@ -189,8 +189,7 @@ public class Personagem extends Sprite {
 						if(layer1[i][j]==2) {
 							float velo = 2000;
 		
-							Projetil proj = new Tiro01((float)(xy[0]+X), (float)(xy[1]+Y), (float) (velo * Math.cos(ang)), (float) (velo * Math.sin(ang)),
-									this);
+							Projetil proj = new Tiro01((float)(xy[0]+X), (float)(xy[1]+Y), (float) (velo * Math.cos(ang)), (float) (velo * Math.sin(ang)),this,0);
 		
 							CanvasMain.listaDeProjeteis.add(proj);
 		
@@ -206,6 +205,24 @@ public class Personagem extends Sprite {
 		
 							statusArm[i][j].timertir = 0;
 						}	
+						if(layer1[i][j]==4) {
+							float velo = 2000;
+		
+							Projetil proj = new Tiro01((float)(xy[0]+X), (float)(xy[1]+Y), (float) (velo * Math.cos(ang)), (float) (velo * Math.sin(ang)),this,1);
+		
+							CanvasMain.listaDeProjeteis.add(proj);
+		
+							statusArm[i][j].timertir = 0;
+						}
+						if(layer1[i][j]==5) {
+							float velo = 2000;
+		
+							Projetil proj = new Tiro01((float)(xy[0]+X), (float)(xy[1]+Y), (float) (velo * Math.cos(ang)), (float) (velo * Math.sin(ang)),this,2);
+		
+							CanvasMain.listaDeProjeteis.add(proj);
+		
+							statusArm[i][j].timertir = 0;
+						}
 					}
 				}
 			}
