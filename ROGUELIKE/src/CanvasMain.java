@@ -137,7 +137,7 @@ public class CanvasMain extends MyCanvas {
 		
 		Random maprnd = new Random(Constantes.randomSeed); 
 		
-		for(int i = 0; i < 1000;i++){
+		for(int i = 0; i < 800;i++){
 			int posx = 0;
 			int posy = 0;
 
@@ -152,11 +152,11 @@ public class CanvasMain extends MyCanvas {
 			if(dist < 10000) {
 				pers = new Personagem(posx, posy,1,Constantes.navesBase.get(0));
 			}else if(dist < 60000) {
-				if(maprnd.nextInt(4)==0) {
-					pers = new Personagem(posx, posy,1,Constantes.navesBase.get(maprnd.nextInt(10)+11));
-				}else {
+				//if(maprnd.nextInt(4)==0) {
+				//	pers = new Personagem(posx, posy,1,Constantes.navesBase.get(maprnd.nextInt(10)+11));
+				//}else {
 					pers = new Personagem(posx, posy,1,Constantes.navesBase.get(maprnd.nextInt(4)+24));
-				}
+				//}
 			}else {
 				if(maprnd.nextInt(4)==0) {
 					pers = new Personagem(posx, posy,1,Constantes.navesBase.get(maprnd.nextInt(10)+11));

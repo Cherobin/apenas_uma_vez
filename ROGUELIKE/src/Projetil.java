@@ -137,18 +137,18 @@ BufferedImage charset = null;
 		}
 	}
 	
-	public boolean testaColisao(Personagem pers){
-		float dx = (pers.X+pers.raio)-(X);
-		float dy = (pers.Y+pers.raio)-(Y);
-		
-		float sr = pers.raio+raio;
-		
-		if(sr*sr>(dx*dx+dy*dy)){
-			return true;
-		}
-		
-		return false;
-	}
+//	public boolean testaColisao(Personagem pers){
+//		float dx = (pers.X+pers.raio)-(X);
+//		float dy = (pers.Y+pers.raio)-(Y);
+//		
+//		float sr = pers.raio+raio;
+//		
+//		if(sr*sr>(dx*dx+dy*dy)){
+//			return true;
+//		}
+//		
+//		return false;
+//	}
 	
 //    public boolean ColisaoRetangular(Personagem pers){
 //    	float p1x1 = X-1;

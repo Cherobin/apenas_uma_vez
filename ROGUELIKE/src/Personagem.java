@@ -23,7 +23,7 @@ public class Personagem extends Sprite {
 	double angulo = 0;
 
 
-	int raio = 496;
+	int raio = 701;
 
 
 
@@ -324,8 +324,8 @@ public class Personagem extends Sprite {
 		if(vel>0) {// só gira se tem velocidade, pois as estacionarias não podem rotacionar
 		  dbg.rotate(angulo);
 		}
-		//dbg.setColor(Color.white);
-		//dbg.drawOval((int) -raio, (int) -raio, raio * 2, raio * 2);
+//		dbg.setColor(Color.white);
+//		dbg.drawOval((int) -raio, (int) -raio, raio * 2, raio * 2);
 
 		// dbg.setColor(Color.red);
 		// dbg.drawRect((int)X-xMundo-boundingbox.width/2,
@@ -333,17 +333,7 @@ public class Personagem extends Sprite {
 
 		for (int i = 0; i < 31; i++) {
 			for (int j = 0; j < 31; j++) {
-				//dbg.setColor(Color.red);
-				//dbg.drawRect((int) -basex + j * 32, (int) -basey + i * 32, 32, 32);
-//				if (layer0[i][j] == 1) {
-//					dbg.setColor(Color.red);
-//					dbg.fillRect((int) -basex + j * 32, (int) -basey + i * 32, 32, 32);
-//				}
-//				if (layer0[i][j] == 2) {
-//					dbg.setColor(Color.blue);
-//					dbg.fillRect((int) -basex + j * 32, (int) -basey + i * 32, 32, 32);
-//				}
-				
+
 				if (layer0[i][j] != 0) {
 					dbg.drawImage(Constantes.bases.get(layer0[i][j]-1).imagem,(int) -basex + j * 32, (int) -basey + i * 32,32,32,null);
 				}
@@ -428,15 +418,15 @@ public class Personagem extends Sprite {
 	}
 
 	public boolean ColisaoRetangular(Personagem pers) {
-		float p1x1 = X + 2;
-		float p1x2 = X + 30;
-		float p2x1 = pers.X + 2;
-		float p2x2 = pers.X + 30;
+		float p1x1 = X - 32;
+		float p1x2 = X + 32;
+		float p2x1 = pers.X - 16;
+		float p2x2 = pers.X + 16;
 
-		float p1y1 = Y + 2;
-		float p1y2 = Y + 46;
-		float p2y1 = pers.Y + 2;
-		float p2y2 = pers.Y + 46;
+		float p1y1 = Y - 32;
+		float p1y2 = Y + 32;
+		float p2y1 = pers.Y - 16;
+		float p2y2 = pers.Y + 16;
 
 		if ((p1x1 < p2x2) && (p1x2 > p2x1) && (p1y1 < p2y2) && (p1y2 > p2y1)) {
 			return true;

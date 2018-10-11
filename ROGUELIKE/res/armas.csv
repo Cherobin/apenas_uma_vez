@@ -1,10 +1,10 @@
 #ID;nome;imagem;dano;cadencia_tiro;velocidade_tiro;tiro_automatico;tipo_tiro;custo;range;energia
-1;arma 1;arma_1.png;100;200;2000;false;1;100;2000;100
-2;arma 2;arma_2.png;200;250;4000;false;2;200;1800;60
-3;arma 3;arma_3.png;240;100;5000;false;3;300;2100;80
-4;arma 4;arma_4.png;400;100;6000;false;4;400;1900;80
-5;arma 5;arma_5.png;2000;500;7000;false;5;400;2200;60
-6;arma 6;arma_6.png;1000;150;8000;false;6;500;2500;140
-7;arma 7;arma_7.png;500;20;6000;false;7;700;2000;100
-8;arma 8;arma_8.png;4000;600;5000;false;8;1000;1800;60
-9;arma 9;arma_9.png;4000;250;5000;false;9;1300;2800;160
+1;arma 1;arma_1.png;100;200;1000;false;1;100;2000;100
+2;arma 2;arma_2.png;200;250;2000;false;2;200;1800;60
+3;arma 3;arma_3.png;240;100;2500;false;3;300;2100;80
+4;arma 4;arma_4.png;400;100;3000;false;4;400;1900;80
+5;arma 5;arma_5.png;2000;500;3500;false;5;400;2200;60
+6;arma 6;arma_6.png;1000;150;4000;false;6;500;2500;140
+7;arma 7;arma_7.png;500;20;3000;false;7;700;2000;100
+8;arma 8;arma_8.png;4000;600;2500;false;8;1000;1800;60
+9;arma 9;arma_9.png;4000;250;2500;false;9;1300;2800;160

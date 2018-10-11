@@ -15,6 +15,16 @@ public class Tiro02 extends Projetil {
 		xini = x;
 		yini = y;
 	}
+	
+	@Override
+	public void SimulaSe(int diftime) {
+		// TODO Auto-generated method stub
+		super.SimulaSe(diftime);
+		
+		xini+=velX*diftime/2000.0f;
+		yini+=velY*diftime/2000.0f;
+	}
+	
 	@Override
 	public void DesenhaSe(Graphics2D dbg, int xMundo, int yMundo) {
 		// TODO Auto-generated method stub
