@@ -455,7 +455,15 @@ public class Personagem extends Sprite {
 							Projetil proj = new Projetil((float)(xy[0]+X), (float)(xy[1]+Y), (float) (velproj * Math.cos(angproj)), (float) (velproj * Math.sin(angproj)),this);
 							proj.tempoDeVida = 800+GamePanel.rnd.nextInt(400);
 							CanvasMain.listaDeProjeteis.add(proj);
-							}
+						}
+						
+						if(GamePanel.rnd.nextInt(100)>60) {		
+							Item item = new Item(Constantes.goldImage,(float)(xy[0]+X), (float)(xy[1]+Y),GamePanel.rnd.nextInt(100), 0 ,100, 7, 38, 55, 60, true); 
+							CanvasMain.listaDeItens.add(item);
+						}else if(GamePanel.rnd.nextInt(100)>50) {
+							Item item = new Item(Constantes.lifeImage,(float)(xy[0]+X), (float)(xy[1]+Y),0, GamePanel.rnd.nextInt(100),100, 1, 44, 44, 60, false);
+							CanvasMain.listaDeItens.add(item);
+						}
 					}
 				}
 			}
