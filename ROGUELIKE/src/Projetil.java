@@ -1,6 +1,7 @@
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.util.LinkedList;
 
 
 public class Projetil extends Sprite {
@@ -47,42 +48,8 @@ BufferedImage charset = null;
 		X+=velX*diftime/1000.0f;
 		Y+=velY*diftime/1000.0f;
 		
-//		if(X<=0){
-//			X = xold;
-//			vivo = false;
-//		}
-//		if(Y<=0){
-//			Y = yold;
-//			vivo = false;
-//		}
-//		if(X>=CanvasMain.tilemap.Largura*16){
-//			X = xold;
-//			vivo = false;
-//		}
-//		if(Y>=CanvasMain.tilemap.Altura*16){
-//			Y = yold;
-//			vivo = false;
-//		}
 		
-		
-//		if(CanvasMain.tilemap.mapa2[by][bx]!=0){
-//			X = xold;
-//			Y = yold;
-//			vivo = false;
-//			
-//			double ang1 = Math.atan2(velY, velX);
-//			
-//			
-//			for(int i = 0; i < 20; i++){
-//				double newang = ang1+(Math.random()*Math.PI/4)-Math.PI/8-Math.PI;
-//				float v = 5+(float)(Math.random()*95);
-//				float vx = (float)(v*Math.cos(newang));
-//				float vy = (float)(v*Math.sin(newang));
-//				
-//				CanvasMain.listaDeParticulas.add(new Particula(X,Y,vx,vy,500+GamePanel.rnd.nextInt(500),Color.white));
-//			}
-//		}
-		
+		/*
 		for(int i = 0; i < CanvasMain.listaDePersonagens.size();i++){
 			Personagem pers = (Personagem)CanvasMain.listaDePersonagens.get(i);
 			
@@ -107,22 +74,39 @@ BufferedImage charset = null;
 					break;
 				}
 		}
+		*/
 		
-//		double ang = Math.atan2(velY, velX);
-//		for(int i = 0; i < 10; i++){
-//			double newang = ang+(GamePanel.rnd.nextInt(2)==0?(Math.PI/2):(-Math.PI/2))+((Math.random()*Math.PI/8)-Math.PI/16);
-//			float v = (float)(Math.random()*25);
-//			float vx = (float)(v*Math.cos(newang));
-//			float vy = (float)(v*Math.sin(newang));
-//			
-//			int dist  = GamePanel.rnd.nextInt(10);
-//			float x = X+(float)(dist*Math.cos(-ang));
-//			float y = Y+(float)(dist*Math.sin(-ang));
-//			
-//			//GamePanel.listaDeParticulas.add(new Particula3Cores(x,y,vx,vy,500+GamePanel.rnd.nextInt(500),Color.red,Color.yellow,Color.white));
-//			
-//			CanvasMain.listaDeParticulas.add(new ParticulaIMG(x,y,vx,vy,500+GamePanel.rnd.nextInt(500),CanvasMain.fumaca));
-//		}
+		int bx =  (int)((X+100000)/1000);
+		int by =  (int)((Y+100000)/1000);
+		if(bx<0) {
+			bx = 0;
+		}
+		if(by<0) {
+			by = 0;
+		}
+		if(bx>199){
+			bx = 199;
+		}
+		if(by>199) {
+			by = 199;
+		}
+		
+		LinkedList<Sprite> list = CanvasMain.colisionLists[by][bx];
+		
+		for (Sprite sprite : list) {
+			Personagem pers = (Personagem)sprite;
+			
+			if(pers!=pai){
+				if(pers.testaColisao(X,Y,raio,this)){
+					X = xold;
+					Y = yold;
+					vivo = false; 
+					
+					break;
+				}
+			}
+		}
+
 	}
 
 	@Override

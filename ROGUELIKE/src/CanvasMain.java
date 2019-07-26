@@ -10,6 +10,7 @@ import java.awt.event.MouseWheelEvent;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.Random;
 
 
@@ -53,6 +54,8 @@ public class CanvasMain extends MyCanvas {
 	
 	public static GerenciadorDeEventos gerenciadorEventos = new GerenciadorDeEventos();
 	
+	public static LinkedList<Sprite>[][] colisionLists = new LinkedList[200][200];
+	
 	int timerfps = 0;
 	int somacor = 0;
 	int timertiro = 0;
@@ -81,7 +84,7 @@ public class CanvasMain extends MyCanvas {
 		 isExit = false;
 		 isRestart = false;
 		 
-		 Constantes.gold = 1000;
+		 Constantes.gold = 100000;
 		 
 		 tempomovimento = 0;
 		 tempomovimento2 = 0;
@@ -271,6 +274,12 @@ public class CanvasMain extends MyCanvas {
 
 		//GamePanel.telaAtiva = new CanvasCostrucao(this,Color.blue);
 		
+		for(int i = 0; i < 200;i++) {
+			for(int j = 0; j < 200;j++) {
+				colisionLists[i][j] = new LinkedList<Sprite>();
+			}
+		}
+		
 	}
 	@Override
 	public void SimulaSe(int diftime) {
@@ -319,6 +328,13 @@ public class CanvasMain extends MyCanvas {
 
 //		heroi.SimulaSe((int)diftime);
 		
+		for(int i = 0; i < 200;i++) {
+			for(int j = 0; j < 200;j++) {
+				colisionLists[i][j].clear();
+			}
+		}
+		
+		
 		double distsimula = 32000*32000;
 		for(int i = 0; i < listaDePersonagens.size();i++){
 			Personagem sp = (Personagem)listaDePersonagens.get(i);
@@ -345,7 +361,48 @@ public class CanvasMain extends MyCanvas {
 					sp.heoiAng = iang;
 					sp.heroiDist = idist;
 				}
+				
+				int bx =  (int)((sp.X+100000)/1000);
+				int by =  (int)((sp.Y+100000)/1000);
+				if(bx<0) {
+					bx = 0;
+				}
+				if(by<0) {
+					by = 0;
+				}
+				if(bx>199){
+					bx = 199;
+				}
+				if(by>199) {
+					by = 199;
+				}
+				colisionLists[by][bx].add(sp);
 			}
+		}
+		
+		for(int i = 0; i < listaDeAsteroides.size();i++){
+			Sprite sp = listaDeAsteroides.get(i);
+			sp.SimulaSe((int)diftime);
+			if(!sp.vivo){
+				listaDeAsteroides.remove(i);
+				i--;
+			}
+			
+			int bx =  (int)((sp.X+100000)/1000);
+			int by =  (int)((sp.Y+100000)/1000);
+			if(bx<0) {
+				bx = 0;
+			}
+			if(by<0) {
+				by = 0;
+			}
+			if(bx>199){
+				bx = 199;
+			}
+			if(by>199) {
+				by = 199;
+			}
+			colisionLists[by][bx].add(sp);
 		}
 		
 		
@@ -367,14 +424,7 @@ public class CanvasMain extends MyCanvas {
 			}
 		}	
 		
-		for(int i = 0; i < listaDeAsteroides.size();i++){
-			Sprite sp = listaDeAsteroides.get(i);
-			sp.SimulaSe((int)diftime);
-			if(!sp.vivo){
-				listaDeAsteroides.remove(i);
-				i--;
-			}
-		}	
+	
 		
 		for(int i = 0; i < listaDeItens.size();i++){
 			Sprite sp = listaDeItens.get(i);

@@ -17,7 +17,7 @@ public class Constantes {
 
 	public static Quadrante quadrantes[][] = new Quadrante[40][40];
 	
-	public static double gold = 1000;
+	public static double gold = 100000;
 	
 	public static List<NaveBase> navesBase = new ArrayList<>();
 	
